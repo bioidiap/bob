@@ -48,6 +48,7 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_test.sh
   script:
+    - cp test.sh ./_ci  
     - ./_ci/test.sh
   after_script:
     - ./_ci/after_test.sh

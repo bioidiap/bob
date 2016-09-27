@@ -47,8 +47,8 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_test.sh
   script:
-    - ls ./bin
-    - ./bin/nosetests -sv bob
+    - ${PREFIX}/bin/python ${BOB_PREFIX_PATH}/bin/coverage run --source=${CI_PROJECT_NAME} ${BOB_PREFIX_PATH}/bin/nosetests -sv ${CI_PROJECT_NAME}
+    - ${PREFIX}/bin/python ${BOB_PREFIX_PATH}/bin/coverage report
   after_script:
     - ./_ci/after_test.sh
 

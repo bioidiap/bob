@@ -20,7 +20,6 @@ bob.learn.linear == 2.0.9
 bob.learn.mlp == 2.1.2
 bob.learn.em == 2.0.10
 bob.learn.boosting == 2.0.9
-bob.db.verification.utils == 2.0.8
 bob.db.iris == 2.0.6
 bob.db.wine == 2.0.6
 bob.db.mnist == 2.0.6

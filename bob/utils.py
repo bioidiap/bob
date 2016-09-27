@@ -94,6 +94,13 @@ def download_packages(requirements,  output_dir="./temp"):
   
   for u in urls:
     file_name = download(u, output_dir)
+    
+    # Excluding packages in wheels.
+    # I don't know, but ONLY the doctest is adding the setuptools in the docs
+    
+    _, extension = os.path.splitext(u)
+    if extension != ".zip":
+      continue
 
     print ("Unziping {0}".format(u)    )
     f = open(file_name, 'rb')

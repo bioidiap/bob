@@ -47,7 +47,7 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_test.sh
   script:
-    - ./bin/nosetest -sv bob
+    - ${PREFIX}/bin/nosetest -sv bob
   after_script:
     - ./_ci/after_test.sh
 

@@ -1,0 +1,8 @@
+Compared with our last minor version (2.3.4) this one 2.4.0 has the following 
+minor updates:
+
+ - Bumped bob.ap from 2.0.5 to 2.1.0
+ - Bumped bob.db.base from 2.0.6 to 2.1.0
+ - Bumped bob.extension from 2.3.1 to 2.2.1
+ - Deprecated bob.db.verification.utils
+ - Added bob.ip.flandmark 2.1.2 as bob core package

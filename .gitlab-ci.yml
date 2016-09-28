@@ -31,7 +31,6 @@ stages:
     - ./_ci/build.sh
   after_script:
     - ./_ci/after_build.sh
-    - cp test.sh ./_ci 
   artifacts:
     expire_in: 1 week
     paths:

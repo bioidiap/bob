@@ -1,3 +1,4 @@
+bob.extension == 2.3.1
 bob.blitz == 2.0.10
 bob.core == 2.1.4
 bob.io.base == 2.0.11
@@ -27,3 +28,4 @@ bob.db.atnt == 2.0.6
 bob.ip.facedetect == 2.0.10
 bob.ip.optflow.hornschunck == 2.0.9
 bob.ip.optflow.liu == 2.0.8
+bob.ip.flandmark == 2.1.2

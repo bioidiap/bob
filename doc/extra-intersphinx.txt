@@ -1,1 +1,3 @@
 bob.bio.base
+matplotlib
+scipy

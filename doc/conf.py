@@ -34,12 +34,12 @@ from bob.utils import get_dependencies, download_packages
 temp_dir="./temp"
 try:
   import shutil
-  #shutil.rmtree(temp_dir)
+  shutil.rmtree(temp_dir)
 except:
   None
 
 packages = get_dependencies()
-#download_packages(packages[1:], temp_dir)
+download_packages(packages[1:], temp_dir)
 
 
 import sphinx

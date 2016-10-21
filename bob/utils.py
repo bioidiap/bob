@@ -80,7 +80,7 @@ def download_packages(requirements,  output_dir="./temp"):
 
   import bob.io.base    
   bob.io.base.create_directories_safe(output_dir)
-
+  
   urls = []
   print ("Fetching urls!!!")
   for r in requirements:
@@ -108,7 +108,7 @@ def download_packages(requirements,  output_dir="./temp"):
     z.extractall(os.path.dirname(file_name))
     f.close()
     os.rename(file_name.rstrip(".zip"),file_name.split("-")[0])
-    os.unlink(file_name)
+    #os.unlink(file_name)
 
 
 def get_releases(package):

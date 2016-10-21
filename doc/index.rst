@@ -27,9 +27,9 @@ Basic Functionality
 .. toctree::
    :maxdepth: 2
 
-   temp/bob.core/doc/index.rst
-   temp/bob.math/doc/index.rst
-   temp/bob.measure/doc/index.rst
+   temp/bob.core/doc/index
+   temp/bob.math/doc/index
+   temp/bob.measure/doc/index
 
 Data Input and Output
 ---------------------
@@ -40,6 +40,7 @@ Data Input and Output
    temp/bob.io.base/doc/index
    temp/bob.io.image/doc/index
    temp/bob.io.video/doc/index
+   temp/bob.io.audio/doc/index
    temp/bob.io.matlab/doc/index
 
 Signal, Audio, Image and Video Processing
@@ -57,6 +58,7 @@ Signal, Audio, Image and Video Processing
    temp/bob.ip.facedetect/doc/index
    temp/bob.ip.optflow.liu/doc/index
    temp/bob.ip.optflow.hornschunck/doc/index
+   temp/bob.ip.flandmark/doc/index
 
 Machine Learning
 ----------------
@@ -81,8 +83,8 @@ Database Modules
    temp/bob.db.base/doc/index
    temp/bob.db.mnist/doc/index
    temp/bob.db.wine/doc/index
-   temp/bob.db.verification.utils/doc/index
    temp/bob.db.atnt/doc/index
+   temp/bob.db.iris/doc/index
    
 
 
@@ -92,7 +94,6 @@ Modules for Developers
 .. toctree::
    :maxdepth: 2
 
-   temp/bob.buildout/doc/index
    temp/bob.extension/doc/index
    temp/bob.blitz/doc/index
    

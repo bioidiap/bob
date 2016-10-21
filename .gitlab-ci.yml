@@ -28,6 +28,7 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_build.sh
   script:
+    - cp build.sh ./_ci  
     - ./_ci/build.sh
   after_script:
     - ./_ci/after_build.sh

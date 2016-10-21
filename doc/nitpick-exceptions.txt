@@ -1,0 +1,164 @@
+# This is a c type confused as c++ type by Sphinx (not our fault)
+cpp:type PyObject
+# Not properly documented on Python 2.7 manual
+py:exc RuntimeError
+# ignore c/c++ references
+c:type Py_ssize_t
+c:type PyArrayDescr
+cpp:type blitz
+cpp:type blitz::Array
+cpp:type PyObject
+cpp:type T
+cpp:type N
+# not really documented
+py:meth bob.blitz.array.__array__
+# not available in NumPy's manual, nor replacements
+py:class numpy.bool_
+py:class numpy.int8
+py:class numpy.int16
+py:class numpy.int32
+py:class numpy.int64
+py:class numpy.uint8
+py:class numpy.uint16
+py:class numpy.uint32
+py:class numpy.uint64
+py:class numpy.float32
+py:class numpy.float64
+py:class numpy.float128
+py:class numpy.complex64
+py:class numpy.complex128
+py:class numpy.complex256
+
+# not sure why these don't work
+py:exc ValueError
+py:exc TypeError
+
+# not linked
+py:class distutils.extension.Extension
+#Issue with python 2 https://github.com/sphinx-doc/sphinx/issues/1034
+py:exc ValueError# No documentation exists for these c++ types
+cpp:type bob
+cpp:type bob::learn
+cpp:type bob::learn::activation
+cpp:type bob::learn::activation::Activation
+cpp:type boost
+cpp:type boost::shared_ptr
+
+# These are not c++ types, but c - why Sphinx confuses those?
+cpp:type PyObject
+# no sphinx correlation for these
+c:type boost
+c:type shared_ptr
+c:type mt19937
+
+# this is actually a c type
+cpp:type PyObject
+cpp:type Py_ssize_t
+
+# exceptions are not found in python 2.7
+py:exc ValueError
+
+py:meth __call__
+# these are actually c types
+cpp:type PyObject
+cpp:type Py_ssize_t
+
+# no reference exists for these
+cpp:type bob
+cpp:type bob::core
+cpp:type bob::core::array
+cpp:type bob::core::array::typeinfo
+cpp:type bob::core::array::ElementType
+cpp:type boost
+cpp:type boost::shared_ptr
+cpp:type bob::io
+cpp:type bob::io::base
+cpp:type bob::io::base::File
+cpp:type bob::io::base::HDF5File
+
+# exceptions are not found in python 2.7
+py:exc RuntimeError
+py:class tuple
+c:func PyUnicode_FSConverter
+
+# these don't exists on numpy's manual
+py:class numpy.uint8
+# These are not documented properly on numpy's manual
+py:class numpy.uint8
+py:class numpy.uint16
+py:class numpy.float64
+
+# These are not proper py:exc on Python's 2.7 manual
+py:exc TypeError
+# Not available in Python 2.7, but ok in Python 3.x
+py:exc ValueError
+# we don't link against setuptools manual
+py:class setuptools.extension.Extension
+py:class distutils.extension.Extension
+py:class setuptools.command.build_ext.build_ext
+py:class distutils.command.build_ext
+py:mod distutils.version.LooseVersion
+
+# ignores various c-types (not important)
+c:type message
+c:type ret
+c:type o
+
+# ignores functions that don't exist in Python 3.x C-API
+c:func PyInt_Check
+c:func PyInt_AS_LONG
+c:func PyString_Check
+c:func PyString_AS_STRING
+# These are not documented anywhere
+cpp:type bob
+cpp:type bob::learn
+cpp:type bob::learn::mlp
+cpp:type bob::learn::mlp::Machine
+cpp:type bob::learn::mlp::Cost
+cpp:type bob::learn::mlp::DataShuffler
+cpp:type bob::learn::mlp::Trainer
+cpp:type bob::learn::mlp::BackProp
+cpp:type bob::learn::mlp::RProp
+cpp:type boost
+cpp:type boost::shared_ptr
+# This is a C type that Sphinx confuses as a C++ type
+cpp:type PyObject
+# This is a function in Python 2.7 and a class in Python 3.x
+# Ignore Python 2.7 error - 3.x is the future
+py:class tuple
+c:type bob
+c:type sp
+c:type Extrapolation
+c:type BorderType
+# Not correctly linked in Python 2.7 docs - works OK for Python 3.x
+py:class tuple
+# These are not documented anywhere
+cpp:type size_t
+cpp:type std
+cpp:type std::vector
+cpp:type std::string
+cpp:type boost
+cpp:type boost::shared_ptr
+cpp:type blitz
+cpp:type blitz::Array
+cpp:type bob
+cpp:type bob::learn
+cpp:type bob::learn::libsvm
+cpp:type bob::learn::libsvm::Machine
+cpp:type bob::io
+cpp:type bob::io::base
+cpp:type bob::io::base::HDF5File
+cpp:type svm_model
+# This is a C type that Sphinx confuses as a C++ type
+cpp:type PyObject
+# Not available in Python 3.x
+c:type PyStringObject
+# This is not properly documented in Python 2.7, but works in Python 3.x
+py:exc RuntimeError
+# Documentation for C++ classes is not available yet
+cpp:type std
+cpp:type std::string
+cpp:type blitz
+cpp:type blitz::Array
+cpp:type uint8_t
+docstring LiJain2005

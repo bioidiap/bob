@@ -3,17 +3,17 @@
 .. Mon 20 Jul 2015 16:57:00 CEST
 
 
-.. image:: http://img.shields.io/badge/docs-stable-yellow.png
+.. image:: http://img.shields.io/badge/docs-stable-yellow.svg
    :target: http://pythonhosted.org/bob/index.html
-.. image:: http://img.shields.io/badge/docs-latest-orange.png
+.. image:: http://img.shields.io/badge/docs-latest-orange.svg
    :target: https://www.idiap.ch/software/bob/docs/latest/bob/bob/master/index.html
 .. image:: https://gitlab.idiap.ch/bob/bob/badges/master/build.svg
    :target: https://gitlab.idiap.ch/bob/bob/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob/commits/master
-.. image:: http://img.shields.io/pypi/v/bob.png
+.. image:: http://img.shields.io/pypi/v/bob.svg
    :target: https://pypi.python.org/pypi/bob
-.. image:: http://img.shields.io/pypi/dm/bob.png
+.. image:: http://img.shields.io/pypi/dm/bob.svg
    :target: https://pypi.python.org/pypi/bob
 
 ====================
@@ -87,9 +87,9 @@ Removing a dependency package
 .. _c++: http://www2.research.att.com/~bs/C++.html
 .. _python: http://www.python.org
 .. _idiap: http://www.idiap.ch
-.. _packages: https://github.com/idiap/bob/wiki/Packages
-.. _wiki: https://github.com/idiap/bob/wiki
-.. _bug tracker: https://github.com/idiap/bob/issues
-.. _dependencies: https://github.com/idiap/bob/wiki/Dependencies
-.. _installation: https://gitlab.idiap.ch/bob/bob/wikis/Installation
+.. _packages: https://www.idiap.ch/software/bob/packages
+.. _wiki: https://www.idiap.ch/software/bob/wiki
+.. _bug tracker: https://www.idiap.ch/software/bob/issues
+.. _dependencies: https://gitlab.idiap.ch/bob/bob/wikis/Dependencies
+.. _installation: https://www.idiap.ch/software/bob/install
 

@@ -101,5 +101,5 @@ Modules for Developers
 .. _c++: http://www2.research.att.com/~bs/C++.html
 .. _python: http://www.python.org
 .. _idiap: http://www.idiap.ch
-.. _packages: https://github.com/idiap/bob/wiki/Packages
+.. _packages: https://www.idiap.ch/software/bob/packages
 

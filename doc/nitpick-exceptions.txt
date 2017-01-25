@@ -78,6 +78,7 @@ cpp:type bob::io::base::HDF5File
 
 # exceptions are not found in python 2.7
 py:exc RuntimeError
+py:exc NotImplementedError
 py:class tuple
 c:func PyUnicode_FSConverter
 

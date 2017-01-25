@@ -15,12 +15,19 @@ both efficient and reduce development time. It is composed of a reasonably
 large number of `packages`_ that implement tools for image, audio & video
 processing, machine learning and pattern recognition.
 
-Bob is organized in several independent python packages.
-Below you can find the list of all packages organized by category with their respectives documentation and building status.
-
 .. todolist::
 
-   
+.. toctree::
+   :maxdepth: 2
+
+   install
+
+
+Bob is organized in several independent python packages. Below you can find the
+list of all packages organized by category with their respectives documentation
+and building status.
+
+
 Basic Functionality
 -------------------
 
@@ -97,9 +104,4 @@ Modules for Developers
    temp/bob.extension/doc/index
    temp/bob.blitz/doc/index
    
-
-.. _c++: http://www2.research.att.com/~bs/C++.html
-.. _python: http://www.python.org
-.. _idiap: http://www.idiap.ch
-.. _packages: https://www.idiap.ch/software/bob/packages
-
+.. include:: links.rst

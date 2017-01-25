@@ -35,7 +35,7 @@ temp_dir="./temp"
 try:
   import shutil
   shutil.rmtree(temp_dir)
-except:
+except Exception:
   None
 
 packages = get_dependencies()

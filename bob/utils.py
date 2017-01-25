@@ -117,7 +117,7 @@ def get_releases(package):
   """  
   try:
     return pkgtools.pypi.PyPIJson(package).retrieve()['releases'].keys()
-  except:
+  except Exception:
     return []
 
 

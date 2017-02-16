@@ -1,7 +1,7 @@
 .. vim: set fileencoding=utf-8 :
 .. Andre Anjos <andre.anjos@idiap.ch>
 .. Mon 17 Feb 2014 17:40:07 CET
-.. Copyright (C) 2011-2014 Idiap Research Institute, Martigny, Switzerland
+.. Copyright (C) 2011-2017 Idiap Research Institute, Martigny, Switzerland
 
 =======================
  Bob
@@ -21,6 +21,7 @@ processing, machine learning and pattern recognition.
    :maxdepth: 2
 
    install
+   tutorial
 
 
 Bob is organized in several independent python packages. Below you can find the

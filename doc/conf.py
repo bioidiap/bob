@@ -41,6 +41,13 @@ except Exception:
 packages = get_dependencies()
 download_packages(packages[1:], temp_dir)
 
+# download a copy of from-scratch.sh from bob.admin
+url = "http://gitlab.idiap.ch/bob/bob.admin/raw/master/install/from-scratch.sh"
+try:
+  from urllib import urlretrieve
+except ImportError:
+  from urllib.request import urlretrieve
+urlretrieve(url, filename='from-scratch.sh')
 
 import sphinx
 if sphinx.__version__ >= "1.4.1":

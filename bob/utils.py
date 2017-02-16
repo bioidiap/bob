@@ -55,7 +55,7 @@ def download(url, output_dir="."):
 
     file_size_dl += len(buffer)
     f.write(buffer)
-    status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
+    status = r"%10d KB" % (file_size_dl / 1024)
     status = status + chr(8)*(len(status)+1)
     print (status)
 

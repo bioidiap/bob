@@ -3,11 +3,11 @@ cpp:type PyObject
 # Not properly documented on Python 2.7 manual
 py:exc RuntimeError
 # ignore c/c++ references
+
 c:type Py_ssize_t
 c:type PyArrayDescr
 cpp:type blitz
 cpp:type blitz::Array
-cpp:type PyObject
 cpp:type T
 cpp:type N
 # not really documented
@@ -43,6 +43,7 @@ cpp:type bob::learn::activation
 cpp:type bob::learn::activation::Activation
 cpp:type boost
 cpp:type boost::shared_ptr
+cpp:typeOrConcept bob::learn::activation::Activation
 
 # These are not c++ types, but c - why Sphinx confuses those?
 cpp:type PyObject
@@ -50,18 +51,7 @@ cpp:type PyObject
 c:type boost
 c:type shared_ptr
 c:type mt19937
-
-# this is actually a c type
-cpp:type PyObject
-cpp:type Py_ssize_t
-
-# exceptions are not found in python 2.7
-py:exc ValueError
-
 py:meth __call__
-# these are actually c types
-cpp:type PyObject
-cpp:type Py_ssize_t
 
 # no reference exists for these
 cpp:type bob
@@ -72,9 +62,13 @@ cpp:type bob::core::array::ElementType
 cpp:type boost
 cpp:type boost::shared_ptr
 cpp:type bob::io
+cpp:typeOrConcept bob::io
 cpp:type bob::io::base
+cpp:typeOrConcept bob::io::base
 cpp:type bob::io::base::File
+cpp:typeOrConcept bob::io::base::File
 cpp:type bob::io::base::HDF5File
+cpp:typeOrConcept bob::io::base::HDF5File
 
 # exceptions are not found in python 2.7
 py:exc RuntimeError
@@ -82,17 +76,6 @@ py:exc NotImplementedError
 py:class tuple
 c:func PyUnicode_FSConverter
 
-# these don't exists on numpy's manual
-py:class numpy.uint8
-# These are not documented properly on numpy's manual
-py:class numpy.uint8
-py:class numpy.uint16
-py:class numpy.float64
-
-# These are not proper py:exc on Python's 2.7 manual
-py:exc TypeError
-# Not available in Python 2.7, but ok in Python 3.x
-py:exc ValueError
 # we don't link against setuptools manual
 py:class setuptools.extension.Extension
 py:class distutils.extension.Extension
@@ -142,12 +125,10 @@ cpp:type boost
 cpp:type boost::shared_ptr
 cpp:type blitz
 cpp:type blitz::Array
+cpp:typeOrConcept blitz::Array
 cpp:type bob
-cpp:type bob::learn
 cpp:type bob::learn::libsvm
 cpp:type bob::learn::libsvm::Machine
-cpp:type bob::io
-cpp:type bob::io::base
 cpp:type bob::io::base::HDF5File
 cpp:type svm_model
 # This is a C type that Sphinx confuses as a C++ type
@@ -162,3 +143,66 @@ cpp:type std::string
 cpp:type blitz
 cpp:type blitz::Array
 cpp:type uint8_t
+
+### New set of exceptions
+cpp:typeOrConcept PyObject
+cpp:typeOrConceptOrConcept PyObject
+cpp:typeOrConcept blitz
+cpp:typeOrConcept blitz::Array
+cpp:typeOrConcept PyObject
+cpp:typeOrConcept T
+cpp:typeOrConcept N
+cpp:typeOrConcept bob
+cpp:typeOrConcept bob::learn
+cpp:typeOrConcept bob::learn::activation
+cpp:typeOrConcept bob::learn::activation::Activation
+cpp:typeOrConcept boost
+cpp:typeOrConcept boost::shared_ptr
+cpp:typeOrConcept PyObject
+cpp:typeOrConcept PyObject
+cpp:typeOrConcept Py_ssize_t
+cpp:typeOrConcept bob
+cpp:typeOrConcept bob::core
+cpp:typeOrConcept bob::core::array
+cpp:typeOrConcept bob::core::array::typeinfo
+cpp:typeOrConcept bob::core::array::ElementType
+cpp:typeOrConcept boost
+cpp:typeOrConcept boost::shared_ptr
+cpp:typeOrConcept bob::io
+cpp:typeOrConcept bob::io::base
+cpp:typeOrConcept bob::io::base::File
+cpp:typeOrConcept bob::io::base::HDF5File
+cpp:typeOrConcept bob
+cpp:typeOrConcept bob::learn
+cpp:typeOrConcept bob::learn::mlp
+cpp:typeOrConcept bob::learn::mlp::Machine
+cpp:typeOrConcept bob::learn::mlp::Cost
+cpp:typeOrConcept bob::learn::mlp::DataShuffler
+cpp:typeOrConcept bob::learn::mlp::Trainer
+cpp:typeOrConcept bob::learn::mlp::BackProp
+cpp:typeOrConcept bob::learn::mlp::RProp
+cpp:typeOrConcept boost
+cpp:typeOrConcept boost::shared_ptr
+cpp:typeOrConcept PyObject
+cpp:typeOrConcept size_t
+cpp:typeOrConcept std
+cpp:typeOrConcept std::vector
+cpp:typeOrConcept std::string
+cpp:typeOrConcept boost
+cpp:typeOrConcept boost::shared_ptr
+cpp:typeOrConcept blitz
+cpp:typeOrConcept blitz::Array
+cpp:typeOrConcept bob
+cpp:typeOrConcept bob::learn
+cpp:typeOrConcept bob::learn::libsvm
+cpp:typeOrConcept bob::learn::libsvm::Machine
+cpp:typeOrConcept bob::io
+cpp:typeOrConcept bob::io::base
+cpp:typeOrConcept bob::io::base::HDF5File
+cpp:typeOrConcept svm_model
+cpp:typeOrConcept PyObject
+cpp:typeOrConcept std
+cpp:typeOrConcept std::string
+cpp:typeOrConcept blitz
+cpp:typeOrConcept blitz::Array
+cpp:typeOrConcept uint8_t

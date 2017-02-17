@@ -4,9 +4,9 @@ bob.core == 2.1.7
 bob.io.base == 2.0.13
 bob.sp == 2.0.8
 bob.ap == 2.1.2
-bob.math == 2.1
-bob.measure == 2.3
-bob.db.base == 2.2
+bob.math == 2.1.0
+bob.measure == 2.3.0
+bob.db.base == 2.2.0
 bob.io.audio == 2.0.4
 bob.io.image == 2.2.1
 bob.io.video == 2.0.14
@@ -17,7 +17,7 @@ bob.ip.draw == 2.0.7
 bob.ip.gabor == 2.0.9
 bob.learn.activation == 2.0.8
 bob.learn.libsvm == 2.0.10
-bob.learn.linear == 2.1
+bob.learn.linear == 2.1.0
 bob.learn.mlp == 2.1.4
 bob.learn.em == 2.0.12
 bob.learn.boosting == 2.0.11

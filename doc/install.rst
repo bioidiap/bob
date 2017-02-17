@@ -4,7 +4,7 @@
  Installation Instructions
 ***************************
 
-You can either compile bob yourself or use our binary installation method.
+You can either compile bob or use the provided binary packages.
 
 =====================
  Binary Installation
@@ -20,8 +20,8 @@ Conda (Linux and MacOSX 64-bit)
    Please install and get familiar with `conda`_ first by referring to their
    website before getting started.
 
-The commands below will you give you a minimal bob environment. Continue reading
-for more detailed instructions.
+The commands below will you give you a minimal bob environment. Continue
+reading for more detailed instructions.
 
 .. code:: sh
 
@@ -35,9 +35,10 @@ for more detailed instructions.
 
 .. warning::
 
-   The packages in our channel are not API/ABI compatible with packages in other
-   user/community channels (especially ``conda-forge``). We can only guarantee
-   that the packages in our channel is compatible with the ``defaults`` channel.
+   The packages in our channel are not API/ABI compatible with packages in
+   other user/community channels (especially ``conda-forge``). We can only
+   guarantee that the packages in our channel is compatible with the
+   ``defaults`` channel.
 
 
 Detailed installation instructions
@@ -45,11 +46,11 @@ Detailed installation instructions
 
 `Anaconda`_ is a python distribution which comes with `conda`_ as its package
 manager besides ``pip``. `conda`_ can package every program and not just python
-libraries. `conda`_ packages are usually compiled binary packages and you do not
-need to compile them.
+libraries. `conda`_ packages are usually compiled binary packages and you do
+not need to compile them.
 
-To get started install `Miniconda`_ (recommended) or `Anaconda`_ (Anaconda comes
-with `Miniconda`_ and some extra packages already installed).
+To get started install `Miniconda`_ (recommended) or `Anaconda`_ (Anaconda
+comes with `Miniconda`_ and some extra packages already installed).
 
 * Make sure that `conda`_ is in your path and get familiar with `conda`_ by
   reading their webpage:
@@ -64,7 +65,7 @@ with `Miniconda`_ and some extra packages already installed).
 .. code:: sh
 
    $ conda config --add channels defaults
-   # conda config --add channels https://www.idiap.ch/software/bob/conda
+   $ conda config --add channels https://www.idiap.ch/software/bob/conda
 
 * Create a new environment:
 
@@ -139,22 +140,22 @@ that you may not use. To create such an environment:
 .. code:: sh
 
     export PY_VER="2.7"
-    export BOB_VER="2.5.1"
-    export ANACONDA_VER="4.2.0"
+    export BOB_VER="2.6.1"
+    export ANACONDA_VER="4.3.0"
     export ENV_NAME="bob-$BOB_VER-$PY_VER"
     conda create --yes -n $ENV_NAME --override-channels -c https://www.idiap.ch/software/bob/conda -c defaults python=$PY_VER anaconda=$ANACONDA_VER bob=$BOB_VER
     source activate $ENV_NAME
 
 There is only one compatible anaconda version for each version of Bob. For
-example bob ``2.5.1`` works only with anaconda ``4.2.0`` (as far as we know and
-have tested). Here is a table that lists compatible versions:
+example bob ``2.5.1`` works only with anaconda ``4.2.0`` (as far as we have
+tested). Here is a table that lists compatible versions:
 
 +-------------+------------------+
 | Bob version | Anaconda version |
 +=============+==================+
 | 2.5.1       | 4.2.0            |
 +-------------+------------------+
-| 2.6.1       | 4.3.0            |
+| 2.6.2       | 4.3.0            |
 +-------------+------------------+
 
 
@@ -162,10 +163,9 @@ have tested). Here is a table that lists compatible versions:
  Compiling from Source
 =======================
 
-If the binary installation does not work for you or you want to install Bob form
-source, this section is for you. Following you will find the software
-dependencies required for Bob's compilation and detailed instructions on how to
-install all the equivalent software packages.
+Following, you will find the software dependencies required for Bob's
+compilation and instructions on how to install all the equivalent
+software packages.
 
 
 Dependencies
@@ -176,11 +176,11 @@ This section describes software dependencies required for Bob's compilation
 
 .. note::
 
-   We keep here a comprehensive list of **all** packages you may need to compile
-   most of the available Bob packages. You may not need all this software for
-   special deployments. You should choose whatever suits you best. If you have
-   problems or would like to report a success story, please use our `mailing
-   list`_ for discussions.
+   We keep here a comprehensive list of **all** packages you may need to
+   compile most of the available Bob packages. You may not need all this
+   software for special deployments. You should choose whatever suits you best.
+   If you have problems or would like to report a success story, please use our
+   `mailing list`_ for discussions.
 
 +----------------+--------+-----------------------------+-------------------------+
 | Library        | Min.   | License                     | Notes                   |
@@ -328,13 +328,139 @@ be fetched automatically from PyPI otherwise.
 
 
 Setting up a Development Environment using Conda
-------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please look at our script in here:
-`<https://gitlab.idiap.ch/bob/bob.admin/blob/master/install/from-scratch.sh>`_
-that lets you setup a `conda`_ environment for bob development and installs all
-the dependencies in one shot.
+Please look at :download:`this script <from-scratch.sh>`
+that lets you setup a `conda`_ environment for |project| development and
+installs all the dependencies in one shot.
 
+
+Installing |project| from source
+--------------------------------
+
+Once the dependecies are installed you can use buildout (for production) or pip
+(for experts) to install |project| from source.
+
+Using ``zc.buildout`` (for production)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Please read our :doc:`temp/bob.extension/doc/buildout` page for instructions on
+how to install |project| packages. This is the recommended way to install bob
+from PyPI instead of pip.
+
+
+Using ``pip`` (for experts)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is also possible to install Bob packages using ``pip``, globally or on your
+private ``virtualenv``, if that is the way you like your Python work
+environments. Differently than with ``zc.buildout``, you will need to manually
+install all packages you need (directly or indirectly), as
+``pip``/``setuptools`` has presently no way to coherently install Python
+packages that depend on each other *for building*, such as is the case of many
+Bob packages.
+
+For example, to install ``bob.io.image`` in a newly created virtual
+environment, here is the sequence of commands to execute:
+
+.. code:: sh
+
+   $ pip install numpy
+   $ pip install bob.extension
+   $ pip install bob.blitz
+   $ pip install bob.core
+   $ pip install bob.io.base
+   $ pip install bob.io.image
+
+.. note::
+
+   Each ``pip`` command must be executed separately, respecting the inter-
+   package dependency.
+
+   The following will **not** work as expected:
+
+   .. code:: sh
+
+      $ #Do not do this:
+      $ pip install numpy bob.io.image
+
+The dependency of |project| core packages can be summarized into 8 layers and
+the following script can be used to install all core |project| packages using
+``pip``:
+
+.. code:: sh
+
+   $ bash pip_install_bob.sh
+   -------------------------
+   #!/bin/bash
+   set -e
+   
+   get_layer() {
+   case $1 in
+     1)
+       packages=("bob.extension")
+       ;;
+     2)
+       packages=("bob.blitz")
+       ;;
+     3)
+       packages=("bob.core" "bob.ip.draw")
+       ;;
+     4)
+       packages=("bob.io.base" "bob.sp" "bob.math")
+       ;;
+     5)
+       packages=("bob.ap" "bob.measure" "bob.db.base" "bob.io.image" "bob.io.video" "bob.io.matlab" "bob.ip.base" "bob.ip.color" "bob.ip.gabor" "bob.learn.activation" "bob.learn.libsvm" "bob.learn.boosting")
+       ;;
+     6)
+       packages=("bob.io.audio" "bob.learn.linear" "bob.learn.mlp" "bob.db.wine" "bob.db.mnist" "bob.db.atnt" "bob.ip.flandmark" "bob.ip.facedetect" "bob.ip.optflow.hornschunck" "bob.ip.optflow.liu")
+       ;;
+     7)
+       packages=("bob.learn.em" "bob.db.iris")
+       ;;
+     8)
+       packages=("bob")
+       ;;
+   esac
+   }
+   
+   for layer in `seq 1 8`;
+   do
+     get_layer ${layer}
+     for pkg in "${packages[@]}";
+     do
+       pip install $pkg
+     done
+   done
+
+
+Hooking-in privately compiled externals
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you have placed external libraries outside default search paths, make sure
+you set the environment variable ``BOB_PREFIX_PATH`` to point to the root of
+the installation paths for those, **before** you run ``pip install...``:
+
+.. code:: sh
+
+    $ export BOB_PREFIX_PATH="/path/to/my-install:/path/to/my-other-install"
+    $ pip install numpy
+    $ pip install bob.io.image
+    ...
+
+Package development
+~~~~~~~~~~~~~~~~~~~
+
+You can develop your package as per-usual, no special restrictions apply. You
+may refer to our :doc:`temp/bob.extension/doc/guide` for further hints and
+tips. In this case, ignore ``zc.buildout`` setup instructions.
+
+====================
+ Available packages
+====================
+
+For a comprehensive list of packages that are either part of |project| or use
+|project|, please visit `packages`_.
 
 =====================
  Supported platforms

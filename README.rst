@@ -7,10 +7,10 @@
    :target: http://pythonhosted.org/bob/index.html
 .. image:: http://img.shields.io/badge/docs-latest-orange.svg
    :target: https://www.idiap.ch/software/bob/docs/latest/bob/bob/master/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob/badges/master/build.svg
-   :target: https://gitlab.idiap.ch/bob/bob/commits/master
+.. image:: https://gitlab.idiap.ch/bob/bob/badges/v2.6.2/build.svg
+   :target: https://gitlab.idiap.ch/bob/bob/commits/v2.6.2
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
-   :target: https://gitlab.idiap.ch/bob/bob/commits/master
+   :target: https://gitlab.idiap.ch/bob/bob/commits/v2.6.2
 .. image:: http://img.shields.io/pypi/v/bob.svg
    :target: https://pypi.python.org/pypi/bob
 .. image:: http://img.shields.io/pypi/dm/bob.svg

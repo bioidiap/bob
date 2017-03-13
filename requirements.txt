@@ -1,4 +1,4 @@
-bob.extension == 2.3.9
+bob.extension == 2.3.10
 bob.blitz == 2.0.12
 bob.core == 2.1.7
 bob.io.base == 2.0.13

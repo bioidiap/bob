@@ -1,10 +1,3 @@
-include README.rst
-include CHANGELOG
-include LICENSE
-include bootstrap-buildout.py
-include buildout.cfg
-include requirements.txt
+include README.rst CHANGELOG LICENSE buildout.cfg requirements.txt version.txt
 include test-requirements.txt
-include version.txt
 recursive-include doc doc/plot *.rst *.png conf.py *.py *.ico
-

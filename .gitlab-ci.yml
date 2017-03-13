@@ -28,7 +28,7 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_build.sh
   script:
-    - cp build.sh ./_ci  
+    - sed -ie 's/sphinx-build -W/sphinx-build/g' ./_ci/build.sh
     - ./_ci/build.sh
   after_script:
     - ./_ci/after_build.sh
@@ -48,7 +48,7 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_test.sh
   script:
-    - cp test.sh ./_ci  
+    - sed -ie '/doctest/d' ./_ci/test.sh
     - ./_ci/test.sh
   after_script:
     - ./_ci/after_test.sh

@@ -118,7 +118,7 @@ And now you are ready to run your programs.
    >>> import bob.io.base
    >>> ...
 
-.. note:: 
+.. note::
 
    Now that you have all the dependencies and required Bob packages installed,
    it is a good idea to follow our :doc:`temp/bob.extension/doc/buildout` page
@@ -330,9 +330,33 @@ be fetched automatically from PyPI otherwise.
 Setting up a Development Environment using Conda
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please look at :download:`this script <from-scratch.sh>`
-that lets you setup a `conda`_ environment for |project| development and
-installs all the dependencies in one shot.
+Our :download:`conda environment file <bob-devel.yml>` lets you create a conda_
+environment from scratch for |project| development and installs all the
+dependencies in one shot. To create the default development environment,
+download ``bob-devel.yml`` from the link above and run the following conda_
+command:
+
+
+.. code-block:: sh
+
+   $ conda create env -f bob-devel.yml
+
+
+If you'd like to rename the environment, just do:
+
+
+.. code-block:: sh
+
+   $ conda create env -n mydev -f bob-devel.yml
+
+
+To install an environment using a different version of Python, first edit the
+file `bob-devel.yml` and change the line that says `python=2.7` to the variant
+you wish to install.
+
+
+Read ``conda create env --help`` for more information.
+
 
 
 Installing |project| from source
@@ -394,7 +418,7 @@ the following script can be used to install all core |project| packages using
    -------------------------
    #!/bin/bash
    set -e
-   
+
    get_layer() {
    case $1 in
      1)
@@ -423,7 +447,7 @@ the following script can be used to install all core |project| packages using
        ;;
    esac
    }
-   
+
    for layer in `seq 1 8`;
    do
      get_layer ${layer}

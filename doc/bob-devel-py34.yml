@@ -1,0 +1,58 @@
+name: bob-devel-py34
+channels:
+- https://www.idiap.ch/software/bob/conda
+- defaults
+dependencies:
+- python=3.4
+- cython
+- dask
+- hdf5
+- jpeg
+- libpng
+- libtiff
+- matplotlib
+- nose
+- numexpr
+- numpy
+- pillow
+- pip
+- psutil
+- scikit-image
+- scikit-learn
+- scipy
+- sphinx
+- sqlalchemy
+- anaconda=4.2.0 # [only linux]
+- anaconda=4.3.0 # [only osx]
+- boost=1.61
+- caffe # [only linux]
+- cmake
+- coverage
+- cyvlfeat=0.4.5
+- docopt
+- ffmpeg=2.8.10
+- gcc=4.8.5 # [only linux]
+- libgcc=4.8.5 # [only linux]
+- giflib=5.1.4
+- ipdb=0.10.2
+- ipython
+- libblitz=0.10
+- libmatio=1.5
+- libsvm=3.21
+- menpo=0.7.7
+- menpofit=0.4.1
+- menpowidgets=0.2.1p3
+- mne=0.13.1
+- openblas=0.2.19
+- opencv=3
+- pkgtools=0.7.3
+- pkg-config
+- pyedflib=0.1.6
+- schema=0.6.5
+- sox=14.4.2
+- sphinx_rtd_theme
+- toolchain=2.3.2
+- vlfeat=0.9.20
+- zc.buildout=2.9.2
+- pip:
+  - tensorflow==1.0.1

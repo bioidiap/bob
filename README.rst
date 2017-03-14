@@ -33,24 +33,26 @@ Installation
 ------------
 
 Follow our `installation`_ instructions. Then, using the Python interpreter
-provided by the distribution, bootstrap and buildout this package::
+provided by the distribution, build this package with::
 
-  $ python bootstrap-buildout.py
-  $ ./bin/buildout
-  
+  $ buildout
+
 
 For the maintainers
 -------------------
 
 In the next subsections we have instructions for the maintainers of the package.
 
+
 Adding a dependency package
 ===========================
 
-   
-   To add a package on bob, just append the package name in the file ('requirements.txt').
+
+To add a package on bob, just append the package name in the file
+(``requirements.txt``).
 
 .. warning::
+
    Before adding a package to this prototype, please ensure that the package:
 
    * contains a README clearly indicating how to install the package (including
@@ -70,11 +72,12 @@ Adding a dependency package
 Updating the dependencies
 =========================
 
- If you want to update the version of the dependency packages, run the following commands::
- 
- $ ./bin/python ./bob/script/get_versions.py > requirements.txt
- $ git commit requirements.txt -m "Update requeriments" && git push
- 
+If you want to update the version of the dependency packages, run the following
+commands::
+
+  $ ./bin/python ./bob/script/get_versions.py > requirements.txt
+  $ git commit requirements.txt -m "Update requeriments" && git push
+
 
 Removing a dependency package
 =============================
@@ -92,4 +95,3 @@ Removing a dependency package
 .. _bug tracker: https://www.idiap.ch/software/bob/issues
 .. _dependencies: https://gitlab.idiap.ch/bob/bob/wikis/Dependencies
 .. _installation: https://www.idiap.ch/software/bob/install
-

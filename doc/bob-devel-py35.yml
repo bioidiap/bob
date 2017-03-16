@@ -1,6 +1,6 @@
 name: bob-devel-py35
 channels:
-- https://www.idiap.ch/software/bob/conda
+- http://www.idiap.ch/software/bob/conda
 - defaults
 dependencies:
 - python=3.5

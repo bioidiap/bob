@@ -1,6 +1,6 @@
 name: bob-devel-py27
 channels:
-- https://www.idiap.ch/software/bob/conda
+- http://www.idiap.ch/software/bob/conda
 - defaults
 dependencies:
 - python=2.7

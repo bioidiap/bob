@@ -22,17 +22,17 @@ dependencies:
 - scipy
 - sphinx
 - sqlalchemy
-- anaconda=4.2.0 # [only linux]
-- anaconda=4.3.0 # [only osx]
+- anaconda=4.2.0 # [linux]
+- anaconda=4.3.0 # [osx]
 - boost=1.61
-- caffe # [only linux]
+- caffe # [linux]
 - cmake
 - coverage
 - cyvlfeat=0.4.5
 - docopt
 - ffmpeg=2.8.10
-- gcc=4.8.5 # [only linux]
-- libgcc=4.8.5 # [only linux]
+- gcc=4.8.5 # [linux]
+- libgcc=4.8.5 # [linux]
 - giflib=5.1.4
 - ipdb=0.10.2
 - ipython

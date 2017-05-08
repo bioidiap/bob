@@ -13,7 +13,6 @@ Basic Functionality
 
 * :ref:`bob.core`
 * :ref:`bob.math`
-* :ref:`bob.measure`
 
 Data Input and Output
 ---------------------
@@ -41,9 +40,10 @@ Signal, Audio, Image and Video Processing
 Machine Learning
 ----------------
 
-* :ref:`bob.learn.activation`
+* :ref:`bob.measure`
 * :ref:`bob.learn.linear`
 * :ref:`bob.learn.mlp`
+* :ref:`bob.learn.activation`
 * :ref:`bob.learn.libsvm`
 * :ref:`bob.learn.em`
 * :ref:`bob.learn.boosting`
@@ -53,9 +53,9 @@ Database Modules
 
 * :ref:`bob.db.base`
 * :ref:`bob.db.mnist`
-* :ref:`bob.db.wine`
 * :ref:`bob.db.atnt`
 * :ref:`bob.db.iris`
+* :ref:`bob.db.wine`
 
 Modules for Developers
 ----------------------

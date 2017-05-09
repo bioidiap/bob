@@ -28,7 +28,6 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_build.sh
   script:
-    - sed -ie 's/sphinx-build -W/sphinx-build/g' ./_ci/build.sh
     - ./_ci/build.sh
   after_script:
     - ./_ci/after_build.sh
@@ -48,7 +47,6 @@ stages:
     - ./_ci/install.sh _ci #updates
     - ./_ci/before_test.sh
   script:
-    - sed -ie '/doctest/d' ./_ci/test.sh
     - ./_ci/test.sh
   after_script:
     - ./_ci/after_test.sh
@@ -145,24 +143,6 @@ deploy_linux_27:
     - conda-linux
 
 
-# Linux + Python 3.4: Builds and tests
-build_linux_34:
-  <<: *build_job
-  variables: &linux_34_build_variables
-    PYTHON_VERSION: "3.4"
-    WHEEL_TAG: "py3"
-  tags:
-    - conda-linux
-
-test_linux_34:
-  <<: *test_job
-  variables: *linux_34_build_variables
-  dependencies:
-    - build_linux_34
-  tags:
-    - conda-linux
-
-
 # Linux + Python 3.5: Builds, tests and uploads wheel
 build_linux_35:
   <<: *build_job
@@ -211,24 +191,6 @@ test_macosx_27:
   variables: *macosx_27_build_variables
   dependencies:
     - build_macosx_27
-  tags:
-    - conda-macosx
-
-
-# Mac OSX + Python 3.4: Builds and tests
-build_macosx_34:
-  <<: *build_job
-  variables: &macosx_34_build_variables
-    PYTHON_VERSION: "3.4"
-    WHEEL_TAG: "py3"
-  tags:
-    - conda-macosx
-
-test_macosx_34:
-  <<: *test_job
-  variables: *macosx_34_build_variables
-  dependencies:
-    - build_macosx_34
   tags:
     - conda-macosx
 

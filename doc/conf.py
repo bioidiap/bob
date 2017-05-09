@@ -29,18 +29,6 @@ extensions = [
     ]
 
 
-#Hack to download the dependencies
-from bob.utils import get_dependencies, download_packages
-temp_dir="./temp"
-try:
-  import shutil
-  shutil.rmtree(temp_dir)
-except Exception:
-  None
-
-packages = get_dependencies()
-download_packages(packages[1:], temp_dir)
-
 import sphinx
 if sphinx.__version__ >= "1.4.1":
     extensions.append('sphinx.ext.imgmath')
@@ -245,7 +233,6 @@ autodoc_member_order = 'bysource'
 autodoc_default_flags = [
   'members',
   'undoc-members',
-  'inherited-members',
   'show-inheritance',
   ]
 

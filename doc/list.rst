@@ -15,13 +15,13 @@ Below you can find the list of all **core** packages organized by category with
 their respective documentation.
 
 Basic Functionality
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 * :ref:`bob.core`
 * :ref:`bob.math`
 
 Data Input and Output
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 * :ref:`bob.io.base`
 * :ref:`bob.io.image`
@@ -30,7 +30,7 @@ Data Input and Output
 * :ref:`bob.io.matlab`
 
 Signal, Audio, Image and Video Processing
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------
 
 * :ref:`bob.sp`
 * :ref:`bob.ap`
@@ -44,7 +44,7 @@ Signal, Audio, Image and Video Processing
 * :ref:`bob.ip.flandmark`
 
 Machine Learning
-^^^^^^^^^^^^^^^^
+----------------
 
 * :ref:`bob.measure`
 * :ref:`bob.learn.linear`
@@ -55,7 +55,7 @@ Machine Learning
 * :ref:`bob.learn.boosting`
 
 Database Modules
-^^^^^^^^^^^^^^^^
+----------------
 
 * :ref:`bob.db.base`
 * :ref:`bob.db.mnist`
@@ -64,7 +64,7 @@ Database Modules
 * :ref:`bob.db.wine`
 
 Modules for Developers
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 * :ref:`bob.extension`
 * :ref:`bob.blitz`
@@ -73,7 +73,7 @@ The list does not stop here, please visit `packages`_ for more. Below you can
 find some notable **extra** packages:
 
 Biometric Recognition
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 * :ref:`bob.bio.base`
 * :ref:`bob.bio.face`

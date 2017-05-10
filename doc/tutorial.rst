@@ -231,24 +231,22 @@ Here, we examine a few of the machines and trainers available in Bob.
 Database interfaces
 ===================
 
-Bob provides an API to easily query and interface with well known
-databases. A database contains information about the organization of the
-files, functions to query information such as the data which might be
-used for training a model, but it usually does **not** contain the data
-itself (except for some toy examples). Most of the databases are stored
-in an `SQLite`_ file, whereas the smallest ones can be stored as
-filelists.
+Bob provides an API to easily query and interface with well known databases. A
+database contains information about the organization of the files, functions to
+query information such as the data which might be used for training a model,
+but it usually does **not** contain the data itself (except for some toy
+examples). Please visit :ref:`bob.db.base` for an excellent guide on Bob's
+datbases.
 
 Bob includes a (growing) list of supported database interfaces. There are some
-small toy databases like :ref:`bob.db.iris` and the
-:ref:`bob.db.mnist` database can be used to train and evaluate
-classification experiments. For the former, a detailed example on how to use
-Bob's machine learning techniques to classify the Iris flowers is given in
-:doc:`example`.
+small toy databases like :ref:`bob.db.iris` and the :ref:`bob.db.mnist`
+database can be used to train and evaluate classification experiments. For the
+former, a detailed example on how to use Bob's machine learning techniques to
+classify the Iris flowers is given in :doc:`example`.
 
 However, most of the databases contain face images, speech data or videos that
-are used for biometric recognition and presentation attack detection
-(anti-spoofing). A complete (and growing) list of database packages can be found in
+are used for biometric recognition and presentation attack detection (anti-
+spoofing). A complete (and growing) list of database packages can be found in
 our `Packages`_.
 
 Several databases that can be used for biometric recognition share a common

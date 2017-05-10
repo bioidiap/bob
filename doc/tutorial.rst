@@ -245,9 +245,9 @@ former, a detailed example on how to use Bob's machine learning techniques to
 classify the Iris flowers is given in :doc:`example`.
 
 However, most of the databases contain face images, speech data or videos that
-are used for biometric recognition and presentation attack detection (anti-
-spoofing). A complete (and growing) list of database packages can be found in
-our `Packages`_.
+are used for biometric recognition and presentation attack detection
+(anti-spoofing). A complete (and growing) list of database packages can be
+found in our `Packages`_.
 
 Several databases that can be used for biometric recognition share a common
 interface, which is defined in the :any:`bob.bio.base.database.BioDatabase`

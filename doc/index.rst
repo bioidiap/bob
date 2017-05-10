@@ -7,13 +7,14 @@
  Bob
 =======================
 
-Bob is a free signal-processing and machine learning toolbox originally
+Bob_ is a free signal-processing and machine learning toolbox originally
 developed by the Biometrics group at `Idiap`_ Research Institute, Switzerland.
 
 The toolbox is written in a mix of `Python`_ and `C++`_ and is designed to be
 both efficient and reduce development time. It is composed of a reasonably
 large number of `packages`_ that implement tools for image, audio & video
-processing, machine learning and pattern recognition.
+processing, machine learning & pattern recognition, and a lot more task
+specific packages.
 
 .. todolist::
 
@@ -25,6 +26,7 @@ processing, machine learning and pattern recognition.
    example
    list
    source
+   Bob's Wiki <https://www.idiap.ch/software/bob/wiki>
 
 
 .. include:: links.rst

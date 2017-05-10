@@ -2,20 +2,26 @@
  List of Bob packages
 ======================
 
-Bob is organized in several independent python packages. Below you can find the
-list of all **core** packages organized by category with their respective
-documentation. For a comprehensive list of packages that are either part of
-|project| or use |project|, please visit `packages`_.
+Bob is organized in several independent python packages. The list of packages
+are divided into two lists: **core** and **extra**.
 
+* You can
+  `search PyPI <https://pypi.python.org/pypi?:action=browse&show=all&c=590>`_
+  for a comprehensive list of packages that **either use Bob or are part of
+  Bob**.
+* Also, we maintain a list of active **core** and **extra** `packages`_.
+
+Below you can find the list of all **core** packages organized by category with
+their respective documentation.
 
 Basic Functionality
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 * :ref:`bob.core`
 * :ref:`bob.math`
 
 Data Input and Output
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 * :ref:`bob.io.base`
 * :ref:`bob.io.image`
@@ -24,7 +30,7 @@ Data Input and Output
 * :ref:`bob.io.matlab`
 
 Signal, Audio, Image and Video Processing
------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * :ref:`bob.sp`
 * :ref:`bob.ap`
@@ -38,7 +44,7 @@ Signal, Audio, Image and Video Processing
 * :ref:`bob.ip.flandmark`
 
 Machine Learning
-----------------
+^^^^^^^^^^^^^^^^
 
 * :ref:`bob.measure`
 * :ref:`bob.learn.linear`
@@ -49,7 +55,7 @@ Machine Learning
 * :ref:`bob.learn.boosting`
 
 Database Modules
-----------------
+^^^^^^^^^^^^^^^^
 
 * :ref:`bob.db.base`
 * :ref:`bob.db.mnist`
@@ -58,9 +64,21 @@ Database Modules
 * :ref:`bob.db.wine`
 
 Modules for Developers
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 * :ref:`bob.extension`
 * :ref:`bob.blitz`
+
+The list does not stop here, please visit `packages`_ for more. Below you can
+find some notable **extra** packages:
+
+Biometric Recognition
+^^^^^^^^^^^^^^^^^^^^^
+
+* :ref:`bob.bio.base`
+* :ref:`bob.bio.face`
+* :ref:`bob.bio.spear`
+* :ref:`bob.bio.video`
+* :ref:`bob.bio.gmm`
 
 .. include:: links.rst

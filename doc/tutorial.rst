@@ -32,22 +32,15 @@ and so when using Python we have relied on the existing `NumPy`_ multi-
 dimensional arrays :any:`numpy.ndarray`. This provides with greater flexibility
 within the Python environment.
 
-At the C++ level, the `Blitz++`_ library is used to handle arrays. Although we
-initially bound Blitz++ Arrays in Python, we quickly realized that it might be
-more clever to use the existing NumPy ndarrays from Python, as they can
-directly be processed by numerous existing Python libraries such as `NumPy`_
-and `SciPy`_.
-
-This means that |project|'s multi-dimensional arrays are represented in Python
-by NumPy ndarrays. This also implies that there are internal conversion
-routines to convert NumPy ndarrays from/to Blitz++. As they are done
-implicitly, the user has no need to care about this aspect and should just use
-NumPy ndarrays everywhere.
+At the C++ level, the `Blitz++`_ library is used to handle arrays. |project|
+provides internal conversion routines to transparently and efficiently convert
+NumPy ndarrays to/from Blitz++. As they are done implicitly, the user has no
+need to care about this aspect and should just use NumPy ndarrays everywhere
+while inside Python code.
 
 For an introduction and tutorials about NumPy ndarrays, just visit the `NumPy
 Reference`_ website. For a short tutorial on the bindings from NumPy ndarrays
-to Blitz++, you can read the documentation of our
-:ref:`bob.blitz` package.
+to Blitz++, you can read the documentation of our :ref:`bob.blitz` package.
 
 .. note::
 
@@ -231,25 +224,23 @@ Here, we examine a few of the machines and trainers available in Bob.
 Database interfaces
 ===================
 
-Bob provides an API to easily query and interface with well known
-databases. A database contains information about the organization of the
-files, functions to query information such as the data which might be
-used for training a model, but it usually does **not** contain the data
-itself (except for some toy examples). Most of the databases are stored
-in an `SQLite`_ file, whereas the smallest ones can be stored as
-filelists.
+Bob provides an API to easily query and interface with well known databases. A
+database contains information about the organization of the files, functions to
+query information such as the data which might be used for training a model,
+but it usually does **not** contain the data itself (except for some toy
+examples). Please visit :ref:`bob.db.base` for an excellent guide on Bob's
+datbases.
 
 Bob includes a (growing) list of supported database interfaces. There are some
-small toy databases like :ref:`bob.db.iris` and the
-:ref:`bob.db.mnist` database can be used to train and evaluate
-classification experiments. For the former, a detailed example on how to use
-Bob's machine learning techniques to classify the Iris flowers is given in
-:doc:`example`.
+small toy databases like :ref:`bob.db.iris` and the :ref:`bob.db.mnist`
+database can be used to train and evaluate classification experiments. For the
+former, a detailed example on how to use Bob's machine learning techniques to
+classify the Iris flowers is given in :doc:`example`.
 
 However, most of the databases contain face images, speech data or videos that
 are used for biometric recognition and presentation attack detection
-(anti-spoofing). A complete (and growing) list of database packages can be found in
-our `Packages`_.
+(anti-spoofing). A complete (and growing) list of database packages can be
+found in our `Packages`_.
 
 Several databases that can be used for biometric recognition share a common
 interface, which is defined in the :any:`bob.bio.base.database.BioDatabase`

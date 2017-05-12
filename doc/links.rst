@@ -1,6 +1,7 @@
 .. _anaconda: https://www.continuum.io/anaconda
 .. _Artistic-2.0: http://www.opensource.org/licenses/Artistic-2.0
 .. _Blitz++: http://www.oonumerics.org/blitz
+.. _Bob: https://www.idiap.ch/software/bob
 .. _Boost: http://www.boost.org
 .. _BSD-2-Clause: http://www.opensource.org/licenses/BSD-2-Clause
 .. _BSD-3-Clause: http://www.opensource.org/licenses/BSD-3-Clause
@@ -47,3 +48,4 @@
 .. _SQLAlchemy: http://www.sqlalchemy.org/
 .. _SQLite: http://www.sqlite.org
 .. _VLFeat: http://www.vlfeat.org/
+.. _Wiki: https://www.idiap.ch/software/bob/wiki

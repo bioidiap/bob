@@ -34,7 +34,7 @@ Now you can create an envrionment and install |project| in that environment:
     Be aware that if you use packages from our channel and other user/community
     channels (especially ``conda-forge``) in one environment, you may end up
     with a broken envrionment. We can only guarantee that the packages in our
-    channel is compatible with the ``defaults`` channel.
+    channel are compatible with the ``defaults`` channel.
 
 You can install other |project| `packages`_ by reading the instructions on
 their webpage. In most cases, the installation should be as simple as:

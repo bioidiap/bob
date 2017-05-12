@@ -32,22 +32,15 @@ and so when using Python we have relied on the existing `NumPy`_ multi-
 dimensional arrays :any:`numpy.ndarray`. This provides with greater flexibility
 within the Python environment.
 
-At the C++ level, the `Blitz++`_ library is used to handle arrays. Although we
-initially bound Blitz++ Arrays in Python, we quickly realized that it might be
-more clever to use the existing NumPy ndarrays from Python, as they can
-directly be processed by numerous existing Python libraries such as `NumPy`_
-and `SciPy`_.
-
-This means that |project|'s multi-dimensional arrays are represented in Python
-by NumPy ndarrays. This also implies that there are internal conversion
-routines to convert NumPy ndarrays from/to Blitz++. As they are done
-implicitly, the user has no need to care about this aspect and should just use
-NumPy ndarrays everywhere.
+At the C++ level, the `Blitz++`_ library is used to handle arrays. |project|
+provides internal conversion routines to transparently and efficiently convert
+NumPy ndarrays to/from Blitz++. As they are done implicitly, the user has no
+need to care about this aspect and should just use NumPy ndarrays everywhere
+while inside Python code.
 
 For an introduction and tutorials about NumPy ndarrays, just visit the `NumPy
 Reference`_ website. For a short tutorial on the bindings from NumPy ndarrays
-to Blitz++, you can read the documentation of our
-:ref:`bob.blitz` package.
+to Blitz++, you can read the documentation of our :ref:`bob.blitz` package.
 
 .. note::
 

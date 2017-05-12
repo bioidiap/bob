@@ -1,7 +1,4 @@
 .. vim: set fileencoding=utf-8 :
-.. Andre Anjos <andre.anjos@idiap.ch>
-.. Mon 17 Feb 2014 17:40:07 CET
-.. Copyright (C) 2011-2017 Idiap Research Institute, Martigny, Switzerland
 
 =======================
  Bob

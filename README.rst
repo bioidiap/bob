@@ -12,8 +12,6 @@
    :target: https://gitlab.idiap.ch/bob/bob/commits/master
 .. image:: http://img.shields.io/pypi/v/bob.svg
    :target: https://pypi.python.org/pypi/bob
-.. image:: http://img.shields.io/pypi/dm/bob.svg
-   :target: https://pypi.python.org/pypi/bob
 
 ====================
  Bob

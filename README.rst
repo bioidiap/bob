@@ -29,7 +29,7 @@ large number of `packages`_ that implement tools for image, audio & video
 processing, machine learning & pattern recognition, and a lot more task
 specific packages.
 
-Please visit our `website`_ for more information.
+**Please visit our `website`_ for more information.**
 
 
 For the maintainers

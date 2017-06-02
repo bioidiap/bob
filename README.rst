@@ -42,7 +42,7 @@ Updating the dependencies
 If you want to update the version of the dependency packages, run the following
 commands::
 
-  $ python ./bob/script/get_versions.py > requirements.txt
+  $ python ./bob/script/get_versions.py bob > requirements.txt
   $ git commit requirements.txt -m "Update requeriments" && git push
 
 

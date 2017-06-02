@@ -19,13 +19,16 @@ def main():
       sys.exit(1)
 
     dependencies = get_dependencies(pkg_name=sys.argv[1])
-    for i in range(1, len(dependencies)):
-      d = dependencies[i].split("==")[0]
+    dependencies.remove('setuptools')
+    for d in dependencies:
+      d = d.split("==")[0].strip()
       versions = get_releases(d)
-      print("{0} == {1}".format(d, get_max_version(versions)))
+      print("{0} == {1}".format(
+          d, '{}.{}.{}'.format(*get_max_version(versions).version)))
   except ImportError:
     print("Package pkgtools required, please install it.  "
           "<https://pypi.python.org/pypi/pkgtools/>")
+    raise
 
 
 if __name__ == '__main__':

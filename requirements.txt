@@ -1,7 +1,7 @@
 bob.extension == 2.4.5
 bob.blitz == 2.0.14
 bob.core == 2.1.9
-bob.io.base == 3.0.0
+bob.io.base == 3.0.2
 bob.sp == 2.0.10
 bob.ap == 2.1.5
 bob.math == 3.0.0

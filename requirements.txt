@@ -9,7 +9,7 @@ bob.measure == 2.4.1
 bob.db.base == 2.3.2
 bob.io.audio == 2.0.6
 bob.io.image == 2.3.0
-bob.io.video == 2.0.16
+bob.io.video == 2.0.19
 bob.io.matlab == 2.0.10
 bob.ip.base == 2.1.0
 bob.ip.color == 2.0.10

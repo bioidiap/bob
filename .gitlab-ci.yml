@@ -1,249 +1,142 @@
-# This build file heavily uses template features from YAML so it is generic
-# enough for any Bob project. Don't modify it unless you know what you're
-# doing.
+# This build file uses template features from YAML so it is generic enough for
+# any Bob project. Don't modify it unless you know what you're doing.
+
+# Definition of global variables (all stages)
+variables:
+  CONDA_ROOT: "${CI_PROJECT_DIR}/miniconda"
 
 
-# Definition of our build pipeline
+# Definition of our build pipeline order
 stages:
   - build
-  - test
-  - docs
-  - wheels
   - deploy
+  - pypi
 
 
-# ---------
-# Templates
-# ---------
-
-# Template for the build stage
-# Needs to run on all supported architectures, platforms and python versions
+# Build targets
 .build_template: &build_job
   stage: build
   before_script:
-    - git clean -ffdx
     - mkdir _ci
-    - curl --silent "https://gitlab.idiap.ch/bob/bob.admin/raw/master/gitlab/install.sh" > _ci/install.sh
+    - curl --silent "https://gitlab.idiap.ch/bob/bob.admin/raw/condapackage/gitlab/install.sh" > _ci/install.sh
     - chmod 755 _ci/install.sh
-    - ./_ci/install.sh _ci #updates
+    - ./_ci/install.sh _ci condapackage #installs ci support scripts
     - ./_ci/before_build.sh
   script:
     - ./_ci/build.sh
-  after_script:
-    - ./_ci/after_build.sh
+  cache: &build_caches
+    paths:
+      - miniconda.sh
+      - ${CONDA_ROOT}/pkgs/*.tar.bz2
+      - ${CONDA_ROOT}/pkgs/urls.txt
+
+
+.build_linux_template: &linux_build_job
+  <<: *build_job
+  tags:
+    - docker
+  image: continuumio/conda-concourse-ci
   artifacts:
     expire_in: 1 week
     paths:
       - _ci/
-      - dist/
-      - sphinx/
+      - ${CONDA_ROOT}/conda-bld/linux-64/*.tar.bz2
+  cache:
+    <<: *build_caches
+    key: "linux-cache"
 
 
-# Template for the test stage - re-installs from uploaded wheels
-# Needs to run on all supported architectures, platforms and python versions
-.test_template: &test_job
-  stage: test
-  before_script:
-    - ./_ci/install.sh _ci #updates
-    - ./_ci/before_test.sh
-  script:
-    - ./_ci/test.sh
-  after_script:
-    - ./_ci/after_test.sh
+.build_macosx_template: &macosx_build_job
+  <<: *build_job
+  tags:
+    - macosx
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - _ci/
+      - ${CONDA_ROOT}/conda-bld/osx-64/*.tar.bz2
+  cache:
+    <<: *build_caches
+    key: "macosx-cache"
 
 
-# Template for the wheel uploading stage
-# Needs to run against one supported architecture, platform and python version
-.wheels_template: &wheels_job
-  stage: wheels
-  environment: intranet
-  only:
-    - master
-    - /^v\d+\.\d+\.\d+([abc]\d*)?$/  # PEP-440 compliant version (tags)
-  before_script:
-    - ./_ci/install.sh _ci #updates
-    - ./_ci/before_wheels.sh
-  script:
-    - ./_ci/wheels.sh
-  after_script:
-    - ./_ci/after_wheels.sh
+build_linux_27:
+  <<: *linux_build_job
+  variables:
+    PYTHON_VERSION: "2.7"
 
 
-# Template for (latest) documentation upload stage
-# Only one real job needs to do this
-.docs_template: &docs_job
-  stage: docs
-  environment: intranet
-  only:
-    - master
-  before_script:
-    - ./_ci/install.sh _ci #updates
-    - ./_ci/before_docs.sh
-  script:
-    - ./_ci/docs.sh
-  after_script:
-    - ./_ci/after_docs.sh
+build_linux_36:
+  <<: *linux_build_job
+  variables:
+    PYTHON_VERSION: "3.6"
+    BUILD_EGG: "true"
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - _ci/
+      - dist/*.zip
+      - sphinx
+      - ${CONDA_ROOT}/conda-bld/linux-64/*.tar.bz2
 
 
-# Template for the deployment stage - re-installs from uploaded wheels
-# Needs to run on a single architecture only
-# Will deploy your package to PyPI and other required services
-# Only runs for tags
+build_macosx_27:
+  <<: *macosx_build_job
+  variables:
+    PYTHON_VERSION: "2.7"
+
+
+build_macosx_36:
+  <<: *macosx_build_job
+  variables:
+    PYTHON_VERSION: "3.6"
+
+
+# Deploy targets
 .deploy_template: &deploy_job
   stage: deploy
-  environment: internet
+  before_script:
+    - ./_ci/install.sh _ci condapackage #updates ci support scripts
+  script:
+    - ./_ci/deploy.sh
+  dependencies:
+    - build_linux_27
+    - build_linux_36
+    - build_macosx_27
+    - build_macosx_36
+  tags:
+    - deployer
+
+
+deploy_beta:
+  <<: *deploy_job
+  environment: beta
+  only:
+    - master
+    - condapackage
+
+
+deploy_stable:
+  <<: *deploy_job
+  environment: stable
+  only:
+    - /^v\d+\.\d+\.\d+([abc]\d*)?$/  # PEP-440 compliant version (tags)
+  except:
+    - branches
+
+
+pypi:
+  stage: pypi
+  environment: pypi
   only:
     - /^v\d+\.\d+\.\d+([abc]\d*)?$/  # PEP-440 compliant version (tags)
   except:
     - branches
   before_script:
-    - ./_ci/install.sh _ci #updates
-    - ./_ci/before_deploy.sh
+    - ./_ci/install.sh _ci condapackage #updates ci support scripts
   script:
-    - ./_ci/deploy.sh
-  after_script:
-    - ./_ci/after_deploy.sh
-
-
-# -------------
-# Build Targets
-# -------------
-
-# Linux + Python 2.7: Builds, tests, uploads wheel and deploys (if needed)
-build_linux_27:
-  <<: *build_job
-  variables: &linux_27_build_variables
-    PYTHON_VERSION: "2.7"
-    WHEEL_TAG: "py27"
-  tags:
-    - conda-linux
-
-test_linux_27:
-  <<: *test_job
-  variables: *linux_27_build_variables
-  dependencies:
-    - build_linux_27
-  tags:
-    - conda-linux
-
-wheels_linux_27:
-  <<: *wheels_job
-  variables: *linux_27_build_variables
-  dependencies:
-    - build_linux_27
-  tags:
-    - conda-linux
-
-deploy_linux_27:
-  <<: *deploy_job
-  variables: *linux_27_build_variables
-  dependencies:
-    - build_linux_27
-  tags:
-    - conda-linux
-
-
-# Linux + Python 3.5: Builds, tests and uploads wheel
-build_linux_35:
-  <<: *build_job
-  variables: &linux_35_build_variables
-    PYTHON_VERSION: "3.5"
-    WHEEL_TAG: "py3"
-  tags:
-    - conda-linux
-
-test_linux_35:
-  <<: *test_job
-  variables: *linux_35_build_variables
-  dependencies:
-    - build_linux_35
-  tags:
-    - conda-linux
-
-wheels_linux_35:
-  <<: *wheels_job
-  variables: *linux_35_build_variables
-  dependencies:
-    - build_linux_35
-  tags:
-    - conda-linux
-
-docs_linux_35:
-  <<: *docs_job
-  variables: *linux_35_build_variables
-  dependencies:
-    - build_linux_35
-  tags:
-    - conda-linux
-
-
-# Linux + Python 3.6: Builds and tests
-build_linux_36:
-  <<: *build_job
-  variables: &linux_36_build_variables
-    PYTHON_VERSION: "3.6"
-    WHEEL_TAG: "py3"
-  tags:
-    - conda-linux
-
-test_linux_36:
-  <<: *test_job
-  variables: *linux_36_build_variables
+    - ./_ci/pypi.sh
   dependencies:
     - build_linux_36
   tags:
-    - conda-linux
-
-
-# Mac OSX + Python 2.7: Builds and tests
-build_macosx_27:
-  <<: *build_job
-  variables: &macosx_27_build_variables
-    PYTHON_VERSION: "2.7"
-    WHEEL_TAG: "py27"
-  tags:
-    - conda-macosx
-
-test_macosx_27:
-  <<: *test_job
-  variables: *macosx_27_build_variables
-  dependencies:
-    - build_macosx_27
-  tags:
-    - conda-macosx
-
-
-# Mac OSX + Python 3.5: Builds and tests
-build_macosx_35:
-  <<: *build_job
-  variables: &macosx_35_build_variables
-    PYTHON_VERSION: "3.5"
-    WHEEL_TAG: "py3"
-  tags:
-    - conda-macosx
-
-test_macosx_35:
-  <<: *test_job
-  variables: *macosx_35_build_variables
-  dependencies:
-    - build_macosx_35
-  tags:
-    - conda-macosx
-
-
-# Mac OSX + Python 3.6: Builds and tests
-build_macosx_36:
-  <<: *build_job
-  variables: &macosx_36_build_variables
-    PYTHON_VERSION: "3.6"
-    WHEEL_TAG: "py3"
-  tags:
-    - conda-macosx
-
-test_macosx_36:
-  <<: *test_job
-  variables: *macosx_36_build_variables
-  dependencies:
-    - build_macosx_36
-  tags:
-    - conda-macosx
+    - deployer

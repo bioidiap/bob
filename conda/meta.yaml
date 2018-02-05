@@ -1,0 +1,87 @@
+{% set name = 'bob' %}
+{% set project_dir = environ.get('RECIPE_DIR') + '/..' %}
+
+package:
+  name: {{ name }}
+  version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
+
+build:
+  number: {{ environ.get('BOB_BUILD_NUMBER', 0) }}
+  run_exports:
+    - {{ pin_subpackage(name) }}
+  script:
+    - cd {{ project_dir }}
+    {% if environ.get('BUILD_EGG') %}
+    - python setup.py sdist --formats=zip
+    {% endif %}
+    - python setup.py install --single-version-externally-managed --record record.txt
+
+requirements:
+  host:
+    - python {{ python }}
+    - setuptools {{ setuptools }}
+    - bob.extension
+    - bob.blitz
+    - bob.core
+    - bob.io.base
+    - bob.sp
+    - bob.ap
+    - bob.math
+    - bob.measure
+    - bob.db.base
+    - bob.io.audio
+    - bob.io.image
+    - bob.io.video
+    - bob.io.matlab
+    - bob.ip.base
+    - bob.ip.color
+    - bob.ip.draw
+    - bob.ip.gabor
+    - bob.learn.activation
+    - bob.learn.libsvm
+    - bob.learn.linear
+    - bob.learn.mlp
+    - bob.learn.em
+    - bob.learn.boosting
+    - bob.db.iris
+    - bob.db.wine
+    - bob.db.mnist
+    - bob.db.atnt
+    - bob.ip.facedetect
+    - bob.ip.optflow.hornschunck
+    - bob.ip.optflow.liu
+    - bob.ip.flandmark
+  run:
+    - python
+    - setuptools
+
+test:
+  imports:
+    - {{ name }}
+  commands:
+    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }}
+    - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
+    - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
+    - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
+    - conda inspect objects -p $PREFIX {{ name }}  # [osx]
+  requires:
+    - bob-devel {{ bob_devel }}.*
+    - nose
+    - coverage
+    - sphinx
+    - sphinx_rtd_theme
+    - pkgtools
+    - cmake
+    - pkg-config
+    - freetype
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - bob.buildout
+
+about:
+  home: https://www.idiap.ch/software/bob/
+  license: BSD 3-Clause
+  summary: Bob is a free signal-processing and machine learning toolbox originally developed by the Biometrics group at Idiap Research Institute, in Switzerland.
+  license_family: BSD
+  doc_url: https://www.idiap.ch/software/bob/documentation
+  dev_url: https://gitlab.idiap.ch/bob/bob

@@ -18,9 +18,9 @@ stages:
   stage: build
   before_script:
     - mkdir _ci
-    - curl --silent "https://gitlab.idiap.ch/bob/bob.admin/raw/condapackage/gitlab/install.sh" > _ci/install.sh
+    - curl --silent "https://gitlab.idiap.ch/bob/bob.admin/raw/master/gitlab/install.sh" > _ci/install.sh
     - chmod 755 _ci/install.sh
-    - ./_ci/install.sh _ci condapackage #installs ci support scripts
+    - ./_ci/install.sh _ci master #installs ci support scripts
     - ./_ci/before_build.sh
   script:
     - ./_ci/build.sh
@@ -96,7 +96,7 @@ build_macosx_36:
 .deploy_template: &deploy_job
   stage: deploy
   before_script:
-    - ./_ci/install.sh _ci condapackage #updates ci support scripts
+    - ./_ci/install.sh _ci master #updates ci support scripts
   script:
     - ./_ci/deploy.sh
   dependencies:
@@ -113,7 +113,6 @@ deploy_beta:
   environment: beta
   only:
     - master
-    - condapackage
 
 
 deploy_stable:
@@ -133,7 +132,7 @@ pypi:
   except:
     - branches
   before_script:
-    - ./_ci/install.sh _ci condapackage #updates ci support scripts
+    - ./_ci/install.sh _ci master #updates ci support scripts
   script:
     - ./_ci/pypi.sh
   dependencies:

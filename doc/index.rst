@@ -1,5 +1,7 @@
 .. vim: set fileencoding=utf-8 :
 
+.. _bob_main_page:
+
 =======================
  Bob
 =======================

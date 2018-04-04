@@ -31,13 +31,13 @@ specific packages.
 
 
 For the maintainers
--------------------
+===================
 
 Below are some instructions for the maintainers of the package.
 
 
 Adding/Removing a dependency package
-====================================
+------------------------------------
 
 To remove or add a package from bob, search for its name (or the name of a
 similar package in case you are adding a new package) in this repository and
@@ -45,7 +45,7 @@ add/remove its name in appropriate places.
 
 
 Releasing a new version of Bob
-==============================
+------------------------------
 
 Please run::
 

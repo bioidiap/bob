@@ -61,7 +61,7 @@ This will give you the latest tag version of public packages release on PyPI.
 * Put the same tags in ``conda/meta.yaml`` too. You need to pin like this:
   ``bob.extension 2.4.5``.
 * Tag and push.
-* Remove the pins again to relax the dependencies.
+* Remove the pins again to relax the dependencies while in master.
 
 
 .. External References

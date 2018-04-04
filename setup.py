@@ -21,8 +21,11 @@
 
 from setuptools import setup, find_packages
 
-requeriments = [l.rstrip("\n") for l in open("requirements.txt", 'r').readlines()]
-version      = open("version.txt").read().rstrip() 
+requeriments = [l.rstrip("\n")
+                for l in open("requirements.txt", 'r').readlines()]
+prequeriments = [l.rstrip("\n") for l in open(
+    "private-requirements.txt", 'r').readlines()]
+version = open("version.txt").read().rstrip()
 
 # The only thing we do in this file is to call the setup() function with all
 # parameters that define our package.
@@ -50,16 +53,20 @@ setup(
     # on the current system will be installed locally and only visible to the
     # scripts of this package. Don't worry - You won't need administrative
     # privileges when using buildout.
-    install_requires=["setuptools"] + requeriments,
-        
-    classifiers = [
-      'Development Status :: 5 - Production/Stable',
-      'License :: OSI Approved :: BSD License',
-      'Intended Audience :: Education',
-      'Intended Audience :: Science/Research',
-      'Natural Language :: English',
-      'Programming Language :: Python',
-      'Programming Language :: Python :: 3',
+    install_requires=["setuptools"],
+    extras_require={
+        'public': requeriments,
+        'private': prequeriments,
+    },
+
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: BSD License',
+        'Intended Audience :: Education',
+        'Intended Audience :: Science/Research',
+        'Natural Language :: English',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
     ],
 
 )

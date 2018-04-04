@@ -36,21 +36,32 @@ For the maintainers
 Below are some instructions for the maintainers of the package.
 
 
-Updating the dependencies
-=========================
+Adding/Removing a dependency package
+====================================
 
-If you want to update the version of the dependency packages, run the following
-commands::
-
-  $ python ./bob/script/get_versions.py bob > requirements.txt
-  $ git commit requirements.txt -m "Update requeriments" && git push
+To remove or add a package from bob, search for its name (or the name of a
+similar package in case you are adding a new package) in this repository and
+add/remove its name in appropriate places.
 
 
-Removing a dependency package
-=============================
+Releasing a new version of Bob
+==============================
 
-To remove a package on bob, just remove the package name in the file
-(`requirements.txt`).
+Please run::
+
+  $ # prepare a development environment for this package
+  $ buildout
+  $ bin/python ./bob/script/get_versions.py requirements.txt > requirements.txt
+
+This will give you the latest tag version of public packages release on PyPI.
+
+* Find the same latest tag information of private packages using Gitlab tags.
+  For private packages you cannot use the ``get_versions.py`` script.
+* Update private-requirements.txt similar to requirements.txt
+* Put the same tags in ``conda/meta.yaml`` too. You need to pin like this:
+  ``bob.extension 2.4.5``.
+* Tag and push.
+* Remove the pins again to relax the dependencies.
 
 
 .. External References

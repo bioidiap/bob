@@ -7,8 +7,8 @@
 
 import distutils.version
 import pkg_resources
-import pkgtools.pypi
 import re
+import requests
 
 
 def get_config():
@@ -23,10 +23,8 @@ def get_releases(package):
   """
   Given a package name, get the release versions
   """
-  try:
-    return pkgtools.pypi.PyPIJson(package).retrieve()['releases'].keys()
-  except Exception:
-    return []
+  url = "https://pypi.org/pypi/{}/json".format(package)
+  return requests.get(url).json()["releases"]
 
 
 def get_max_version(versions):

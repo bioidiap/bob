@@ -7,8 +7,10 @@ package:
 
 build:
   number: {{ environ.get('BOB_BUILD_NUMBER', 0) }}
-  run_exports:
-    - {{ pin_subpackage(name) }}
+  ignore_run_exports:
+  {% for package in resolved_packages('host') %}
+    - {{ package.split()[0] }}
+  {% endfor %}
   script:
     - cd {{ project_dir }}
     {% if environ.get('BUILD_EGG') %}
@@ -20,19 +22,25 @@ requirements:
   host:
     - python {{ python }}
     - setuptools {{ setuptools }}
+    - bob-devel {{ bob_devel }}
+    # the list below contains all (public and private) packages. This is/should
+    # be the same list as order.txt in bob.nightlies. Please keep public and
+    # private packages list separate.
+    # Public packages:
+    - bob.buildout
     - bob.extension
     - bob.blitz
     - bob.core
     - bob.io.base
-    - bob.sp
-    - bob.ap
     - bob.math
     - bob.measure
-    - bob.db.base
-    - bob.io.audio
     - bob.io.image
+    - bob.db.base
     - bob.io.video
     - bob.io.matlab
+    - bob.io.audio
+    - bob.sp
+    - bob.ap
     - bob.ip.base
     - bob.ip.color
     - bob.ip.draw
@@ -41,9 +49,9 @@ requirements:
     - bob.learn.libsvm
     - bob.learn.linear
     - bob.learn.mlp
-    - bob.learn.em
     - bob.learn.boosting
     - bob.db.iris
+    - bob.learn.em
     - bob.db.wine
     - bob.db.mnist
     - bob.db.atnt
@@ -51,9 +59,68 @@ requirements:
     - bob.ip.optflow.hornschunck
     - bob.ip.optflow.liu
     - bob.ip.flandmark
+    - gridtk
+    - bob.ip.qualitymeasure
+    - bob.ip.skincolorfilter
+    - bob.ip.facelandmarks
+    - bob.ip.dlib
+    - bob.db.arface
+    - bob.db.asvspoof
+    - bob.db.asvspoof2017
+    - bob.db.atvskeystroke
+    - bob.db.avspoof
+    - bob.db.banca
+    - bob.db.biosecure
+    - bob.db.biosecurid.face
+    - bob.db.casme2
+    - bob.db.caspeal
+    - bob.db.cohface
+    - bob.db.frgc
+    - bob.db.gbu
+    - bob.db.hci_tagging
+    - bob.db.ijba
+    - bob.db.kboc16
+    - bob.db.lfw
+    - bob.db.livdet2013
+    - bob.db.mobio
+    - bob.db.msu_mfsd_mod
+    - bob.db.multipie
+    - bob.db.nist_sre12
+    - bob.db.putvein
+    - bob.db.replay
+    - bob.db.replaymobile
+    - bob.db.scface
+    - bob.db.utfvp
+    - bob.db.verafinger
+    - bob.db.fv3d
+    - bob.db.voicepa
+    - bob.db.xm2vts
+    - bob.db.youtube
+    - bob.db.pericrosseye
+    - bob.db.cuhk_cufs
+    - bob.bio.base
+    - bob.bio.gmm
+    - bob.bio.face
+    - bob.bio.spear
+    - bob.bio.video
+    - bob.bio.vein
+    - bob.db.voxforge
+    - bob.pad.base
+    - bob.pad.face
+    # Private packages:
+    - bob.db.hkpu
+    - bob.db.thufvdt
+    - bob.db.mmcbnu6k
+    - bob.db.hmtvein
+    - bob.db.oulunpu
+    - bob.db.uvad
   run:
     - python
     - setuptools
+  run_constrained:
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
 
 test:
   imports:
@@ -70,13 +137,14 @@ test:
     - coverage
     - sphinx
     - sphinx_rtd_theme
-    - pkgtools
     - cmake
     - pkg-config
     - freetype
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - bob.buildout
+  {% for package in resolved_packages('host') %}
+    - {{ package }}
+  {% endfor %}
 
 about:
   home: https://www.idiap.ch/software/bob/

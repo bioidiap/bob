@@ -5,29 +5,39 @@
 ***************************
 
 We offer pre-compiled binary installations of Bob using `conda`_ for Linux and
-MacOS 64-bit operating systems. Currently, we do not support Windows.
+MacOS 64-bit operating systems.
 
-Please install and get familiar with `conda`_ first by referring to their
-website before getting started. Then, make sure you have an up-to-date `conda`_
-installation with the **correct configuration** by running the commands below:
+#.  Please install `conda`_ (miniconda is preferred) and get familiar with it.
+#.  Make sure you have an up-to-date `conda`_ installation (conda 4.4 and above
+    is needed) with the **correct configuration** by running the commands
+    below:
 
-.. code:: sh
+    .. code:: sh
 
-    $ conda update -n root conda
-    $ conda config --set show_channel_urls True
-    $ conda config --add channels defaults
-    $ conda config --add channels https://www.idiap.ch/software/bob/conda
+       $ conda update -n base conda
+       $ conda config --set show_channel_urls True
 
-Now you can create an envrionment and install |project| in that environment:
+#.  Create an environment for Bob:
 
-.. code:: sh
+    .. code:: sh
 
-    $ conda create -n bob_py3 --override-channels \
-      -c https://www.idiap.ch/software/bob/conda \
-      -c defaults \
-      python=3 bob
-    $ source activate bob_py3
-    $ python -c 'import bob.io.base'
+       $ conda create -n bob_py3 --override-channels \
+         -c https://www.idiap.ch/software/bob/conda -c defaults \
+         python=3 bob
+       $ conda activate bob_py3
+       $ conda config --env --add channels defaults
+       $ conda config --env --add channels https://www.idiap.ch/software/bob/conda
+
+#.  Install the Bob packages that you need in that environment:
+
+    .. code:: sh
+
+       $ conda install bob.io.image bob.bio.base ...
+
+Repeat the last two steps for every environment that you create for Bob.
+
+For a comprehensive list of packages that are either part of |project| or use
+|project|, please visit `packages`_.
 
 .. warning::
 
@@ -36,22 +46,68 @@ Now you can create an envrionment and install |project| in that environment:
     with a broken envrionment. We can only guarantee that the packages in our
     channel are compatible with the ``defaults`` channel.
 
-You can install other |project| `packages`_ by reading the instructions on
-their webpage. In most cases, the installation should be as simple as:
+.. note::
+
+    Bob does not work on Windows and hence no conda packages are available for
+    it. It will not work even if you install it from source. If you are an
+    experienced user and manage to make Bob work on Windows, please let us know
+    through our `mailing list`_.
+
+.. note::
+
+    Bob runs on arm processors (e.g. Raspberry Pi) but is not installable with
+    conda. Please see :ref:`bob.source` for installations on how to install Bob
+    from source.
+
+
+Installing older versions of Bob
+================================
+
+Since Bob 3.1.0, you can easily select the Bob version that you want to install
+using conda. For example:
 
 .. code:: sh
 
-   $ conda install <package-name>
+    $ conda install bob=3.1.0 bob.io.base
 
-or if there are no conda packages available for that package:
+will install the version of ``bob.io.base`` that was associated with the Bob
+3.1.0 release.
+
+Bob packages that were released before Bob 3.1.0 are not easily installable.
+Here, we provide conda environment files (**Linux 64-bit only**) that will
+install all Bob packages associated with an older release of Bob:
+
+===========  ==============================================================
+Bob Version  Environment Files
+===========  ==============================================================
+2.6.2        :download:`envs/v262py27.yaml`, :download:`envs/v262py35.yaml`
+2.7.0        :download:`envs/v270py27.yaml`, :download:`envs/v270py35.yaml`
+3.0.0        :download:`envs/v300py27.yaml`, :download:`envs/v300py36.yaml`
+===========  ==============================================================
+
+To install them, download one of the files above and run:
 
 .. code:: sh
 
-   $ pip install <package-name>
+    $ conda env create --file v300py36.yaml
 
 
-For a comprehensive list of packages that are either part of |project| or use
-|project|, please visit `packages`_.
+Details (Advanced Users)
+========================
+
+Since Bob 3.1.0, the ``bob`` conda package is just a meta package that pins all
+packages to a specific version. Installing ``bob`` will not install anything;
+it will just impose pinnings in your environment. Normally, installations of
+Bob packages should work without installing ``bob`` itself. For example,
+running:
+
+.. code:: sh
+
+    $ conda create -n env_name --override-channels \
+      -c https://www.idiap.ch/software/bob/conda -c defaults \
+      bob.<package-name>
+
+should always create a working environment. If it doesn't, please let us know.
 
 
 .. include:: links.rst

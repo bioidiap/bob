@@ -21,7 +21,7 @@ MacOS 64-bit operating systems.
 
     .. code:: sh
 
-       $ conda create -n bob_py3 --override-channels \
+       $ conda create --name bob_py3 --override-channels \
          -c https://www.idiap.ch/software/bob/conda -c defaults \
          python=3 bob
        $ conda activate bob_py3
@@ -34,7 +34,8 @@ MacOS 64-bit operating systems.
 
        $ conda install bob.io.image bob.bio.base ...
 
-Repeat the last two steps for every environment that you create for Bob.
+**Repeat the last two steps for every conda environment that you create for
+Bob.**
 
 For a comprehensive list of packages that are either part of |project| or use
 |project|, please visit `packages`_.
@@ -63,15 +64,15 @@ For a comprehensive list of packages that are either part of |project| or use
 Installing older versions of Bob
 ================================
 
-Since Bob 3.1.0, you can easily select the Bob version that you want to install
+Since Bob 4, you can easily select the Bob version that you want to install
 using conda. For example:
 
 .. code:: sh
 
-    $ conda install bob=3.1.0 bob.io.base
+    $ conda install bob=4.0.0 bob.io.base
 
 will install the version of ``bob.io.base`` that was associated with the Bob
-3.1.0 release.
+4.0.0 release.
 
 Bob packages that were released before Bob 3.1.0 are not easily installable.
 Here, we provide conda environment files (**Linux 64-bit only**) that will
@@ -95,7 +96,7 @@ To install them, download one of the files above and run:
 Details (Advanced Users)
 ========================
 
-Since Bob 3.1.0, the ``bob`` conda package is just a meta package that pins all
+Since Bob 4, the ``bob`` conda package is just a meta package that pins all
 packages to a specific version. Installing ``bob`` will not install anything;
 it will just impose pinnings in your environment. Normally, installations of
 Bob packages should work without installing ``bob`` itself. For example,
@@ -103,7 +104,7 @@ running:
 
 .. code:: sh
 
-    $ conda create -n env_name --override-channels \
+    $ conda create --name env_name --override-channels \
       -c https://www.idiap.ch/software/bob/conda -c defaults \
       bob.<package-name>
 

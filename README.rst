@@ -9,7 +9,7 @@
 .. image:: https://gitlab.idiap.ch/bob/bob/badges/master/coverage.svg
    :target: https://gitlab.idiap.ch/bob/bob/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
-   :target: https://gitlab.idiap.ch/bob/bob/commits/master
+   :target: https://gitlab.idiap.ch/bob/bob
 .. image:: http://img.shields.io/pypi/v/bob.svg
    :target: https://pypi.python.org/pypi/bob
 

@@ -74,9 +74,9 @@ using conda. For example:
 will install the version of ``bob.io.base`` that was associated with the Bob
 4.0.0 release.
 
-Bob packages that were released before Bob 3.1.0 are not easily installable.
-Here, we provide conda environment files (**Linux 64-bit only**) that will
-install all Bob packages associated with an older release of Bob:
+Bob packages that were released before Bob 4 are not easily installable. Here,
+we provide conda environment files (**Linux 64-bit only**) that will install
+all Bob packages associated with an older release of Bob:
 
 ===========  ==============================================================
 Bob Version  Environment Files

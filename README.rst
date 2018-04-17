@@ -47,22 +47,7 @@ add/remove its name in appropriate places.
 Releasing a new version of Bob
 ------------------------------
 
-Please run::
-
-  $ # prepare a development environment for this package
-  $ buildout
-  $ bin/python ./bob/script/get_versions.py requirements.txt > requirements.txt
-
-This will give you the latest tag version of public packages release on PyPI.
-
-* Find the same latest tag information of private packages using Gitlab tags.
-  For private packages you cannot use the ``get_versions.py`` script.
-* Update private-requirements.txt similar to requirements.txt
-* Put the same tags in ``conda/meta.yaml`` too. You need to pin like this:
-  ``bob.extension 2.4.5``.
-* Tag and push.
-* Remove the pins again to relax the dependencies while in master.
-
+Use the release script from bob.admin to do this.
 
 .. External References
 

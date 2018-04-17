@@ -56,9 +56,9 @@ For a comprehensive list of packages that are either part of |project| or use
 
 .. note::
 
-    Bob runs on arm processors (e.g. Raspberry Pi) but is not installable with
-    conda. Please see :ref:`bob.source` for installations on how to install Bob
-    from source.
+    Bob has been reported to run on arm processors (e.g. Raspberry Pi) but is
+    not installable with conda. Please see :ref:`bob.source` for installations
+    on how to install Bob from source.
 
 
 Installing older versions of Bob

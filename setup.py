@@ -51,7 +51,10 @@ setup(
     # on the current system will be installed locally and only visible to the
     # scripts of this package. Don't worry - You won't need administrative
     # privileges when using buildout.
-    install_requires=["setuptools"] + requeriments,
+    install_requires=["setuptools"],
+    extras_require={
+        'all': requeriments,
+    },
 
     classifiers=[
         'Development Status :: 5 - Production/Stable',

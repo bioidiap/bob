@@ -105,6 +105,7 @@ requirements:
     - bob.db.voxforge
     - bob.pad.base
     - bob.pad.face
+    - bob.pad.voice
     - bob.pad.vein
   run:
     - python

@@ -62,7 +62,6 @@ requirements:
     - bob.ip.skincolorfilter 0.0.5
     - bob.ip.facelandmarks 1.0.6
     - bob.ip.dlib 1.0.5
-    - bob.ip.mtcnn 1.0.1  # [linux]
     - bob.db.arface 2.1.6
     - bob.db.asvspoof 1.2.1
     - bob.db.asvspoof2017 1.1.1
@@ -117,7 +116,8 @@ requirements:
     - bob.db.nivl 1.0.1
     - bob.db.pola_thermal 1.0.1
     - bob.db.cuhk_cufsf 1.0.1
-    - bob.ip.tensorflow_extractor 0.0.3
+    - bob.ip.mtcnn 1.0.1  # [linux]
+    - bob.ip.tensorflow_extractor 0.0.3  # [linux]
     - bob.ip.caffe_extractor 2.0.1  # [linux]
     - bob.bio.caffe_face 1.1.1  # [linux]
   run:

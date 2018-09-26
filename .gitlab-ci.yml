@@ -62,12 +62,6 @@ stages:
     key: "macosx-cache"
 
 
-build_linux_27:
-  <<: *linux_build_job
-  variables:
-    PYTHON_VERSION: "2.7"
-
-
 build_linux_36:
   <<: *linux_build_job
   variables:
@@ -80,12 +74,6 @@ build_linux_36:
       - dist/*.zip
       - sphinx
       - ${CONDA_ROOT}/conda-bld/linux-64/*.tar.bz2
-
-
-build_macosx_27:
-  <<: *macosx_build_job
-  variables:
-    PYTHON_VERSION: "2.7"
 
 
 build_macosx_36:
@@ -102,9 +90,7 @@ build_macosx_36:
   script:
     - ./_ci/deploy.sh
   dependencies:
-    - build_linux_27
     - build_linux_36
-    - build_macosx_27
     - build_macosx_36
   tags:
     - deployer

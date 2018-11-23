@@ -120,6 +120,7 @@ requirements:
     - bob.ip.tensorflow_extractor  # [linux]
     - bob.ip.caffe_extractor  # [linux]
     - bob.bio.caffe_face  # [linux]
+    - bob.fusion.base
   run:
     - python
     - setuptools

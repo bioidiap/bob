@@ -149,6 +149,7 @@ test:
     - cmake
     - pkg-config
     - freetype
+    - psutil  # for bob.io.video
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}

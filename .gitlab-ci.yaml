@@ -1,0 +1,149 @@
+# Definition of global variables (all stages)
+variables:
+  CONDA_ROOT: "${CI_PROJECT_DIR}/miniconda"
+  BOOTSTRAP: "https://gitlab.idiap.ch/bob/bob.devtools/raw/master/bob/devtools/bootstrap.py"
+
+
+# Definition of our build pipeline order
+stages:
+  - build
+  - deploy
+
+
+# Build targets
+.build_template: &build_job
+  stage: build
+  script:
+    - curl --silent "${BOOTSTRAP}" --output "bootstrap.py"
+    - python3 bootstrap.py -vv channel base
+    - source ${CONDA_ROOT}/etc/profile.d/conda.sh
+    - conda activate base
+    - bdt ci build -vv
+    - bdt ci clean -vv
+  cache: &build_caches
+    paths:
+      - miniconda.sh
+      - ${CONDA_ROOT}/pkgs/*.tar.bz2
+      - ${CONDA_ROOT}/pkgs/urls.txt
+
+
+.build_linux_template: &linux_build_job
+  <<: *build_job
+  tags:
+    - docker
+  image: continuumio/conda-concourse-ci
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - ${CONDA_ROOT}/conda-bld/linux-64/*.tar.bz2
+  cache:
+    <<: *build_caches
+    key: "linux-cache"
+
+
+.build_macosx_template: &macosx_build_job
+  <<: *build_job
+  tags:
+    - macosx
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - ${CONDA_ROOT}/conda-bld/osx-64/*.tar.bz2
+  cache:
+    <<: *build_caches
+    key: "macosx-cache"
+
+
+build_linux_27:
+  <<: *linux_build_job
+  variables:
+    PYTHON_VERSION: "2.7"
+  script:
+    - curl --silent "${BOOTSTRAP}" --output "bootstrap.py"
+    - python3 bootstrap.py -vv channel base
+    - source ${CONDA_ROOT}/etc/profile.d/conda.sh
+    - conda activate base
+    - bdt ci build -vv -m conda/conda_build_config.yaml
+    - bdt ci clean -vv
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - ${CONDA_ROOT}/conda-bld/linux-64/*.tar.bz2
+
+
+build_macosx_27:
+  <<: *macosx_build_job
+  variables:
+    PYTHON_VERSION: "2.7"
+
+
+# Test targets (not normally used)
+.test_template: &test_job
+  stage: test
+  script:
+    - curl --silent "${BOOTSTRAP}" --output "bootstrap.py"
+    - python3 bootstrap.py -vv channel base
+    - source ${CONDA_ROOT}/etc/profile.d/conda.sh
+    - conda activate base
+    - bdt ci test -vv
+    - bdt ci clean -vv
+  cache: &test_caches
+    paths:
+      - miniconda.sh
+      - ${CONDA_ROOT}/pkgs/*.tar.bz2
+      - ${CONDA_ROOT}/pkgs/urls.txt
+
+
+.test_linux_template: &linux_test_job
+  <<: *test_job
+  tags:
+    - docker
+  image: continuumio/conda-concourse-ci
+  cache:
+    <<: *test_caches
+    key: "linux-cache"
+
+
+.test_macosx_template: &macosx_test_job
+  <<: *test_job
+  tags:
+    - macosx
+  cache:
+    <<: *test_caches
+    key: "macosx-cache"
+
+
+# Deploy targets
+.deploy_template: &deploy_job
+  stage: deploy
+  script:
+    - curl --silent "${BOOTSTRAP}" --output "bootstrap.py"
+    - python3 bootstrap.py channel base
+    - source ${CONDA_ROOT}/etc/profile.d/conda.sh
+    - conda activate base
+    - bdt ci deploy -vv
+    - bdt ci clean -vv
+  dependencies:
+    - build_linux_36
+    - build_macosx_36
+  tags:
+    - docker
+  cache: &build_caches
+    paths:
+      - miniconda.sh
+      - ${CONDA_ROOT}/pkgs/*.tar.bz2
+      - ${CONDA_ROOT}/pkgs/urls.txt
+
+
+deploy_beta:
+  <<: *deploy_job
+  environment: beta
+  only:
+    - 1.2
+
+
+deploy_stable:
+  <<: *deploy_job
+  environment: stable
+  only:
+    - /^v1\.2\.\d+([abc]\d*)?$/  # PEP-440 compliant version (tags)

@@ -19,7 +19,5 @@ debian/*.log
 debian/*.substvars
 databases/
 build/
-b/
-i/
 cxx/visioner/project/
 python/*.egg-info

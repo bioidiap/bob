@@ -1,0 +1,83 @@
+{% set name = "bob" %}
+{% set version = "1.2.3b0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://gitlab.idiap.ch/{{ name }}/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.bz2
+  sha1: 14cbac0f166cee559e19792e1f2edae002ef34fa
+
+build:
+  number: 0
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ version }} -DWITH_QT4=OFF -DWITH_NETPBM=OFF ..
+    - make VERBOSE=1 -j${CPU_COUNT} all
+    - make VERBOSE=1 test nosetests sphinx-doctest
+    - make VERBOSE=1 install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake {{ cmake }}
+    - pkg-config {{ pkg_config }}
+
+  host:
+    - python 2.7
+    - setuptools {{ setuptools }}
+    - sqlite {{ sqlite }}
+    - sqlalchemy {{ sqlalchemy }}
+    - ffmpeg {{ ffmpeg }}
+    - libblitz {{ libblitz }}
+    - boost {{ boost }}
+    - jpeg {{ jpeg }}
+    - giflib {{ giflib }}
+    - libtiff {{ libtiff }}
+    - libmatio {{ libmatio }}
+    - libpng {{ libpng }}
+    - vlfeat {{ vlfeat }}
+    - libsvm {{ libsvm }}
+    - hdf5 {{ hdf5 }}
+    - sphinx {{ sphinx }}
+    - nose {{ nose }}
+    - pillow {{ pillow }}
+    - numpy {{ numpy }}
+    - scipy {{ scipy }}
+    - matplotlib {{ matplotlib }}
+    - fftw {{ fftw }}
+    - openblas {{ openblas }}
+      #- netpbm
+      #- qt 4.8
+      #- doxygen
+
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
+    - scipy
+    - sqlalchemy
+    - pillow
+    - matplotlib
+
+test:
+  imports:
+    - bob
+
+  commands:
+    - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
+    - conda inspect objects -p $PREFIX {{ name }}  # [osx]
+    - python -c "import bob; print bob.version"
+
+about:
+  home: https://gitlab.idiap.ch/bob/bob
+  summary: Bob is a free signal-processing and machine learning toolbox
+  license: GNU General Public License v3 (GPLv3)
+  license_family: GPL
+  license_file: COPYING
+
+extra:
+  recipe-maintainers:
+    - anjos

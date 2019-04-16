@@ -4,17 +4,13 @@ package:
   name: {{ name }}
   version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
 
-source:
-  url: https://gitlab.idiap.ch/{{ name }}/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.bz2
-  sha1: 14cbac0f166cee559e19792e1f2edae002ef34fa
-
 build:
   number: 0
   script:
     - cd {{ environ.get('RECIPE_DIR') + '/..' }}
     - mkdir build
     - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ version }} -DWITH_QT4=OFF ..
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF ..
     - make VERBOSE=1 -j${CPU_COUNT} all
     - make VERBOSE=1 test nosetests sphinx-doctest
     - make VERBOSE=1 install

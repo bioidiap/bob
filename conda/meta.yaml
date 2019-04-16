@@ -1,9 +1,8 @@
 {% set name = "bob" %}
-{% set version = "1.2.3b0" %}
 
 package:
   name: {{ name }}
-  version: {{ version }}
+  version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
 
 source:
   url: https://gitlab.idiap.ch/{{ name }}/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.bz2
@@ -12,6 +11,7 @@ source:
 build:
   number: 0
   script:
+    - cd {{ environ.get('RECIPE_DIR') + '/..' }}
     - mkdir build
     - cd build
     - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ version }} -DWITH_QT4=OFF -DWITH_NETPBM=OFF ..

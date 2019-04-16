@@ -124,8 +124,8 @@ build_macosx_27:
     - bdt ci deploy -vv
     - bdt ci clean -vv
   dependencies:
-    - build_linux_36
-    - build_macosx_36
+    - build_linux_27
+    - build_macosx_27
   tags:
     - docker
   cache: &build_caches
@@ -139,8 +139,7 @@ deploy_beta:
   <<: *deploy_job
   environment: beta
   only:
-    refs:
-      - 1.2
+    - "1.2"
 
 
 deploy_stable:

@@ -4,16 +4,6 @@ project(io)
 set(HDF5_FIND_COMPONENTS C CXX)
 include(FindHDF5)
 
-# netpbm
-if(WITH_NETPBM)
-include(netpbm.cmake)
-  if(NOT NETPBM_FOUND)
-    message(FATAL_ERROR "netpbm has not been found.")
-  endif()
-else()
-  message(STATUS "netpbm modules DISABLED by user request")
-endif()
-
 # libjpeg
 include(FindJPEG)
 if(NOT JPEG_FOUND)

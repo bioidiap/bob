@@ -31,9 +31,104 @@
 
 #include <bob/io/CodecRegistry.h>
 
-extern "C" {
-// This header must come last, as it brings a lot of global stuff that messes up other headers...
-#include <pam.h>
+#include "pnmio.h"
+
+typedef unsigned long sample;
+
+struct pam {
+/* This structure describes an open PAM image file.  It consists
+   entirely of information that belongs in the header of a PAM image
+   and filesystem information.  It does not contain any state
+   information about the processing of that image.
+
+   This is not considered to be an opaque object.  The user of Netbpm
+   libraries is free to access and set any of these fields whenever
+   appropriate.  The structure exists to make coding of function calls
+   easy.
+*/
+
+    /* 'size' and 'len' are necessary in order to provide forward and
+       backward compatibility between library functions and calling programs
+       as this structure grows.
+       */
+    unsigned int size;
+        /* The storage size of this entire structure, in bytes */
+    unsigned int len;
+        /* The length, in bytes, of the information in this structure.
+           The information starts in the first byte and is contiguous.
+           This cannot be greater than 'size'
+           */
+    FILE *file;
+    int format;
+        /* The format code of the raw image.  This is PAM_FORMAT
+           unless the PAM image is really a view of a PBM, PGM, or PPM
+           image.  Then it's PBM_FORMAT, RPBM_FORMAT, etc.
+           */
+    unsigned int plainformat;
+        /* Logical:  the format above is a plain (text) format as opposed
+           to a raw (binary) format.  This is entirely redundant with the
+           'format' member and exists as a separate member only for
+           computational speed.
+        */
+    int height;  /* Height of image in rows */
+    int width;
+        /* Width of image in number of columns (tuples per row) */
+    unsigned int depth;
+        /* Depth of image (number of samples in each tuple). */
+    sample maxval;  /* Maximum defined value for a sample */
+    unsigned int bytes_per_sample;
+        /* Number of bytes used to represent each sample in the image file.
+           Note that this is strictly a function of 'maxval'.  It is in a
+           a separate member for computational speed.
+           */
+    char tuple_type[256];
+        /* The tuple type string from the image header.  Netpbm does
+           not define any values for this except the following, which are
+           used for a PAM image which is really a view of a PBM, PGM,
+           or PPM image:  PAM_PBM_TUPLETYPE, PAM_PGM_TUPLETYPE,
+           PAM_PPM_TUPLETYPE.
+           */
+};
+
+
+/* File open/close that handles "-" as stdin/stdout and checks errors. */
+
+FILE*
+pm_openr(const char * const name) {
+    FILE* f;
+
+    if (strcmp(name, "-") == 0)
+        f = stdin;
+    else {
+#ifndef VMS
+        f = fopen(name, "rb");
+#else
+        f = fopen (name, "r", "ctx=stm");
+#endif
+    }
+    return f;
+}
+
+FILE*
+pm_openw(const char * const name) {
+    FILE* f;
+
+    if (strcmp(name, "-") == 0)
+        f = stdout;
+    else {
+#ifndef VMS
+        f = fopen(name, "wb");
+#else
+        f = fopen (name, "w", "mbc=32", "mbf=2");  /* set buffer factors */
+#endif
+    }
+    return f;
+}
+
+void
+pm_close(FILE * const f) {
+  fflush(f);
+  if (f != stdin) fclose( f );
 }
 
 static boost::shared_ptr<std::FILE> make_cfile(const char *filename, const char *flags)
@@ -51,6 +146,107 @@ static boost::shared_ptr<std::FILE> make_cfile(const char *filename, const char 
   return boost::shared_ptr<std::FILE>(fp, pm_close);
 }
 
+static void pnm_readpaminit(FILE *file, struct pam * const pamP, const int size) {
+  int pnm_type=0;
+  int x_dim=256, y_dim=256;
+  int enable_ascii=1, img_colors=1;
+  int read_err;
+
+  pamP->file = file;
+  pnm_type = get_pnm_type(pamP->file);
+  rewind(pamP->file);
+  pamP->format = pnm_type;
+
+  /* Read the image file header (the input file has been rewinded). */
+  if ((pnm_type == PBM_ASCII) || (pnm_type == PBM_BINARY)) {
+    read_err = read_pbm_header(file, &x_dim, &y_dim, &enable_ascii);
+    pamP->bytes_per_sample = 1;
+  } else if ((pnm_type == PGM_ASCII) || (pnm_type == PGM_BINARY)) {
+    read_err = read_pgm_header(file, &x_dim, &y_dim, &img_colors, &enable_ascii);
+    if (img_colors >> 8 == 0)       pamP->bytes_per_sample = 1;
+    else if (img_colors >> 16 == 0) pamP->bytes_per_sample = 2;
+  } else if ((pnm_type == PPM_ASCII) || (pnm_type == PPM_BINARY)) {
+    read_err = read_ppm_header(file, &x_dim, &y_dim, &img_colors, &enable_ascii);
+    if (img_colors >> 8 == 0)       pamP->bytes_per_sample = 1;
+    else if (img_colors >> 16 == 0) pamP->bytes_per_sample = 2;
+  } else {
+    boost::format m("pnm_readpaminit(): Unknown PNM/PFM image format.");
+    throw std::runtime_error(m.str());
+  }
+
+  if (read_err != 0) {
+    boost::format m("pnm_readpaminit(): Something went wrong when reading the image file.");
+    throw std::runtime_error(m.str());
+  }
+
+  /* Perform operations. */
+  if ((pnm_type == PPM_ASCII) || (pnm_type == PPM_BINARY)) {
+    pamP->depth = 3;
+  } else {
+    pamP->depth = 1;
+  }
+  pamP->width = x_dim;
+  pamP->height = y_dim;
+  pamP->plainformat = enable_ascii;
+  pamP->maxval = img_colors;
+
+}
+
+static int * pnm_allocpam(struct pam * const pamP) {
+  int *img_data;
+  /* Perform operations. */
+  if ((pamP->format == PPM_ASCII) || (pamP->format == PPM_BINARY)) {
+    img_data = (int *) malloc((3 * pamP->width * pamP->height) * sizeof(int));
+  } else {
+    img_data = (int *) malloc((pamP->width * pamP->height) * sizeof(int));
+  }
+  return (img_data);
+}
+
+static void pnm_readpam(struct pam * const pamP, int *img_data) {
+  int read_err=1;
+
+  /* Read the image data. */
+  if ((pamP->format == PBM_ASCII) || (pamP->format == PBM_BINARY)) {
+    read_err = read_pbm_data(pamP->file, img_data, pamP->width * pamP->height, pamP->plainformat, pamP->width);
+  } else if ((pamP->format == PGM_ASCII) || (pamP->format == PGM_BINARY)) {
+    read_err = read_pgm_data(pamP->file, img_data, pamP->width * pamP->height, pamP->plainformat, pamP->bytes_per_sample);
+  } else if ((pamP->format == PPM_ASCII) || (pamP->format == PPM_BINARY)) {
+    read_err = read_ppm_data(pamP->file, img_data, 3 * pamP->width * pamP->height, pamP->plainformat, pamP->bytes_per_sample);
+  }
+
+  if (read_err != 0) {
+    boost::format m("pnm_readpam(): Something went wrong when reading the image file.");
+    throw std::runtime_error(m.str());
+  }
+}
+
+static void pnm_writepam(struct pam * const pamP, int *img_data) {
+  int write_err=1;
+
+  /* Write the output image file. */
+  if ((pamP->format == PBM_ASCII) || (pamP->format == PBM_BINARY)) {
+    write_err = write_pbm_file(pamP->file, img_data,
+      pamP->width, pamP->height, 1, 1, 32, pamP->plainformat
+    );
+  } else if ((pamP->format == PGM_ASCII) || (pamP->format == PGM_BINARY)) {
+    write_err = write_pgm_file(pamP->file, img_data,
+      pamP->width, pamP->height, 1, 1, pamP->maxval, 16, pamP->plainformat,
+      pamP->bytes_per_sample
+    );
+  } else if ((pamP->format == PPM_ASCII) || (pamP->format == PPM_BINARY)) {
+    write_err = write_ppm_file(pamP->file, img_data,
+      pamP->width, pamP->height, 1, 1, pamP->maxval, pamP->plainformat,
+      pamP->bytes_per_sample
+    );
+  }
+
+  if (write_err != 0) {
+    boost::format m("pnm_writepam(): Something went wrong when writing the image file.");
+    throw std::runtime_error(m.str());
+  }
+}
+
 /**
  * LOADING
  */
@@ -58,12 +254,7 @@ static void im_peek(const std::string& path, bob::core::array::typeinfo& info) {
 
   struct pam in_pam;
   boost::shared_ptr<std::FILE> in_file = make_cfile(path.c_str(), "r");
-#ifdef PAM_STRUCT_SIZE
-  // For version >= 10.23
-  pnm_readpaminit(in_file.get(), &in_pam, PAM_STRUCT_SIZE(tuple_type));
-#else
   pnm_readpaminit(in_file.get(), &in_pam, sizeof(struct pam));
-#endif
 
   if( in_pam.depth != 1 && in_pam.depth != 3)
   {
@@ -99,62 +290,53 @@ static void im_peek(const std::string& path, bob::core::array::typeinfo& info) {
 template <typename T> static
 void im_load_gray(struct pam *in_pam, bob::core::array::interface& b) {
   const bob::core::array::typeinfo& info = b.type();
+  int c=0;
 
   T *element = static_cast<T*>(b.ptr());
-  tuple *tuplerow = pnm_allocpamrow(in_pam);
+  int *img_data = pnm_allocpam(in_pam);
+  pnm_readpam(in_pam, img_data);
   for(size_t y=0; y<info.shape[0]; ++y)
   {
-    pnm_readpamrow(in_pam, tuplerow);
     for(size_t x=0; x<info.shape[1]; ++x)
     {
-      *element = tuplerow[x][0];
+      *element = img_data[c];
       ++element;
+      c++;
     }
   }
-  pnm_freepamrow(tuplerow);
-}
-
-template <typename T> static
-void imbuffer_to_rgb(size_t size, const tuple* tuplerow, T* r, T* g, T* b) {
-  for (size_t k=0; k<size; ++k) {
-    r[k] = tuplerow[k][0];
-    g[k] = tuplerow[k][1];
-    b[k] = tuplerow[k][2];
-  }
+  free(img_data);
 }
 
 template <typename T> static
 void im_load_color(struct pam *in_pam, bob::core::array::interface& b) {
-  const bob::core::array::typeinfo& info = b.type();
+  const bob::io::base::array::typeinfo& info = b.type();
+  int c=0;
 
   long unsigned int frame_size = info.shape[2] * info.shape[1];
   T *element_r = static_cast<T*>(b.ptr());
   T *element_g = element_r+frame_size;
   T *element_b = element_g+frame_size;
 
-  int row_color_stride = info.shape[2]; // row_stride for each component
-  tuple *tuplerow = pnm_allocpamrow(in_pam);
+  int *img_data = pnm_allocpam(in_pam);
+  pnm_readpam(in_pam, img_data);
   for(size_t y=0; y<info.shape[1]; ++y)
   {
-    pnm_readpamrow(in_pam, tuplerow);
-    imbuffer_to_rgb(row_color_stride, tuplerow, element_r, element_g, element_b);
-    element_r += row_color_stride;
-    element_g += row_color_stride;
-    element_b += row_color_stride;
+    for(size_t x=0; x<info.shape[2]; ++x)
+    {
+      element_r[y*info.shape[2] + x] = img_data[c+0];
+      element_g[y*info.shape[2] + x] = img_data[c+1];
+      element_b[y*info.shape[2] + x] = img_data[c+2];
+      c = c + 3;
+    }
   }
-  pnm_freepamrow(tuplerow);
+  free(img_data);
 }
 
 static void im_load (const std::string& filename, bob::core::array::interface& b) {
 
   struct pam in_pam;
   boost::shared_ptr<std::FILE> in_file = make_cfile(filename.c_str(), "r");
-#ifdef PAM_STRUCT_SIZE
-  // For version >= 10.23
-  pnm_readpaminit(in_file.get(), &in_pam, PAM_STRUCT_SIZE(tuple_type));
-#else
   pnm_readpaminit(in_file.get(), &in_pam, sizeof(struct pam));
-#endif
 
   const bob::core::array::typeinfo& info = b.type();
 
@@ -191,48 +373,48 @@ static void im_load (const std::string& filename, bob::core::array::interface& b
 template <typename T>
 static void im_save_gray(const bob::core::array::interface& b, struct pam *out_pam) {
   const bob::core::array::typeinfo& info = b.type();
+  int c=0;
 
   const T *element = static_cast<const T*>(b.ptr());
 
-  tuple *tuplerow = pnm_allocpamrow(out_pam);
-  for(size_t y=0; y<info.shape[0]; ++y) {
-    for(size_t x=0; x<info.shape[1]; ++x) {
-      tuplerow[x][0] = *element;
+  int *img_data = pnm_allocpam(out_pam);
+  for(size_t y=0; y<info.shape[0]; ++y)
+  {
+    for(size_t x=0; x<info.shape[1]; ++x)
+    {
+      img_data[c] = *element;
       ++element;
+      c++;
     }
-    pnm_writepamrow(out_pam, tuplerow);
   }
-  pnm_freepamrow(tuplerow);
+  pnm_writepam(out_pam, img_data);
+  free(img_data);
 }
 
-template <typename T> static
-void rgb_to_imbuffer(size_t size, const T* r, const T* g, const T* b, tuple* tuplerow) {
-  for (size_t k=0; k<size; ++k) {
-    tuplerow[k][0] = r[k];
-    tuplerow[k][1] = g[k];
-    tuplerow[k][2] = b[k];
-  }
-}
 
 template <typename T>
 static void im_save_color(const bob::core::array::interface& b, struct pam *out_pam) {
   const bob::core::array::typeinfo& info = b.type();
+  int c=0;
 
   long unsigned int frame_size = info.shape[2] * info.shape[1];
   const T *element_r = static_cast<const T*>(b.ptr());
   const T *element_g = element_r + frame_size;
   const T *element_b = element_g + frame_size;
 
-  int row_color_stride = info.shape[2]; // row_stride for each component
-  tuple *tuplerow = pnm_allocpamrow(out_pam);
-  for(size_t y=0; y<info.shape[1]; ++y) {
-    rgb_to_imbuffer(row_color_stride, element_r, element_g, element_b, tuplerow);
-    pnm_writepamrow(out_pam, tuplerow);
-    element_r += row_color_stride;
-    element_g += row_color_stride;
-    element_b += row_color_stride;
+  int *img_data = pnm_allocpam(out_pam);
+  for(size_t y=0; y<info.shape[1]; ++y)
+  {
+    for(size_t x=0; x<info.shape[2]; ++x)
+    {
+      img_data[c+0] = element_r[y*info.shape[2] + x];
+      img_data[c+1] = element_g[y*info.shape[2] + x];
+      img_data[c+2] = element_b[y*info.shape[2] + x];
+      c += 3;
+    }
   }
-  pnm_freepamrow(tuplerow);
+  pnm_writepam(out_pam, img_data);
+  free(img_data);
 }
 
 static void im_save (const std::string& filename, const bob::core::array::interface& array) {
@@ -247,43 +429,31 @@ static void im_save (const std::string& filename, const bob::core::array::interf
 
   // Sets the parameters of the pam structure according to the bca::interface properties
   out_pam.size = sizeof(out_pam);
-#ifdef PAM_STRUCT_SIZE
-  // For version >= 10.23
-  out_pam.len = PAM_STRUCT_SIZE(tuple_type);
-#else
   out_pam.len = out_pam.size;
-#endif
   out_pam.file = out_file.get();
   out_pam.plainformat = 0; // writes in binary
   out_pam.height = (info.nd == 2 ? info.shape[0] : info.shape[1]);
   out_pam.width = (info.nd == 2 ? info.shape[1] : info.shape[2]);
   out_pam.depth = (info.nd == 2 ? 1 : 3);
-  out_pam.maxval = (bob::core::array::t_uint8 ? 255 : 65535);
+  out_pam.maxval = (info.dtype == bob::core::array::t_uint8 ? 255 : 65535);
   out_pam.bytes_per_sample = (info.dtype == bob::core::array::t_uint8 ? 1 : 2);
-  out_pam.format = PAM_FORMAT;
   if( ext.compare(".pbm") == 0)
   {
     out_pam.maxval = 1;
-    out_pam.format = PBM_FORMAT;
-    strcpy(out_pam.tuple_type, PAM_PBM_TUPLETYPE);
+    out_pam.format = PBM_BINARY;
   }
   else if( ext.compare(".pgm") == 0)
   {
-    out_pam.format = PGM_FORMAT;
-    strcpy(out_pam.tuple_type, PAM_PGM_TUPLETYPE);
+    out_pam.format = PGM_BINARY;
   }
   else
   {
-    out_pam.format = PPM_FORMAT;
-    strcpy(out_pam.tuple_type, PAM_PPM_TUPLETYPE);
+    out_pam.format = PPM_BINARY;
   }
 
   if(out_pam.depth == 3 && ext.compare(".ppm")) {
     throw std::runtime_error("cannot save a color image into a file of this type.");
   }
-
-  // Writes header in file
-  pnm_writepaminit(&out_pam);
 
   // Writes content
   if(info.dtype == bob::core::array::t_uint8) {
@@ -323,6 +493,10 @@ static void im_save (const std::string& filename, const bob::core::array::interf
   }
 }
 
+
+/**
+ * NetPBM class
+*/
 
 
 class ImageNetpbmFile: public bob::io::File {

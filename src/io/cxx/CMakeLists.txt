@@ -13,6 +13,7 @@ set(src
     "File.cc"
     "CodecRegistry.cc"
     "utils.cc"
+    "pnmio.cc"
 
     "HDF5Types.cc"
     "HDF5Utils.cc"
@@ -30,6 +31,7 @@ set(src
     "TensorArrayFile.cc"
     "T3File.cc"
     "ImageBmpFile.cc"
+    "ImageNetpbmFile.cc"
     )
 
 # If we have matio installed, enable the compilation of relevant modules
@@ -40,14 +42,6 @@ if(WITH_MATIO)
     "MatFile.cc"
     )
   list(APPEND incdir "${matio_INCLUDE_DIRS}")
-endif()
-
-if(NETPBM_FOUND)
-  list(APPEND shared "${NETPBM_LIBRARIES}")
-  list(APPEND src
-    "ImageNetpbmFile.cc"
-    )
-  list(APPEND incdir "${NETPBM_INCLUDE_DIRS}")
 endif()
 
 if(JPEG_FOUND)
@@ -84,7 +78,7 @@ endif()
 
 if(WITH_FFMPEG)
   list(APPEND shared "${FFMPEG_RESOLVED_LIBRARIES}")
-  list(APPEND src 
+  list(APPEND src
     "VideoFile.cc"
     "VideoUtilities.cc"
     "VideoWriter.cc"

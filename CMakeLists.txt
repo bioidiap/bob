@@ -46,7 +46,6 @@ endif()
 
 # Flags for switching ON/OFF optional requirements
 option(WITH_QT4 "Make Qt4 detection obligatory" ON)
-option(WITH_NETPBM "Make netpbm detection obligatory" ON)
 option(WITH_LIBSVM "Make LibSVM detection obligatory" ON)
 option(WITH_VLFEAT "Make VLFEAT detection obligatory" ON)
 option(WITH_MATIO "Make Matio detection obligatory" ON)

@@ -33,8 +33,6 @@ bob.ip.flandmark
 gridtk
 bob.ip.qualitymeasure
 bob.ip.skincolorfilter
-bob.ip.facelandmarks
-bob.ip.dlib
 bob.ip.mtcnn
 bob.db.arface
 bob.db.asvspoof

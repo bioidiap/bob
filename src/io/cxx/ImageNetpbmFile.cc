@@ -309,7 +309,7 @@ void im_load_gray(struct pam *in_pam, bob::core::array::interface& b) {
 
 template <typename T> static
 void im_load_color(struct pam *in_pam, bob::core::array::interface& b) {
-  const bob::io::base::array::typeinfo& info = b.type();
+  const bob::core::array::typeinfo& info = b.type();
   int c=0;
 
   long unsigned int frame_size = info.shape[2] * info.shape[1];

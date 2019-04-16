@@ -139,7 +139,8 @@ deploy_beta:
   <<: *deploy_job
   environment: beta
   only:
-    - 1.2
+    refs:
+      - 1.2
 
 
 deploy_stable:

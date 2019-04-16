@@ -639,10 +639,9 @@ static bool register_codec() {
   boost::shared_ptr<bob::io::CodecRegistry> instance =
     bob::io::CodecRegistry::instance();
 
-  pm_init("bob",0);
-  instance->registerExtension(".pbm", "PBM, indexed (libnetpbm)", &make_file);
-  instance->registerExtension(".pgm", "PGM, indexed (libnetpbm)", &make_file);
-  instance->registerExtension(".ppm", "PPM, indexed (libnetpbm)", &make_file);
+  instance->registerExtension(".pbm", "PBM, indexed (internal)", &make_file);
+  instance->registerExtension(".pgm", "PGM, indexed (internal)", &make_file);
+  instance->registerExtension(".ppm", "PPM, indexed (internal)", &make_file);
 
   return true;
 

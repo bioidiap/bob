@@ -74,11 +74,4 @@ endif()
 add_subdirectory(machine)
 add_subdirectory(trainer)
 
-if(WITH_QT4)
-  find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-  add_subdirectory(visioner)
-else()
-  message(STATUS "Qt4 modules DISABLED by user request")
-endif()
-
 set(ENABLED_PACKAGES "${ENABLED_PACKAGES}" PARENT_SCOPE)

@@ -26,23 +26,6 @@ from setuptools.command.build_ext import build_ext as build_ext_base
 from setuptools import Extension
 import subprocess
 
-PACKAGE_BASEDIR = os.path.dirname(os.path.abspath(__file__))
-
-# If Python < 2.7 or 3.0 <= Python < 3.2, require some more stuff
-EXTRA_REQUIREMENTS = []
-if sys.version_info[:2] < (2, 7) or ((3,0) <= sys.version_info[:2] < (3,2)):
-  EXTRA_REQUIREMENTS.append('argparse')
-
-# Check if python-imaging means pil or pillow
-try:
-  import pkg_resources
-  pkg_resources.require('pillow')
-  EXTRA_REQUIREMENTS.append('pillow')
-except pkg_resources.DistributionNotFound, e:
-  EXTRA_REQUIREMENTS.append('pil')
-
-# Installing in a caged environment
-DESTDIR = os.environ.get('DESTDIR', '')
 
 # ---------------------------------------------------------------------------#
 #  various functions and classes to help on the setup                        #
@@ -100,6 +83,7 @@ def pkgconfig(package):
 
   return kw
 
+
 def bob_variables():
 
   def get_var(name):
@@ -142,6 +126,7 @@ def bob_variables():
 
 # Retrieve central, global variables from Bob's C++ build
 BOB = bob_variables()
+
 
 class build_ext(build_ext_base):
   '''Customized extension to build bob.python bindings in the expected way'''
@@ -188,6 +173,7 @@ class build_ext(build_ext_base):
 
     build_ext_base.build_extension(self, ext)
 
+
 def setup_extension(ext_name, pc_file):
   """Sets up a given C++ extension"""
 
@@ -199,11 +185,6 @@ def setup_extension(ext_name, pc_file):
   library_dirs=[k for k in library_dirs if os.path.exists(k)]
   include_dirs=pc.get('include_dirs', [])
   include_dirs=[k for k in include_dirs if os.path.exists(k)]
-
-  if len(DESTDIR) != 0:
-    # Treat special caged builds
-    library_dirs.insert(0, os.path.join(DESTDIR, BOB['base_libdir'].lstrip(os.sep)))
-    include_dirs.insert(0, os.path.join(DESTDIR, BOB['base_includedir'].strip(os.sep)))
 
   runtime_library_dirs = None
   if BOB['soversion'].lower() == 'off':
@@ -225,84 +206,6 @@ def setup_extension(ext_name, pc_file):
       libraries=pc['libraries'],
       )
 
-# ---------------------------------------------------------------------------#
-#  setup variables, modules and extra files declarations                     #
-# ---------------------------------------------------------------------------#
-
-CONSOLE_SCRIPTS = [
-  'bob_config.py = bob.script.config:main',
-  'bob_dbmanage.py = bob.db.script.dbmanage:main',
-  'bob_compute_perf.py = bob.measure.script.compute_perf:main',
-  'bob_eval_threshold.py = bob.measure.script.eval_threshold:main',
-  'bob_apply_threshold.py = bob.measure.script.apply_threshold:main',
-  'bob_plot_cmc.py = bob.measure.script.plot_cmc:main',
-  'bob_face_detect.py = bob.visioner.script.facebox:main',
-  'bob_face_keypoints.py = bob.visioner.script.facepoints:main',
-  'bob_visioner_trainer.py = bob.visioner.script.trainer:main',
-  'bob_video_test.py = bob.io.script.video_test:main',
-  ]
-
-# built-in databases
-DATABASES = [
-    'iris = bob.db.iris.driver:Interface',
-    ]
-
-# test data that needs to be shipped with the distribution
-def find_all_test_data():
-
-  def add_data(l, path):
-    remove = os.path.join(PACKAGE_BASEDIR, 'bob') + os.sep
-    for sub_path, dirs, files in os.walk(path):
-      for f in files:
-        path = os.path.join(sub_path, f).replace(remove, '')
-        l.append(path)
-
-  retval = []
-
-  package_dir = os.path.join(PACKAGE_BASEDIR, 'bob')
-  for pack in os.listdir(package_dir):
-    sub_package_dir = os.path.join(package_dir, pack)
-    if not os.path.isdir(sub_package_dir): continue
-    for subdir in os.listdir(sub_package_dir):
-      if subdir == 'test':
-        test_path = os.path.join(PACKAGE_BASEDIR, 'bob', pack, 'test', 'data')
-        if os.path.exists(test_path):
-          add_data(retval, test_path)
-
-  return retval
-
-DATAFILES = find_all_test_data()
-
-# hand-picked data files to be shipped with the distribution
-DATAFILES += [
-    'db/iris/iris.names',
-    'db/iris/iris.data',
-    'io/fonts/*.txt',
-    'io/fonts/*.ttf',
-    ]
-
-EXTENSIONS = [
-    setup_extension('bob.core._core', 'bob-core-py'),
-    setup_extension('bob.core.random._core_random', 'bob-core-random-py'),
-    setup_extension('bob.io._io', 'bob-io-py'),
-    setup_extension('bob.math._math', 'bob-math-py'),
-    setup_extension('bob.measure._measure', 'bob-measure-py'),
-    setup_extension('bob.sp._sp', 'bob-sp-py'),
-    setup_extension('bob.ip._ip', 'bob-ip-py'),
-    setup_extension('bob.ap._ap', 'bob-ap-py'),
-    setup_extension('bob.machine._machine', 'bob-machine-py'),
-    setup_extension('bob.trainer._trainer', 'bob-trainer-py'),
-    ]
-
-if pkgconfig('bob-visioner'):
-  EXTENSIONS.append(
-    setup_extension('bob.visioner._visioner', 'bob-visioner-py')
-    )
-
-  DATAFILES += [
-      'visioner/detection.gz',
-      'visioner/localization.gz',
-      ]
 
 # ---------------------------------------------------------------------------#
 #  setup starts here                                                         #
@@ -310,49 +213,70 @@ if pkgconfig('bob-visioner'):
 
 from setuptools import setup, find_packages
 
+# Define package version
+version = open("version.txt").read().rstrip()
+
+def load_requirements(f):
+  retval = [str(k.strip()) for k in open(f, 'rt')]
+  return [k for k in retval if k and k[0] not in ('#', '-')]
+
 setup(
 
     name='bob',
-    version=BOB['version'],
+    version=version,
     description='Bob is a free signal-processing and machine learning toolbox',
-    long_description=open('README.rst').read(),
-    url='http://idiap.github.com/bob',
-    download_url='http://www.idiap.ch/software/bob/packages/bob-%s.tar.gz' % BOB['version'],
+    keywords=['signal processing', 'machine learning', 'biometrics'],
+    url='https://www.idiap.ch/software/bob',
+    license='GPLv3',
     author='Bob Developers',
     author_email='bob-devel@googlegroups.com',
-    keywords=['signal processing', 'machine learning', 'biometrics'],
-    license='GPLv3',
 
-    classifiers=[
-      'Classifier: Development Status :: 5 - Production/Stable',
-      'Classifier: Environment :: Console (Text Based)',
-      'Classifier: Intended Audience :: Science/Research',
-      'Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-      'Classifier: Programming Language :: C++',
-      'Classifier: Programming Language :: Python',
-      'Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence',
-      ],
+    long_description=open('README.rst').read(),
 
     packages=find_packages(),
-    package_data={'bob': DATAFILES},
     include_package_data=True,
     zip_safe=False,
+    install_requires=load_requirements('requirements.txt'),
 
-    ext_modules=EXTENSIONS,
+    ext_modules=[
+      setup_extension('bob.core._core', 'bob-core-py'),
+      setup_extension('bob.core.random._core_random', 'bob-core-random-py'),
+      setup_extension('bob.io._io', 'bob-io-py'),
+      setup_extension('bob.math._math', 'bob-math-py'),
+      setup_extension('bob.measure._measure', 'bob-measure-py'),
+      setup_extension('bob.sp._sp', 'bob-sp-py'),
+      setup_extension('bob.ip._ip', 'bob-ip-py'),
+      setup_extension('bob.ap._ap', 'bob-ap-py'),
+      setup_extension('bob.machine._machine', 'bob-machine-py'),
+      setup_extension('bob.trainer._trainer', 'bob-trainer-py'),
+      ]
     cmdclass = {'build_ext': build_ext},
 
-    install_requires=[
-      'setuptools',
-      'numpy',
-      'matplotlib',
-      'sqlalchemy',
-      'scipy',
-      'nose',
-      ] + EXTRA_REQUIREMENTS,
-
     entry_points={
-      'console_scripts': CONSOLE_SCRIPTS,
-      'bob.db': DATABASES,
+      'console_scripts': [
+        'bob_config.py = bob.script.config:main',
+        'bob_dbmanage.py = bob.db.script.dbmanage:main',
+        'bob_compute_perf.py = bob.measure.script.compute_perf:main',
+        'bob_eval_threshold.py = bob.measure.script.eval_threshold:main',
+        'bob_apply_threshold.py = bob.measure.script.apply_threshold:main',
+        'bob_plot_cmc.py = bob.measure.script.plot_cmc:main',
+        'bob_video_test.py = bob.io.script.video_test:main',
+        ]
+      'bob.db': [
+        'iris = bob.db.iris.driver:Interface',
+        ]
       },
+
+    classifiers=[
+      'Framework :: Bob',
+      'Development Status :: 4 - Beta',
+      'Intended Audience :: Science/Research',
+      'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+      'Natural Language :: English',
+      'Programming Language :: Python',
+      'Programming Language :: Python :: 3',
+      'Topic :: Scientific/Engineering :: Artificial Intelligence',
+      'Topic :: Software Development :: Libraries :: Python Modules',
+      ],
 
     )

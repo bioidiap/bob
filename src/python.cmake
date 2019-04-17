@@ -24,13 +24,13 @@ function(find_python_module module)
 		endif()
 		# A module's location is usually a directory, but for binary modules
 		# it's a .so file.
-    execute_process(COMMAND "${PYTHON_EXECUTABLE}" "-c" 
+    execute_process(COMMAND "${PYTHON_EXECUTABLE}" "-c"
 			"import re, ${module}; print re.compile('/__init__.py.*').sub('',${module}.__file__)"
-			RESULT_VARIABLE _${module}_status 
+			RESULT_VARIABLE _${module}_status
 			OUTPUT_VARIABLE _${module}_location
 			ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
 		if(NOT _${module}_status)
-      set(PYTHON_${module_upper} ${_${module}_location} CACHE STRING 
+      set(PYTHON_${module_upper} ${_${module}_location} CACHE STRING
 				"Location of Python module ${module}")
 		endif(NOT _${module}_status)
   endif(NOT PYTHON_${module_upper})
@@ -38,9 +38,9 @@ function(find_python_module module)
 endfunction(find_python_module)
 
 # *************************** READ THIS ***********************************
-# IMPORTANT: When you update this file, think about updating both the 
+# IMPORTANT: When you update this file, think about updating both the
 # ubuntu/debian control file and our Portfile (OSX installation) so the
-# package installations for those systems continue to work properly. 
+# package installations for those systems continue to work properly.
 # *************************** READ THIS ***********************************
 
 # Now double-check for all required python modules
@@ -80,7 +80,7 @@ execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import numpy; print numpy.get_i
 # version is selected). This may cause compilation problems.
 set(python_INCLUDE_DIRS "${PYTHON_NUMPY_INCLUDE_DIR};${PYTHON_PREFIX}/include/python${PYTHON_VERSION}" CACHE INTERNAL "incdirs")
 get_filename_component(python_LIBRARY_DIRS ${PYTHON_LIBRARY} PATH CACHE)
-  
+
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sys; print '%d.%d.%d' % (sys.version_info[0], sys.version_info[1], sys.version_info[2])" OUTPUT_VARIABLE PYTHON_VERSION_COMPLETE OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import numpy; print numpy.version.version" OUTPUT_VARIABLE NUMPY_VERSION_COMPLETE OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -93,17 +93,3 @@ endif()
 # standardized by Python as defined in http://docs.python.org/install/index.html
 set(PYTHON_SITE_PACKAGES "${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/site-packages" CACHE
   PATH "Default package installation prefix for Python packages")
-
-# And we also try to find ipython, if it is installed
-find_program(IPYTHON_EXECUTABLE ${WITH_IPYTHON} ipython DOC "Default ipython interpreter")
-
-if(IPYTHON_EXECUTABLE)
-  execute_process(COMMAND ${IPYTHON_EXECUTABLE} -Version RESULT_VARIABLE IPYTHON_IS_NEW OUTPUT_QUIET ERROR_QUIET)
-  if(IPYTHON_IS_NEW)
-    execute_process(COMMAND ${IPYTHON_EXECUTABLE} --version OUTPUT_VARIABLE IPYTHON_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
-  else()
-    execute_process(COMMAND ${IPYTHON_EXECUTABLE} -Version OUTPUT_VARIABLE IPYTHON_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
-  endif()
-  set(IPYTHON_VERSION "${IPYTHON_VERSION}" CACHE STRING "IPython version")
-  find_package_message(IPYTHON "Found IPython ${IPYTHON_VERSION} at ${IPYTHON_EXECUTABLE}" "[${IPYTHON_EXECUTABLE}][${IPYTHON_VERSION}]")
-endif()

@@ -1,18 +1,18 @@
 .. vim: set fileencoding=utf-8 :
 .. Andre Anjos <andre.anjos@idiap.ch>
 .. Wed Jan 11 14:43:35 2012 +0100
-.. 
+..
 .. Copyright (C) 2011-2013 Idiap Research Institute, Martigny, Switzerland
-.. 
+..
 .. This program is free software: you can redistribute it and/or modify
 .. it under the terms of the GNU General Public License as published by
 .. the Free Software Foundation, version 3 of the License.
-.. 
+..
 .. This program is distributed in the hope that it will be useful,
 .. but WITHOUT ANY WARRANTY; without even the implied warranty of
 .. MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 .. GNU General Public License for more details.
-.. 
+..
 .. You should have received a copy of the GNU General Public License
 .. along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -32,7 +32,7 @@ Obtaining the code
 ------------------
 
 To compile |project| locally you need to first set your mind on what to
-work with. You can choose between a released stable version from 
+work with. You can choose between a released stable version from
 `our release wiki page <https://github.com/idiap/bob/wiki/Releases>`_ or
 checkout and build yourself as explained further below.
 
@@ -71,7 +71,7 @@ Compiling the code
 Just execute:
 
 .. code-block:: sh
-   
+
    $ cd <bob-root>
    $ mkdir build
    $ cd build
@@ -130,13 +130,6 @@ Some variables that may be handy:
  * `CMAKE_PREFIX_PATH`: places to look-up for external dependencies
  * `WITH_PYTHON`: if you would like to force a specific version of python, you
    can define it with this variable
- * `WITH_IPYTHON`: if you would like to force a specific version of ipython, you
-   can define it with this variable
- * `BOB_INSTALL_PYTHON_INTERPRETER`: installs a version of `Python` (and
-   `IPython`, if found) in the `<CMAKE_PREFIX_PATH>/bin` directory. This
-   variable is useful **only** for local installations of |project| in with a
-   non-default Python interpreter in which you want to facilitate the end-user
-   setup. It is `OFF` by default.
  * `WITH_MKL`: tries to compile against the Intel MKL instead of the standard
    BLAS/LAPACK installation. You should provide the path to the MKL such as
    `-DWITH_MKL=/PATH/TO/MKL/LIB`.
@@ -153,7 +146,7 @@ Troubleshooting compilation
 Most of the problems concerning compilation come from not satisfying correctly
 the :ref:`section-dependencies`. Start by double-checking every dependency or
 base OS and check everything is as expected. If after exhausting all of these
-possibilities you are still unable to compile |project|, please 
+possibilities you are still unable to compile |project|, please
 `submit a new bug report`_ in our tracking system. At this time make sure to
 specify your OS version and the versions of the external dependencies so we can
 try to reproduce the failure.

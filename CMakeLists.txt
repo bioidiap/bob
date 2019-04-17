@@ -285,8 +285,7 @@ endif()
 # Project files
 set(ENABLED_PACKAGES "")
 add_subdirectory(src)
-add_subdirectory(python)
-add_subdirectory(doc)
+#add_subdirectory(doc)
 
 # Produce the config.h file
 execute_process(COMMAND ${WITH_PYTHON} ${CMAKE_SOURCE_DIR}/bin/apiversion.py ${BOB_VERSION} OUTPUT_VARIABLE BOB_API_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)

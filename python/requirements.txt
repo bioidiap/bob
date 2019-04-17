@@ -1,0 +1,7 @@
+setuptools
+numpy
+scipy
+matplotlib
+sqlalchemy
+nose
+pillow

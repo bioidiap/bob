@@ -11,9 +11,11 @@ build:
     - mkdir build
     - cd build
     - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF ..
-    - make VERBOSE=1 -j${CPU_COUNT} all
-    - make VERBOSE=1 test nosetests sphinx-doctest
-    - make VERBOSE=1 install
+    - make VERBOSE=1 all
+    - make VERBOSE=1 test
+    - make VERBOSE=1 nosetests
+    - make VERBOSE=1 sphinx-doctest
+    - make install
 
 requirements:
   build:

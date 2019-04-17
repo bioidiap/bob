@@ -249,7 +249,7 @@ setup(
       setup_extension('bob.ap._ap', 'bob-ap-py'),
       setup_extension('bob.machine._machine', 'bob-machine-py'),
       setup_extension('bob.trainer._trainer', 'bob-trainer-py'),
-      ]
+      ],
     cmdclass = {'build_ext': build_ext},
 
     entry_points={
@@ -261,10 +261,10 @@ setup(
         'bob_apply_threshold.py = bob.measure.script.apply_threshold:main',
         'bob_plot_cmc.py = bob.measure.script.plot_cmc:main',
         'bob_video_test.py = bob.io.script.video_test:main',
-        ]
+        ],
       'bob.db': [
         'iris = bob.db.iris.driver:Interface',
-        ]
+        ],
       },
 
     classifiers=[

@@ -22,6 +22,7 @@
 
 import os
 import sys
+import platform
 from setuptools.command.build_ext import build_ext as build_ext_base
 from setuptools import Extension
 import subprocess
@@ -132,6 +133,7 @@ class build_ext(build_ext_base):
   '''Customized extension to build bob.python bindings in the expected way'''
 
   linker_is_smart = None
+  flag = '-force-load' if platform.system() == 'Darwin' else '--whole-archive'
 
   def __init__(self, *args, **kwargs):
     build_ext_base.__init__(self, *args, **kwargs)
@@ -141,13 +143,13 @@ class build_ext(build_ext_base):
 
     def linker_can_remove_symbols(linker):
       '''Tests if the `ld` linker can remove unused symbols from linked
-      libraries. In this case, use the --no-as-needed flag during link'''
+      libraries. In this case, use the "flag" during link'''
 
       import tempfile
       f, name = tempfile.mkstemp()
       del f
 
-      cmd = linker + ['-Wl,--no-as-needed', '-lm', '-o', name]
+      cmd = linker + ['-Wl,%s' % self.flag, '-lm', '-o', name]
       proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
           stderr=subprocess.STDOUT)
       output = proc.communicate()[0]
@@ -165,7 +167,7 @@ class build_ext(build_ext_base):
 
     if self.linker_is_smart is None:
       self.linker_is_smart = linker_can_remove_symbols(self.compiler.linker_so)
-      if self.linker_is_smart: self.compiler.linker_so += ['-Wl,--no-as-needed']
+      if self.linker_is_smart: self.compiler.linker_so += ['-Wl,%s' % self.flag]
 
     if hasattr(self.compiler, 'dll_libraries') and \
         self.compiler.dll_libraries is None:

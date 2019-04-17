@@ -100,6 +100,10 @@ set(COMMON_DEBUG_FLAGS "-g -DBOB_DEBUG")
 
 if(NOT APPLE OR CMAKE_COMPILER_IS_GNUCC) #linux builds or apple+gcc4.2
   set(COMMON_DEBUG_FLAGS "${COMMON_DEBUG_FLAGS} -DBZ_DEBUG")
+
+  # fixes ABI incompatibilites with gcc >= 5
+  # see: https://stackoverflow.com/questions/30668560/boost-unit-test-link-error-abi-mismatch
+  set(COMMON_CXX_FLAGS "${COMMON_CXX_FLAGS} -D_GLIBCXX_USE_CXX11_ABI=0")
 endif()
 
 # These are used in type checks for cmake, be aware and don't change those

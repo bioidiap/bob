@@ -52,6 +52,7 @@ requirements:
 
   run:
     - python
+    - boost
     - {{ pin_compatible('numpy') }}
     - scipy
     - sqlalchemy
@@ -73,7 +74,7 @@ about:
   summary: Bob is a free signal-processing and machine learning toolbox
   license: GNU General Public License v3 (GPLv3)
   license_family: GPL
-  license_file: COPYING
+  license_file: ../COPYING
 
 extra:
   recipe-maintainers:

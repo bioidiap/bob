@@ -70,9 +70,7 @@ static char* line_start (char* line) {
  */
 int get_pnm_type(FILE *f)
 {
-  int flag=0;
   int pnm_type=0;
-  unsigned int i;
   char magic[MAXLINE];
   char line[MAXLINE];
 
@@ -229,9 +227,7 @@ int read_pgm_header(FILE *f, int *img_xdim, int *img_ydim, int *img_colors, int 
  */
 int read_ppm_header(FILE *f, int *img_xdim, int *img_ydim, int *img_colors, int *is_ascii)
 {
-  int flag=0;
   int x_val, y_val, maxcolors_val;
-  unsigned int i;
   char magic[MAXLINE];
   char line[MAXLINE];
   int count=0;

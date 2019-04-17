@@ -53,6 +53,18 @@ requirements:
   run:
     - python
     - boost
+    - jpeg
+    - giflib
+    - libtiff
+    - libmatio
+    - libpng
+    - vlfeat
+    - libsvm
+    - hdf5
+    - fftw
+    - openblas
+    - ffmpeg
+    - libblitz
     - {{ pin_compatible('numpy') }}
     - scipy
     - sqlalchemy

@@ -1,7 +1,6 @@
 {% set name = "bob" %}
 {% set build_type = "Debug" %}
 {% set python_version = "2.7" %}
-{% set python_version_short = "27" %}
 
 package:
   name: {{ name }}
@@ -11,12 +10,12 @@ build:
   number: 0
   script:
     - cmake -DCMAKE_BUILD_TYPE={{ build_type }} -DCMAKE_PREFIX_PATH=${PREFIX} -DCMAKE_INSTALL_PREFIX=${PREFIX} -DBOOST_ROOT=${PREFIX} -DPYTHON_VERSION={{ python_version }} -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
-    - make VERBOSE=1 all
+    - make VERBOSE=1 -j2 all
     - make VERBOSE=1 test
-    - make VERBOSE=1 nosetests
-    - make VERBOSE=1 sphinx-doctest
     - make VERBOSE=1 install
-    - rm -rf ${PREFIX}/lib/python{{ python_version_short }}/site-packages/bob/visioner
+    - rm -rf ${PREFIX}/lib/python{{ python_version.replace('.', '') }}/site-packages/bob/visioner
+    - install -d "${PREFIX}/share/doc/{{ name }}"
+    - cp -R README.md COPYING python/doc "${PREFIX}/share/doc/{{ name }}/"
 
 requirements:
   build:
@@ -63,9 +62,10 @@ test:
     - bob
 
   commands:
+    - nosetests -sv {{ name }}
+    - sphinx-build -b doctest ${PREFIX}/share/doc/{{ name }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
-    - python -c "import bob; print bob.version"
 
 about:
   home: https://gitlab.idiap.ch/bob/bob

@@ -7,10 +7,7 @@ package:
 build:
   number: 0
   script:
-    - cd {{ environ.get('RECIPE_DIR') + '/..' }}
-    - mkdir build
-    - cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF ..
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
     - make VERBOSE=1 all
     - make VERBOSE=1 test
     - make VERBOSE=1 nosetests

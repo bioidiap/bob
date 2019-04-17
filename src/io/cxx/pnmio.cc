@@ -34,6 +34,25 @@
 #define  RGB_TYPE           1 /* used for PFM */
 
 
+/* line_start
+ * Tells if a line should be ignored (completely empty or contains a comment)
+ * Returns: non-null if we should start reading from that position.
+ */
+static char* line_start (char* line) {
+  char* start = line;
+  int size = strnlen(line, MAXLINE);
+  for (int i = 0; i < size; ++i, ++start) {
+    if (isspace(*start)) continue;
+    if (isgraph(*start)) {
+      if ((*start) == '#') start = NULL;
+      break;
+    }
+  }
+  if (start == (line+size)) start = NULL; /* end-of-line ignore it */
+  return start;
+}
+
+
 /* get_pnm_type:
  * Read the header contents of a PBM/PGM/PPM/PFM file up to the point of
  * extracting its type. Valid types for a PNM image are as follows:
@@ -59,18 +78,10 @@ int get_pnm_type(FILE *f)
 
   /* Read the PNM/PFM file header. */
   while (fgets(line, MAXLINE, f) != NULL) {
-    flag = 0;
-    for (i = 0; i < strlen(line); i++) {
-      if (isgraph(line[i])) {
-        if ((line[i] == '#') && (flag == 0)) {
-          flag = 1;
-        }
-      }
-    }
-    if (flag == 0) {
-      sscanf(line, "%s", magic);
-      break;
-    }
+    char* start = line_start(line);
+    if (!start) continue;  /* skip this line */
+    sscanf(line, "%s", magic);
+    break;
   }
 
   /* NOTE: This part can be written more succinctly, however,
@@ -114,35 +125,23 @@ int get_pnm_type(FILE *f)
  */
 int read_pbm_header(FILE *f, int *img_xdim, int *img_ydim, int *is_ascii)
 {
-  int flag=0;
   int x_val, y_val;
-  unsigned int i;
   char magic[MAXLINE];
   char line[MAXLINE];
   int count=0;
 
   /* Read the PBM file header. */
   while (fgets(line, MAXLINE, f) != NULL) {
-    flag = 0;
-    for (i = 0; i < strlen(line); i++) {
-      if (isgraph(line[i])) {
-        if ((line[i] == '#') && (flag == 0)) {
-          flag = 1;
-        }
-      }
+    char* start = line_start(line);
+    if (!start) continue;  /* skip this line */
+    if (count == 0) {
+      count += sscanf(line, "%s %d %d", magic, &x_val, &y_val);
+    } else if (count == 1) {
+      count += sscanf(line, "%d %d", &x_val, &y_val);
+    } else if (count == 2) {
+      count += sscanf(line, "%d", &y_val);
     }
-    if (flag == 0) {
-      if (count == 0) {
-        count += sscanf(line, "%s %d %d", magic, &x_val, &y_val);
-      } else if (count == 1) {
-        count += sscanf(line, "%d %d", &x_val, &y_val);
-      } else if (count == 2) {
-        count += sscanf(line, "%d", &y_val);
-      }
-    }
-    if (count == 3) {
-      break;
-    }
+    if (count == 3) break;
   }
 
   if (strcmp(magic, "P1") == 0) {
@@ -176,37 +175,26 @@ int read_pbm_header(FILE *f, int *img_xdim, int *img_ydim, int *is_ascii)
  */
 int read_pgm_header(FILE *f, int *img_xdim, int *img_ydim, int *img_colors, int *is_ascii)
 {
-  int flag=0;
   int x_val, y_val, maxcolors_val;
-  unsigned int i;
   char magic[MAXLINE];
   char line[MAXLINE];
   int count=0;
 
   /* Read the PGM file header. */
   while (fgets(line, MAXLINE, f) != NULL) {
-    flag = 0;
-    for (i = 0; i < strlen(line); i++) {
-      if (isgraph(line[i]) && (flag == 0)) {
-        if ((line[i] == '#') && (flag == 0)) {
-          flag = 1;
-        }
-      }
+    char* start = line_start(line);
+    if (!start) continue;  /* skip this line */
+    if (count == 0) {
+      count += sscanf(line, "%s %d %d %d", magic, &x_val, &y_val,
+          &maxcolors_val);
+    } else if (count == 1) {
+      count += sscanf(line, "%d %d %d", &x_val, &y_val, &maxcolors_val);
+    } else if (count == 2) {
+      count += sscanf(line, "%d %d", &y_val, &maxcolors_val);
+    } else if (count == 3) {
+      count += sscanf(line, "%d", &maxcolors_val);
     }
-    if (flag == 0) {
-      if (count == 0) {
-        count += sscanf(line, "%s %d %d %d", magic, &x_val, &y_val, &maxcolors_val);
-      } else if (count == 1) {
-        count += sscanf(line, "%d %d %d", &x_val, &y_val, &maxcolors_val);
-      } else if (count == 2) {
-        count += sscanf(line, "%d %d", &y_val, &maxcolors_val);
-      } else if (count == 3) {
-        count += sscanf(line, "%d", &maxcolors_val);
-      }
-    }
-    if (count == 4) {
-      break;
-    }
+    if (count == 4) break;
   }
 
   if (strcmp(magic, "P2") == 0) {
@@ -250,28 +238,19 @@ int read_ppm_header(FILE *f, int *img_xdim, int *img_ydim, int *img_colors, int 
 
   /* Read the PPM file header. */
   while (fgets(line, MAXLINE, f) != NULL) {
-    flag = 0;
-    for (i = 0; i < strlen(line); i++) {
-      if (isgraph(line[i]) && (flag == 0)) {
-        if ((line[i] == '#') && (flag == 0)) {
-          flag = 1;
-        }
-      }
+    char* start = line_start(line);
+    if (!start) continue;  /* skip this line */
+    if (count == 0) {
+      count += sscanf(line, "%s %d %d %d", magic, &x_val, &y_val,
+          &maxcolors_val);
+    } else if (count == 1) {
+      count += sscanf(line, "%d %d %d", &x_val, &y_val, &maxcolors_val);
+    } else if (count == 2) {
+      count += sscanf(line, "%d %d", &y_val, &maxcolors_val);
+    } else if (count == 3) {
+      count += sscanf(line, "%d", &maxcolors_val);
     }
-    if (flag == 0) {
-      if (count == 0) {
-        count += sscanf(line, "%s %d %d %d", magic, &x_val, &y_val, &maxcolors_val);
-      } else if (count == 1) {
-        count += sscanf(line, "%d %d %d", &x_val, &y_val, &maxcolors_val);
-      } else if (count == 2) {
-        count += sscanf(line, "%d %d", &y_val, &maxcolors_val);
-      } else if (count == 3) {
-        count += sscanf(line, "%d", &maxcolors_val);
-      }
-    }
-    if (count == 4) {
-      break;
-    }
+    if (count == 4) break;
   }
 
   if (strcmp(magic, "P3") == 0) {
@@ -433,7 +412,7 @@ int write_pbm_file(FILE *f, int *img_out,
   fprintf(f, "%d %d\n", x_scaled_size, y_scaled_size);
 
   /* Write the image data. */
-  for (i = 0; i < y_scaled_size; i++) {
+  for (i = 0; i < y_scaled_size; ++i) {
     for (j = 0; j < x_scaled_size; j+=step) {
 	    if (is_ascii == 1) {
         fprintf(f, "%d ", img_out[i*x_scaled_size+j]);
@@ -485,8 +464,8 @@ int write_pgm_file(FILE *f, int *img_out,
   fprintf(f, "%d\n", img_colors);
 
   /* Write the image data. */
-  for (i = 0; i < y_scaled_size; i++) {
-    for (j = 0; j < x_scaled_size; j++) {
+  for (i = 0; i < y_scaled_size; ++i) {
+    for (j = 0; j < x_scaled_size; ++j) {
       if (is_ascii == 1) {
         fprintf(f, "%d ", img_out[i*x_scaled_size+j]);
         if (((i*x_scaled_size+j) % linevals) == (linevals-1)) {
@@ -531,8 +510,8 @@ int write_ppm_file(FILE *f, int *img_out,
   fprintf(f, "%d\n", img_colors);
 
   /* Write the image data. */
-  for (i = 0; i < y_scaled_size; i++) {
-    for (j = 0; j < x_scaled_size; j++) {
+  for (i = 0; i < y_scaled_size; ++i) {
+    for (j = 0; j < x_scaled_size; ++j) {
       if (is_ascii == 1) {
         fprintf(f, "%d %d %d ",
           img_out[3*(i*x_scaled_size+j)+0],

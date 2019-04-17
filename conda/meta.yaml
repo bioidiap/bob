@@ -1,4 +1,7 @@
 {% set name = "bob" %}
+{% set build_type = "Debug" %}
+{% set python_version = "2.7" %}
+{% set python_version_short = "27" %}
 
 package:
   name: {{ name }}
@@ -7,12 +10,13 @@ package:
 build:
   number: 0
   script:
-    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PREFIX} -DPYTHON_VERSION=2.7 -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
+    - cmake -DCMAKE_BUILD_TYPE={{ build_type }} -DCMAKE_PREFIX_PATH=${PREFIX} -DCMAKE_INSTALL_PREFIX=${PREFIX} -DBOOST_ROOT=${PREFIX} -DBOOST_NO_SYSTEM_PATHS=ON -DPYTHON_VERSION={{ python_version }} -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
     - make VERBOSE=1 all
     - make VERBOSE=1 test
     - make VERBOSE=1 nosetests
     - make VERBOSE=1 sphinx-doctest
-    - make install
+    - make VERBOSE=1 install
+    - rm -rf ${PREFIX}/lib/python{{ python_version_short }}/site-packages/bob/visioner
 
 requirements:
   build:
@@ -22,7 +26,7 @@ requirements:
     - pkg-config {{ pkg_config }}
 
   host:
-    - python 2.7
+    - python {{ python_version }}
     - setuptools {{ setuptools }}
     - sqlite {{ sqlite }}
     - sqlalchemy {{ sqlalchemy }}

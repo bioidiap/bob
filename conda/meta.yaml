@@ -10,7 +10,7 @@ package:
 build:
   number: 0
   script:
-    - cmake -DCMAKE_BUILD_TYPE={{ build_type }} -DCMAKE_PREFIX_PATH=${PREFIX} -DCMAKE_INSTALL_PREFIX=${PREFIX} -DBOOST_ROOT=${PREFIX} -DBOOST_NO_SYSTEM_PATHS=ON -DPYTHON_VERSION={{ python_version }} -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
+    - cmake -DCMAKE_BUILD_TYPE={{ build_type }} -DCMAKE_PREFIX_PATH=${PREFIX} -DCMAKE_INSTALL_PREFIX=${PREFIX} -DBOOST_ROOT=${PREFIX} -DPYTHON_VERSION={{ python_version }} -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
     - make VERBOSE=1 all
     - make VERBOSE=1 test
     - make VERBOSE=1 nosetests

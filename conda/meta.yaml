@@ -15,6 +15,7 @@ build:
     - make VERBOSE=1 install
     - rm -rf ${PREFIX}/lib/python{{ python_version }}/site-packages/bob/visioner
     - install -d "${PREFIX}/share/doc/{{ name }}"
+    - cd {{ environ.get('RECIPE_DIR') + '/..' }}
     - cp -R README.md COPYING python/doc "${PREFIX}/share/doc/{{ name }}/"
 
 requirements:

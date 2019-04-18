@@ -22,7 +22,6 @@
 
 import os
 import sys
-import platform
 from setuptools.command.build_ext import build_ext as build_ext_base
 from setuptools import Extension
 import subprocess
@@ -132,29 +131,11 @@ BOB = bob_variables()
 class build_ext(build_ext_base):
   '''Customized extension to build bob.python bindings in the expected way'''
 
-  linker_is_smart = None
-  flag = '-force-load' if platform.system() == 'Darwin' else '--whole-archive'
-
   def __init__(self, *args, **kwargs):
     build_ext_base.__init__(self, *args, **kwargs)
 
   def build_extension(self, ext):
     '''Concretely builds the extension given as input'''
-
-    def linker_can_remove_symbols(linker):
-      '''Tests if the `ld` linker can remove unused symbols from linked
-      libraries. In this case, use the "flag" during link'''
-
-      import tempfile
-      f, name = tempfile.mkstemp()
-      del f
-
-      cmd = linker + ['-Wl,%s' % self.flag, '-lm', '-o', name]
-      proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-          stderr=subprocess.STDOUT)
-      output = proc.communicate()[0]
-      if os.path.exists(name): os.unlink(name)
-      return True if proc.returncode == 0 else False
 
     def ld_ok(opt):
       '''Tells if a certain option is a go for the linker'''
@@ -164,10 +145,7 @@ class build_ext(build_ext_base):
 
     # Some clean-up on the linker which is screwed up...
     self.compiler.linker_so = [k for k in self.compiler.linker_so if ld_ok(k)]
-
-    if self.linker_is_smart is None:
-      self.linker_is_smart = linker_can_remove_symbols(self.compiler.linker_so)
-      if self.linker_is_smart: self.compiler.linker_so += ['-Wl,%s' % self.flag]
+    self.compiler.linker_so += ['-Wl,--no-as-needed']
 
     if hasattr(self.compiler, 'dll_libraries') and \
         self.compiler.dll_libraries is None:
@@ -192,15 +170,9 @@ def setup_extension(ext_name, pc_file):
   if BOB['soversion'].lower() == 'off':
     runtime_library_dirs = library_dirs
 
-  # Tricks setuptools into letting us use the --compiler=cygwin during
-  # extension building. Unfortunately, for that option to work, at least one
-  # compiled file has to go into the extension.
-  sources = []
-  if __import__('platform').system().find('CYGWIN') != -1: sources = ['empty.c']
-
   return Extension(
       ext_name,
-      sources=sources,
+      sources=[],
       language="c++",
       include_dirs=include_dirs + [numpy.get_include()],
       library_dirs=library_dirs,

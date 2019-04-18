@@ -52,20 +52,20 @@ requirements:
     - openblas {{ openblas }}
 
   run:
-    - python
-    - boost
-    - jpeg
-    - giflib
-    - libtiff
-    - libmatio
-    - libpng
-    - vlfeat
-    - libsvm
-    - hdf5
-    - fftw
-    - openblas
-    - ffmpeg
-    - libblitz
+    - python {{ python_version }}
+    - boost {{ boost }}
+    - jpeg {{ jpeg }}
+    - giflib {{ giflib }}
+    - libtiff {{ libtiff }}
+    - libmatio {{ libmatio }}
+    - libpng {{ libpng }}
+    - vlfeat {{ vlfeat }}
+    - libsvm {{ libsvm }}
+    - hdf5 {{ hdf5 }}
+    - fftw {{ fftw }}
+    - openblas {{ openblas }}
+    - ffmpeg {{ ffmpeg }}
+    - libblitz {{ libblitz }}
     - {{ pin_compatible('numpy') }}
     - scipy
     - sqlalchemy

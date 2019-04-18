@@ -249,7 +249,7 @@ macro(bob_pkgconfig package requires)
 
   # pkgconfig files for the install area
   set(BOB_CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-  configure_file(${CMAKE_SOURCE_DIR}/pkgconfig/bob-package.pc.in ${CMAKE_BINARY_DIR}/${pkgconfigdir}/${BOB_PACKAGE_NAME}.pc @ONLY)
+  configure_file(${CMAKE_SOURCE_DIR}/pkgconfig/bob-package.pc.in ${CMAKE_INSTALL_PREFIX}/${pkgconfigdir}/${BOB_PACKAGE_NAME}.pc @ONLY)
 
   # Adds this package to the pool
   list(APPEND ENABLED_PACKAGES ${package})
@@ -303,4 +303,4 @@ foreach(pack ${ENABLED_PACKAGES})
   set(BOB_PACKAGES "${BOB_PACKAGES} ${pkg_name} = ${BOB_VERSION}")
 endforeach()
 set(BOB_CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-configure_file(${CMAKE_SOURCE_DIR}/pkgconfig/bob.pc.in ${CMAKE_BINARY_DIR}/${pkgconfigdir}/bob.pc @ONLY)
+configure_file(${CMAKE_SOURCE_DIR}/pkgconfig/bob.pc.in ${CMAKE_INSTALL_PREFIX}/${pkgconfigdir}/bob.pc @ONLY)

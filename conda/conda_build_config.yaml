@@ -27,6 +27,8 @@ python:
 # overlap) so update them in both places.
 cmake:
   - 2.8.10.2
+gcc:
+  - 4.8.5
 pkg_config:
   - 0.29.2
 

@@ -21,7 +21,7 @@ build:
 
 requirements:
   build:
-    - gcc
+    - gcc {{ gcc }}
     - cmake {{ cmake }}
     - pkg-config {{ pkg_config }}
 

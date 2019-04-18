@@ -131,8 +131,8 @@ def test_format_codecs():
       # low quality encoders - avoid using - available for compatibility
       wmv2       = dict(frameskip=3.0,  color=10., noise=50.),
       wmv1       = dict(frameskip=2.5,  color=10., noise=50.),
-      msmpeg4    = dict(frameskip=5.,   color=10., noise=50.),
-      msmpeg4v2  = dict(frameskip=5.,   color=10., noise=50.),
+      msmpeg4    = dict(frameskip=6.,   color=10., noise=50.),
+      msmpeg4v2  = dict(frameskip=6.,   color=10., noise=50.),
       )
 
   # some exceptions

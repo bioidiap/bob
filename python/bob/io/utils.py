@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # vim: set fileencoding=utf-8 :
 # Andre Anjos <andre.dos.anjos@gmail.com>
-# Thu 14 Mar 17:00:58 2013 
+# Thu 14 Mar 17:00:58 2013
 
 """Some utilities to generate fake patterns
 """
@@ -61,7 +61,7 @@ def print_numbers(frame, counter, format, fontsize):
   y_pos = (height - text_height) / 2
   # this is buggy in Pillow-2.0.0, so we do it manually
   #img = Image.fromarray(frame.transpose(1,2,0))
-  img = Image.fromstring('RGB', (frame.shape[1], frame.shape[2]), frame.transpose(1,2,0).tostring())
+  img = Image.frombytes('RGB', (frame.shape[1], frame.shape[2]), frame.transpose(1,2,0).tostring())
   draw = ImageDraw.Draw(img)
   draw.text((x_pos, y_pos), text, font=font, fill=(255,255,255))
   return numpy.asarray(img).transpose(2,0,1)
@@ -70,7 +70,7 @@ def generate_colors(height, width, shift):
   """Generates an image that serves as a test pattern for encoding/decoding and
   accuracy tests."""
 
-  retval = numpy.ndarray((3, height, width), dtype='uint8') 
+  retval = numpy.ndarray((3, height, width), dtype='uint8')
 
   # standard color test pattern
   w = width / 7; w2 = 2*w; w3 = 3*w; w4 = 4*w; w5 = 5*w; w6 = 6*w

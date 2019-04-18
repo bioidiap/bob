@@ -52,28 +52,28 @@ requirements:
     - vlfeat {{ vlfeat }}
 
   run:
-    - boost {{ boost }}
-    - ffmpeg {{ ffmpeg }}
-    - fftw {{ fftw }}
-    - giflib {{ giflib }}
-    - hdf5 {{ hdf5 }}
-    - jpeg {{ jpeg }}
-    - libblitz {{ libblitz }}
-    - libmatio {{ libmatio }}
-    - libpng {{ libpng }}
-    - libsvm {{ libsvm }}
-    - libtiff {{ libtiff }}
+    - boost {{ boost }}.*
+    - ffmpeg {{ ffmpeg }}.*
+    - fftw {{ fftw }}.*
+    - giflib {{ giflib }}.*
+    - hdf5 {{ hdf5 }}.*
+    - jpeg {{ jpeg }}.*
+    - libblitz {{ libblitz }}.*
+    - libmatio {{ libmatio }}.*
+    - libpng {{ libpng }}.*
+    - libsvm {{ libsvm }}.*
+    - libtiff {{ libtiff }}.*
     - matplotlib
     - nose
     - {{ pin_compatible('numpy') }}
-    - openblas {{ openblas }}
+    - openblas {{ openblas }}.*
     - pillow
-    - python {{ python_version }}
+    - python {{ python_version }}.*
     - scipy
     - setuptools
     - sqlalchemy
-    - sqlite {{ sqlite }}
-    - vlfeat {{ vlfeat }}
+    - sqlite {{ sqlite }}.*
+    - vlfeat {{ vlfeat }}.*
 
 test:
   imports:

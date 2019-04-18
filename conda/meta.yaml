@@ -14,7 +14,7 @@ build:
     - make VERBOSE=1 test
     - make VERBOSE=1 install
     - cd {{ environ.get('RECIPE_DIR') + '/../python' }}
-    - python setup.py install --single-version-externally-managed --record record.txt
+    - PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig python setup.py install --single-version-externally-managed --record record.txt
     - cd ..
     - install -d "${PREFIX}/share/doc/{{ name }}"
     - cp -R README.md COPYING python/doc "${PREFIX}/share/doc/{{ name }}/"
@@ -27,50 +27,53 @@ requirements:
     - pkg-config {{ pkg_config }}
 
   host:
-    - python {{ python_version }}
-    - setuptools {{ setuptools }}
-    - sqlite {{ sqlite }}
-    - sqlalchemy {{ sqlalchemy }}
-    - ffmpeg {{ ffmpeg }}
-    - libblitz {{ libblitz }}
     - boost {{ boost }}
-    - jpeg {{ jpeg }}
+    - ffmpeg {{ ffmpeg }}
+    - fftw {{ fftw }}
     - giflib {{ giflib }}
-    - libtiff {{ libtiff }}
+    - hdf5 {{ hdf5 }}
+    - jpeg {{ jpeg }}
+    - libblitz {{ libblitz }}
     - libmatio {{ libmatio }}
     - libpng {{ libpng }}
-    - vlfeat {{ vlfeat }}
     - libsvm {{ libsvm }}
-    - hdf5 {{ hdf5 }}
-    - sphinx {{ sphinx }}
-    - nose {{ nose }}
-    - pillow {{ pillow }}
-    - numpy {{ numpy }}
-    - scipy {{ scipy }}
+    - libtiff {{ libtiff }}
     - matplotlib {{ matplotlib }}
-    - fftw {{ fftw }}
+    - nose {{ nose }}
+    - numpy {{ numpy }}
     - openblas {{ openblas }}
+    - pillow {{ pillow }}
+    - python {{ python_version }}
+    - scipy {{ scipy }}
+    - setuptools {{ setuptools }}
+    - sphinx {{ sphinx }}
+    - sqlalchemy {{ sqlalchemy }}
+    - sqlite {{ sqlite }}
+    - vlfeat {{ vlfeat }}
 
   run:
-    - python {{ python_version }}
     - boost {{ boost }}
-    - jpeg {{ jpeg }}
+    - ffmpeg {{ ffmpeg }}
+    - fftw {{ fftw }}
     - giflib {{ giflib }}
-    - libtiff {{ libtiff }}
+    - hdf5 {{ hdf5 }}
+    - jpeg {{ jpeg }}
+    - libblitz {{ libblitz }}
     - libmatio {{ libmatio }}
     - libpng {{ libpng }}
-    - vlfeat {{ vlfeat }}
     - libsvm {{ libsvm }}
-    - hdf5 {{ hdf5 }}
-    - fftw {{ fftw }}
-    - openblas {{ openblas }}
-    - ffmpeg {{ ffmpeg }}
-    - libblitz {{ libblitz }}
-    - {{ pin_compatible('numpy') }}
-    - scipy
-    - sqlalchemy
-    - pillow
+    - libtiff {{ libtiff }}
     - matplotlib
+    - nose
+    - {{ pin_compatible('numpy') }}
+    - openblas {{ openblas }}
+    - pillow
+    - python {{ python_version }}
+    - scipy
+    - setuptools
+    - sqlalchemy
+    - sqlite {{ sqlite }}
+    - vlfeat {{ vlfeat }}
 
 test:
   imports:

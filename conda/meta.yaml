@@ -83,6 +83,7 @@ test:
   commands:
     - nosetests -sv {{ name }}
     - sphinx-build ${PREFIX}/share/doc/{{ name }}/doc sphinx
+    - if [ -n "${CI_PROJECT_DIR}" ]; then mv sphinx "${CI_PROJECT_DIR}/"; fi
     - sphinx-build -b doctest ${PREFIX}/share/doc/{{ name }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]

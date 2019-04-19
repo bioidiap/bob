@@ -21,3 +21,4 @@ databases/
 build/
 cxx/visioner/project/
 python/*.egg-info
+python/record.txt

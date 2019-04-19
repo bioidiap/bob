@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# vim: set fileencoding=utf-8 :
-
 """Tutorial for plotting a ROC curve
 """
 

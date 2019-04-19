@@ -1,5 +1,5 @@
 {% set name = "bob" %}
-{% set build_type = "Debug" %}
+{% set build_type = "Release" %}
 {% set python_version = "2.7" %}
 
 package:

@@ -17,7 +17,7 @@ build:
     - PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig python setup.py install --single-version-externally-managed --record record.txt
     - cd ..
     - install -d "${PREFIX}/share/doc/{{ name }}"
-    - cp -R README.md COPYING python/doc "${PREFIX}/share/doc/{{ name }}/"
+    - cp -R python/README.rst COPYING python/doc "${PREFIX}/share/doc/{{ name }}/"
 
 requirements:
   build:

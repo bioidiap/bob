@@ -46,7 +46,6 @@ requirements:
     - python {{ python_version }}
     - scipy {{ scipy }}
     - setuptools {{ setuptools }}
-    - sphinx {{ sphinx }}
     - sqlalchemy {{ sqlalchemy }}
     - sqlite {{ sqlite }}
     - vlfeat {{ vlfeat }}
@@ -76,17 +75,21 @@ requirements:
     - vlfeat {{ vlfeat }}.*
 
 test:
+  requires:
+    - sphinx {{ sphinx }}
+
   imports:
     - bob
 
   commands:
     - nosetests -sv {{ name }}
+    - sphinx-build ${PREFIX}/share/doc/{{ name }}/doc sphinx
     - sphinx-build -b doctest ${PREFIX}/share/doc/{{ name }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
 
 about:
-  home: https://gitlab.idiap.ch/bob/bob
+  home: https://www.idiap.ch/software/bob
   summary: Bob is a free signal-processing and machine learning toolbox
   license: GNU General Public License v3 (GPLv3)
   license_family: GPL

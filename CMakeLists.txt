@@ -221,7 +221,7 @@ endmacro()
 #
 # Example: bob_pkgconfig(bob_ip "bob_core;bob_sp;bob_math")
 macro(bob_pkgconfig package requires)
-  set(pkgconfigdir "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+  set(pkgconfigdir "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig")
   string(REPLACE "_" "-" BOB_PACKAGE_NAME ${package})
   set(BOB_PACKAGE_LIBRARY ${package})
 
@@ -297,7 +297,7 @@ install(FILES ${CMAKE_BINARY_DIR}/${cmakedir}/bob-config-version.cmake
   DESTINATION ${cmakedir})
 
 # Global pkg-config file
-set(pkgconfigdir "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+set(pkgconfigdir "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig")
 set(BOB_PACKAGES "")
 foreach(pack ${ENABLED_PACKAGES})
   string(REPLACE "_" "-" pkg_name ${pack})

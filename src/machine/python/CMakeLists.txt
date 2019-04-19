@@ -24,9 +24,8 @@ set(src
    "bic.cc"
    "roll.cc"
    "version.cc"
-   "main.cc"
    )
- 
+
 if(WITH_LIBSVM)
   list(APPEND incdir ${LIBSVM_INCLUDE_DIR})
   list(APPEND src "svm.cc")

@@ -39,13 +39,12 @@ set(src
    "SpatioTemporalGradient.cc"
    "HOG.cc"
    "SIFT.cc"
-   "main.cc"
    )
 
 # If we have VLFeat installed, enable the compilation of relevant modules
 if(WITH_VLFEAT)
   list(APPEND incdir "${VLFEAT_INCLUDE_DIR}")
-  list(APPEND src 
+  list(APPEND src
     "vlsift.cc"
     "vldsift.cc"
     )

@@ -8,7 +8,6 @@ set(incdir ${py_incdir})
 # Python bindings
 set(src
    "ceps.cc"
-   "main.cc"
    )
 
 # Define the library, compilation and linkage options

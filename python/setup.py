@@ -128,32 +128,6 @@ def bob_variables():
 BOB = bob_variables()
 
 
-class build_ext(build_ext_base):
-  '''Customized extension to build bob.python bindings in the expected way'''
-
-  def __init__(self, *args, **kwargs):
-    build_ext_base.__init__(self, *args, **kwargs)
-
-  def build_extension(self, ext):
-    '''Concretely builds the extension given as input'''
-
-    def ld_ok(opt):
-      '''Tells if a certain option is a go for the linker'''
-
-      if opt.find('-L') == 0: return False
-      return True
-
-    # Some clean-up on the linker which is screwed up...
-    self.compiler.linker_so = [k for k in self.compiler.linker_so if ld_ok(k)]
-    self.compiler.linker_so += ['-Wl,--no-as-needed']
-
-    if hasattr(self.compiler, 'dll_libraries') and \
-        self.compiler.dll_libraries is None:
-      self.compiler.dll_libraries = []
-
-    build_ext_base.build_extension(self, ext)
-
-
 def setup_extension(ext_name, pc_file):
   """Sets up a given C++ extension"""
 
@@ -170,9 +144,12 @@ def setup_extension(ext_name, pc_file):
   if BOB['soversion'].lower() == 'off':
     runtime_library_dirs = library_dirs
 
+  path_to_library = ext_name.rsplit('.', 1)[0]
+  path_to_library = path_to_library.replace('.', os.sep)
+
   return Extension(
       ext_name,
-      sources=[],
+      sources=[os.path.join(path_to_library, 'main.cc')],
       language="c++",
       include_dirs=include_dirs + [numpy.get_include()],
       library_dirs=library_dirs,
@@ -224,7 +201,6 @@ setup(
       setup_extension('bob.machine._machine', 'bob-machine-py'),
       setup_extension('bob.trainer._trainer', 'bob-trainer-py'),
       ],
-    cmdclass = {'build_ext': build_ext},
 
     entry_points={
       'console_scripts': [

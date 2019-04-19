@@ -24,7 +24,6 @@ set(src
    "whitening.cc"
    "wccn.cc"
    "cost.cc"
-   "main.cc"
    )
 
 if(WITH_LIBSVM)

@@ -46,6 +46,7 @@ requirements:
     - python {{ python_version }}
     - scipy {{ scipy }}
     - setuptools {{ setuptools }}
+    - sphinx {{ sphinx }}
     - sqlalchemy {{ sqlalchemy }}
     - sqlite {{ sqlite }}
     - vlfeat {{ vlfeat }}
@@ -70,14 +71,12 @@ requirements:
     - python {{ python_version }}.*
     - scipy
     - setuptools
+    - sphinx {{ sphinx }}.*
     - sqlalchemy
     - sqlite {{ sqlite }}.*
     - vlfeat {{ vlfeat }}.*
 
 test:
-  requires:
-    - sphinx {{ sphinx }}
-
   imports:
     - bob
 

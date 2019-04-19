@@ -14,7 +14,7 @@ build:
     - make VERBOSE=1 test
     - make VERBOSE=1 install
     - cd {{ environ.get('RECIPE_DIR') + '/../python' }}
-    - echo "#### PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig ##"
+    - echo "PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig"
     - ls -l ${PREFIX}/lib/pkgconfig
     - PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig python setup.py install --single-version-externally-managed --record record.txt
     - cd ..

@@ -139,6 +139,8 @@ def setup_extension(ext_name, pc_file):
   library_dirs=[k for k in library_dirs if os.path.exists(k)]
   include_dirs=pc.get('include_dirs', [])
   include_dirs=[k for k in include_dirs if os.path.exists(k)]
+  extra_compile_args=pc.get('extra_compile_args', [])
+  extra_compile_args.append('-pthread')
 
   runtime_library_dirs = None
   if BOB['soversion'].lower() == 'off':
@@ -155,6 +157,7 @@ def setup_extension(ext_name, pc_file):
       library_dirs=library_dirs,
       runtime_library_dirs=runtime_library_dirs,
       libraries=pc['libraries'],
+      extra_compile_args=extra_compile_args,
       )
 
 

@@ -117,8 +117,6 @@ def bob_variables():
     raise RuntimeError, 'Cannot retrieve Bob version from pkg-config:\n%s' % \
         output
 
-  kw['soversion'] = get_var('soversion')
-
   kw['base_libdir'] = get_var('libdir')
   kw['base_includedir'] = get_var('includedir')
 
@@ -126,6 +124,30 @@ def bob_variables():
 
 # Retrieve central, global variables from Bob's C++ build
 BOB = bob_variables()
+
+
+def uniq(seq, idfun=None):
+  """Very fast, order preserving uniq function"""
+
+  # order preserving
+  if idfun is None:
+      def idfun(x): return x
+  seen = {}
+  result = []
+  for item in seq:
+      marker = idfun(item)
+      # in old Python versions:
+      # if seen.has_key(marker)
+      # but in new ones:
+      if marker in seen: continue
+      seen[marker] = 1
+      result.append(item)
+  return result
+
+
+def uniq_paths(seq):
+  """Uniq'fy a list of paths taking into consideration their real paths"""
+  return uniq([os.path.realpath(k) for k in seq if os.path.exists(k)])
 
 
 def setup_extension(ext_name, pc_file):
@@ -136,15 +158,11 @@ def setup_extension(ext_name, pc_file):
   pc = pkgconfig(pc_file + '%d%d' % sys.version_info[:2])
 
   library_dirs=pc.get('library_dirs', [])
-  library_dirs=[k for k in library_dirs if os.path.exists(k)]
+  library_dirs=uniq_paths([k for k in library_dirs if os.path.exists(k)])
   include_dirs=pc.get('include_dirs', [])
-  include_dirs=[k for k in include_dirs if os.path.exists(k)]
+  include_dirs=uniq_paths([k for k in include_dirs if os.path.exists(k)])
   extra_compile_args=pc.get('extra_compile_args', [])
   extra_compile_args.append('-pthread')
-
-  runtime_library_dirs = None
-  if BOB['soversion'].lower() == 'off':
-    runtime_library_dirs = library_dirs
 
   path_to_library = ext_name.rsplit('.', 1)[0]
   path_to_library = path_to_library.replace('.', os.sep)
@@ -155,7 +173,7 @@ def setup_extension(ext_name, pc_file):
       language="c++",
       include_dirs=include_dirs + [numpy.get_include()],
       library_dirs=library_dirs,
-      runtime_library_dirs=runtime_library_dirs,
+      runtime_library_dirs=library_dirs,
       libraries=pc['libraries'],
       extra_compile_args=extra_compile_args,
       )

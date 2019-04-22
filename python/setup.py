@@ -22,6 +22,7 @@
 
 import os
 import sys
+import platform
 from setuptools.command.build_ext import build_ext as build_ext_base
 from setuptools import Extension
 import subprocess
@@ -164,6 +165,12 @@ def setup_extension(ext_name, pc_file):
   extra_compile_args=pc.get('extra_compile_args', [])
   extra_compile_args.append('-pthread')
 
+  if platform.system() == 'Darwin':
+    sdkroot = os.environ.get('SDKROOT', '/opt/MacOSX10.9.sdk')
+    if sdkroot:
+      extra_compile_args = ['-isysroot', sdkroot] + extra_compile_args
+    extra_compile_args += ['-Wno-#warnings']
+
   path_to_library = ext_name.rsplit('.', 1)[0]
   path_to_library = path_to_library.replace('.', os.sep)
 
@@ -172,7 +179,7 @@ def setup_extension(ext_name, pc_file):
       sources=[os.path.join(path_to_library, 'main.cc')],
       language="c++",
       include_dirs=include_dirs + [numpy.get_include()],
-      library_dirs=library_dirs,
+      library_dirs=None,
       runtime_library_dirs=library_dirs,
       libraries=pc['libraries'],
       extra_compile_args=extra_compile_args,

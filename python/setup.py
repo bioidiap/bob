@@ -179,7 +179,7 @@ def setup_extension(ext_name, pc_file):
       sources=[os.path.join(path_to_library, 'main.cc')],
       language="c++",
       include_dirs=include_dirs + [numpy.get_include()],
-      library_dirs=None,
+      library_dirs=library_dirs,
       runtime_library_dirs=library_dirs,
       libraries=pc['libraries'],
       extra_compile_args=extra_compile_args,

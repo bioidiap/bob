@@ -24,11 +24,13 @@
 .. _blitz++: http://www.oonumerics.org/blitz
 .. _bob's idiap guide: https://gitlab.idiap.ch/bob/bob/wikis/Using-Bob-at-Idiap
 .. _bob's website: https://www.idiap.ch/software/bob
+.. _bob: https://www.idiap.ch/software/bob
 .. _boost: http://www.boost.org
 .. _buildbot: http://trac.buildbot.net
 .. _buildout: http://pypi.python.org/pypi/zc.buildout/
 .. _c++: http://www2.research.att.com/~bs/C++.html
 .. _cmake: http://www.cmake.org
+.. _conda: https://docs.conda.io/en/latest/
 .. _doxygen: http://www.doxygen.org
 .. _dvipng: http://savannah.nongnu.org/projects/dvipng/
 .. _ffmpeg: http://ffmpeg.org

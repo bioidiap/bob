@@ -1,7 +1,7 @@
 .. vim: set fileencoding=utf-8 :
 .. Wed Apr 17 21:23:40 CEST 2019
 
-.. image:: https://img.shields.io/badge/docs-stable-yellow.svg
+.. image:: https://img.shields.io/badge/docs-1.2-yellow.svg
    :target: https://www.idiap.ch/software/bob/docs/bob/bob/1.2/index.html
 .. image:: https://gitlab.idiap.ch/bob/bob/badges/1.2/build.svg
    :target: https://gitlab.idiap.ch/bob/bob/commits/1.2
@@ -27,7 +27,11 @@ Installation
 To install this version of Bob_, first install miniconda_, then use the
 following command to create an environment for Bob_::
 
-  $ conda create -n bobv1 -c https://www.idiap.ch/software/bob/conda bob=1
+  $ conda create -n bob12x -c https://www.idiap.ch/software/bob/conda bob=1.2
+  $ conda activate bob12x
+  $ python
+  ...
+  >>> import bob  ##enjoy!
 
 
 Contact

@@ -24,9 +24,15 @@
 
 We offer pre-compiled binary installations of Bob using `conda`_ for Linux
 64-bit operating systems.  To install this version of Bob_, first install
-miniconda_, then use the following command to create an environment for Bob_::
+miniconda_, then use the following command to create an environment for Bob_:
 
-  $ conda create -n bobv1 -c https://www.idiap.ch/software/bob/conda bob=1
+.. code-block:: sh
+
+  $ conda create -n bob12x -c https://www.idiap.ch/software/bob/conda bob=1.2
+  $ conda activate bob12x
+  $ python
+  ...
+  >>> import bob  ##enjoy!
 
 
 On the other hand, if the supported binary installation methods are not

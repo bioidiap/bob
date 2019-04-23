@@ -27,7 +27,11 @@ Installation
 To install this version of Bob_, first install miniconda_, then use the
 following command to create an environment for Bob_::
 
-  $ conda create -n bobv1 -c https://www.idiap.ch/software/bob/conda bob=1
+  $ conda create -n bob12x -c https://www.idiap.ch/software/bob/conda bob=1.2
+  $ conda activate bob12x
+  $ python
+  ...
+  >>> import bob  ##enjoy!
 
 
 Contact

@@ -28,27 +28,10 @@
 .. instructions. Thanks.
 .. ****************************** BIG WARNING ********************************
 
-Obtaining the code
-------------------
-
-To compile |project| locally you need to first set your mind on what to
-work with. You can choose between a released stable version from
-`our release wiki page <https://github.com/idiap/bob/wiki/Releases>`_ or
-checkout and build yourself as explained further below.
-
-.. warning::
-
-  Make sure you read and install all requirements defined in
-  :doc:`Dependencies`, prior to compiling and using |project|.
-
-Grab a release tarball and change into the directory of your choice, let's say
-``workdir``:
+Grab a release tarball and change into its directory:
 
 .. code-block:: sh
 
-  $ mkdir workdir
-  $ cd workdir
-  # getting version 1.2.0 as a tarball
   $ wget https://gitlab.idiap.ch/bob/bob/-/archive/v1.2.3/bob-v1.2.3.tar.bz2
   $ tar xfj bob-1.2.3.tar.bz2
   $ cd bob-v1.2.3

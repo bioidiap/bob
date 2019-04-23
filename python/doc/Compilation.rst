@@ -49,9 +49,10 @@ Grab a release tarball and change into the directory of your choice, let's say
   $ mkdir workdir
   $ cd workdir
   # getting version 1.2.0 as a tarball
-  $ wget http://www.idiap.ch/software/bob/packages/bob-1.2.0.tar.gz
-  $ tar xvfz bob-1.2.0.tar.gz
-  $ cd bob-1.2.0
+  $ wget https://gitlab.idiap.ch/bob/bob/-/archive/v1.2.3/bob-v1.2.3.tar.bz2
+  $ tar xfj bob-1.2.3.tar.bz2
+  $ cd bob-v1.2.3
+
 
 .. _section-checkout:
 
@@ -61,65 +62,24 @@ Cloning |project|
 If you decide to checkout the latest sources from our git repository, do the
 following at your shell prompt:
 
+
 .. code-block:: sh
 
-   $ git clone https://github.com/idiap/bob
+   $ git clone --branch=1.2 https://gitlab.idiap.ch/bob/bob
+   $ cd bob
+
 
 Compiling the code
 ------------------
 
-Just execute:
+Follow build instructions at ``conda/meta.yaml``, it is our reference build
+system.  You may optionally build the release using ``conda-build``, which will
+also test it:
 
 .. code-block:: sh
 
-   $ cd <bob-root>
-   $ mkdir build
-   $ cd build
-   $ cmake -DCMAKE_BUILD_TYPE=Release ..
-   # run the whole build
-   $ make
+   $ conda-build --python=2.7 conda
 
-After building, you can execute all unit tests to make sure the build is (as)
-reliable (as it can be):
-
-.. code-block:: sh
-
-  $ make test
-  # if you prefer, you can directly use ctest
-  $ ctest -V
-  # to execute Python tests:
-  $ make nosetests
-  # you can also run the built-in tests at the documentation
-  $ make sphinx-doctest
-
-The documentation can be generated with other specific make targets:
-
-.. code-block:: sh
-
-   $ make doxygen #generates the C++ API documentation in html format
-   $ make sphinx #generates the HTML user guide
-   $ make sphinx-latex #generates the PDF user guide
-
-You don't need to to install |project| to use it. If you wish to do it though,
-you need to do it by calling ``make`` again:
-
-.. code-block:: sh
-
-  $ make install
-  $ make install-doxygen
-  $ make install-sphinx
-
-The installation base directory is set to cmake's default, which is usually on
-an administrator restricted area, such as ``/usr/local``. If you wish to
-install the build in a different directory, you need to tell ``cmake`` the
-installation prefix:
-
-.. code-block:: sh
-
-  # installs on /my/preferred/path
-  $ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/my/preferred/path ..
-  $ make
-  $ make install
 
 Influential CMake Variables
 ===========================
@@ -133,12 +93,12 @@ Some variables that may be handy:
  * `WITH_MKL`: tries to compile against the Intel MKL instead of the standard
    BLAS/LAPACK installation. You should provide the path to the MKL such as
    `-DWITH_MKL=/PATH/TO/MKL/LIB`.
- * `WITH_QT4`: makes Qt4 detection obligatory.
  * `WITH_LIBSVM`: makes LibSVM detection obligatory.
  * `WITH_VLFEAT`: makes VLFeat detection obligatory.
  * `WITH_MATIO`: makes MatIO detection obligatory.
  * `WITH_FFMPEG`: makes FFmpeg detection obligatory.
  * `WITH_PERFTOOLS`: makes Google Perftools detection obligatory.
+
 
 Troubleshooting compilation
 ===========================
@@ -150,6 +110,7 @@ possibilities you are still unable to compile |project|, please
 `submit a new bug report`_ in our tracking system. At this time make sure to
 specify your OS version and the versions of the external dependencies so we can
 try to reproduce the failure.
+
 
 Eager for more functionality?
 =============================

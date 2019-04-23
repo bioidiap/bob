@@ -1,18 +1,18 @@
 .. vim: set fileencoding=utf-8 :
 .. Andre Anjos <andre.anjos@idiap.ch>
-.. Tue 20 Mar 2012 08:57:32 CET 
-.. 
+.. Tue 20 Mar 2012 08:57:32 CET
+..
 .. Copyright (C) 2011-2013 Idiap Research Institute, Martigny, Switzerland
-.. 
+..
 .. This program is free software: you can redistribute it and/or modify
 .. it under the terms of the GNU General Public License as published by
 .. the Free Software Foundation, version 3 of the License.
-.. 
+..
 .. This program is distributed in the hope that it will be useful,
 .. but WITHOUT ANY WARRANTY; without even the implied warranty of
 .. MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 .. GNU General Public License for more details.
-.. 
+..
 .. You should have received a copy of the GNU General Public License
 .. along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -22,7 +22,7 @@
 
 .. _argparse: http://code.google.com/p/argparse/
 .. _blitz++: http://www.oonumerics.org/blitz
-.. _bob's idiap guide: http://github.com/idiap/bob/wiki/Using-Bob-at-Idiap
+.. _bob's idiap guide: https://gitlab.idiap.ch/bob/bob/wikis/Using-Bob-at-Idiap
 .. _bob's website: https://www.idiap.ch/software/bob
 .. _boost: http://www.boost.org
 .. _buildbot: http://trac.buildbot.net
@@ -54,6 +54,7 @@
 .. _matio: http://matio.sourceforge.net
 .. _matlab: http://www.mathworks.ch/products/matlab/
 .. _matplotlib: http://matplotlib.sourceforge.net
+.. _miniconda: https://docs.conda.io/en/latest/miniconda.html
 .. _numpy: http://numpy.scipy.org
 .. _nose: http://nose.readthedocs.org
 .. _opencv: http://opencv.willowgarage.com/
@@ -61,14 +62,14 @@
 .. _pillow: https://pypi.python.org/pypi/Pillow/
 .. _python: http://www.python.org
 .. _pypi: http://pypi.python.org
-.. _qt4: http://qt.nokia.com/ 
-.. _satellite packages: https://github.com/idiap/bob/wiki/Satellite-Packages
+.. _qt4: http://qt.nokia.com/
+.. _satellite packages: https://www.idiap.ch/software/bob/packages
 .. _scipy: http://www.scipy.org
 .. _setuptools: http://trac.edgewall.org/wiki/setuptools
 .. _sphinx: http://sphinx.pocoo.org
 .. _sqlalchemy: http://www.sqlalchemy.org/
 .. _sqlite: http://www.sqlite.org/
-.. _submit a new bug report: https://github.com/idiap/bob/issues
+.. _submit a new bug report: https://www.idiap.ch/software/bob/issues
 .. _torch 3 vision: http://torch3vision.idiap.ch
 .. _torch 3: http://www.torch.ch
 .. _torch 5: http://torch5.sourceforge.net

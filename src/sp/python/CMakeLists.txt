@@ -13,7 +13,6 @@ set(src
    "fft.cc"
    "conv.cc"
    "Quantization.cc"
-   "main.cc"
    )
 
 # Define the library, compilation and linkage options

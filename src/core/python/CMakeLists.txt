@@ -13,7 +13,7 @@ if(WITH_PERFTOOLS)
   find_path(GOOGLE_PERFTOOLS_INCLUDE_2 NAMES google/tcmalloc.h)
   find_library(GOOGLE_PERFTOOLS_LIBRARY NAMES profiler)
 
-  if(GOOGLE_PERFTOOLS_INCLUDE_1 AND GOOGLE_PERFTOOLS_INCLUDE_2 AND 
+  if(GOOGLE_PERFTOOLS_INCLUDE_1 AND GOOGLE_PERFTOOLS_INCLUDE_2 AND
      GOOGLE_PERFTOOLS_LIBRARY)
     list(APPEND incdir "${GOOGLE_PERFTOOLS_INCLUDE_1}")
     list(APPEND incdir "${GOOGLE_PERFTOOLS_INCLUDE_2}")
@@ -24,7 +24,7 @@ if(WITH_PERFTOOLS)
     message(FATAL_ERROR "Google Perftools has not been found. use '-DWITH_PERFTOOLS=OFF' to disable this check.")
   endif()
 endif()
-  
+
 # Python bindings
 set(src
    "exception.cc"
@@ -37,7 +37,6 @@ set(src
    "blitz_numpy.cc"
    "ndarray_numpy.cc"
    "numpy_scalars.cc"
-   "main.cc"
    )
 
 # Define the library, compilation and linkage options

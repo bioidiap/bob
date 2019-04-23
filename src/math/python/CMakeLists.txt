@@ -13,7 +13,6 @@ set(src
    "stats.cc"
    "histogram.cc"
    "pavx.cc"
-   "main.cc"
    )
 
 # Define the library, compilation and linkage options

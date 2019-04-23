@@ -64,7 +64,7 @@ Guidelines on building against Google perftools
    Perftools, during its configuration, by using the flag ``WITH_PERFTOOLS``.
    For example:
 
-   .. code-block:: cmake
+   .. code-block:: sh
 
      $ cmake -DWITH_PERFTOOLS=ON -DCMAKE_BUILD_TYPE=Debug ..
 

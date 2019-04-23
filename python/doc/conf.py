@@ -212,6 +212,7 @@ rst_epilog = """
 # We want to remove all private (i.e. _. or __.__) members
 # that are not in the list of accepted functions
 accepted_private_functions = ['__call__']
+import sphinx
 
 def member_function_test(app, what, name, obj, skip, options):
   # test if we have a private function

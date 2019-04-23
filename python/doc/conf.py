@@ -30,34 +30,30 @@ import pkg_resources
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
+needs_sphinx = '1.3'
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
   'sphinx.ext.todo',
   'sphinx.ext.coverage',
-  'sphinx.ext.imgmath',
+  'sphinx.ext.mathjax',
   'sphinx.ext.ifconfig',
   'sphinx.ext.autodoc',
   'sphinx.ext.autosummary',
   'sphinx.ext.doctest',
   'sphinx.ext.intersphinx',
+  'sphinx.ext.napoleon',
+  'sphinx.ext.viewcode',
   #'matplotlib.sphinxext.plot_directive',
   'bob.sphinxext.plot', # ours add source copying to install directory
   ]
 
-# The viewcode extension appeared only on Sphinx >= 1.0.0
-import sphinx
-if sphinx.__version__ >= "1.0":
-  extensions.append('sphinx.ext.viewcode')
-
 # Always includes todos
 todo_include_todos = True
 
-# If we are on OSX, the 'dvipng' path maybe different
-dvipng_osx = '/opt/local/libexec/texlive/binaries/dvipng'
-if os.path.exists(dvipng_osx): pngmath_dvipng = dvipng_osx
+# Create numbers on figures with captions
+numfig = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -127,8 +123,8 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-if sphinx.__version__ >= "1.0":
-  html_theme = 'nature'
+import sphinx_rtd_theme
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -136,7 +132,7 @@ if sphinx.__version__ >= "1.0":
 #html_theme_options = {}
 
 # Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -147,7 +143,7 @@ if sphinx.__version__ >= "1.0":
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'img/bob+reflection-sphinx.png'
+html_logo = 'img/logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -157,7 +153,7 @@ html_favicon = 'img/favicon.ico'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+#html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -204,61 +200,14 @@ html_static_path = ['_static']
 htmlhelp_basename = 'bobdoc'
 
 
-# -- Options for LaTeX output --------------------------------------------------
-
-# The paper size ('letter' or 'a4').
-latex_paper_size = 'a4'
-
-# The font size ('10pt', '11pt' or '12pt').
-latex_font_size = '10pt'
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title, author, documentclass [howto/manual]).
-latex_documents = [
-  ('index', 'bobman.tex', u'Bob',
-   u'Biometrics Group, Idiap Research Institute', 'manual'),
-]
-
-# The name of an image file (relative to this directory) to place at the top of
-# the title page.
-latex_logo = 'img/bob.pdf'
-
-# For "manual" documents, if this is true, then toplevel headings are parts,
-# not chapters.
-#latex_use_parts = False
-
-# If true, show page references after internal links.
-#latex_show_pagerefs = False
-
-# If true, show URL addresses after external links.
-#latex_show_urls = False
-
-# Additional stuff for the LaTeX preamble.
-#latex_preamble = ''
-
-# Documents to append as an appendix to all manuals.
-#latex_appendices = []
-
-# If false, no module index is generated.
-#latex_domain_indices = True
+# -- Post configuration --------------------------------------------------------
 
 # Included after all input documents
 rst_epilog = """
-.. Some variables
 .. |project| replace:: Bob
-.. |bobweb| replace:: https://www.idiap.ch/software/bob
-.. |current-year| date:: %%Y
 .. |version| replace:: %s
+.. |current-year| date:: %%Y
 """ % (version,)
-
-# -- Options for manual page output --------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'bob', u'Bob Documentation', [u'Idiap Research Institute'], 1)
-]
-
 
 # We want to remove all private (i.e. _. or __.__) members
 # that are not in the list of accepted functions
@@ -303,11 +252,6 @@ if has_new_boost:
   autosummary_generate = glob.glob('*/*.rst')
 else:
   autosummary_generate = False
-try:
-  __import__('bob.visioner')
-  has_visioner = True
-except ImportError:
-  has_visioner = False
 
 def smaller_than(v1, v2):
   """Compares scipy/numpy version numbers"""
@@ -361,5 +305,4 @@ def setup(app):
   app.connect('autodoc-skip-member', member_function_test)
   app.add_config_value('bob_modules', bob_modules, True)
   app.add_config_value('has_libsvm', has_libsvm, True)
-  app.add_config_value('has_visioner', has_visioner, True)
   app.add_config_value('has_new_boost', has_new_boost, True)

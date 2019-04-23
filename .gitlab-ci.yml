@@ -95,7 +95,7 @@ build_linux_27:
     - python3 bootstrap.py channel base
     - source ${CONDA_ROOT}/etc/profile.d/conda.sh
     - conda activate base
-    - bdt ci deploy -vv
+    - bdt ci deploy -vv --no-latest
     - bdt ci clean -vv
   dependencies:
     - build_linux_27

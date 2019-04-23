@@ -76,11 +76,16 @@ requirements:
     - vlfeat {{ vlfeat }}.*
 
 test:
+  requires:
+    - nose
+    - coverage
+    - sphinx_rtd_theme
+
   imports:
     - bob
 
   commands:
-    - nosetests -sv {{ name }}
+    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }}
     - sphinx-build ${PREFIX}/share/doc/{{ name }}/doc sphinx
     - if [ -n "${CI_PROJECT_DIR}" ]; then mv sphinx "${CI_PROJECT_DIR}/"; fi
     - sphinx-build -b doctest ${PREFIX}/share/doc/{{ name }}/doc sphinx

@@ -7,7 +7,7 @@ package:
   version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
 
 build:
-  number: 0
+  number: {{ environ.get('BOB_BUILD_NUMBER', 0) }}
   script:
     - cmake -DCMAKE_BUILD_TYPE={{ build_type }} -DCMAKE_PREFIX_PATH=${PREFIX} -DCMAKE_INSTALL_PREFIX=${PREFIX} -DBOOST_ROOT=${PREFIX} -DPYTHON_VERSION={{ python_version }} -DBOB_VERSION={{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }} -DWITH_QT4=OFF {{ environ.get('RECIPE_DIR') + '/..' }}
     - make VERBOSE=1 all

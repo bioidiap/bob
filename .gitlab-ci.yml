@@ -42,19 +42,6 @@ stages:
     key: "linux-cache"
 
 
-.build_macosx_template: &macosx_build_job
-  <<: *build_job
-  tags:
-    - macosx
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - ${CONDA_ROOT}/conda-bld/osx-64/*.tar.bz2
-  cache:
-    <<: *build_caches
-    key: "macosx-cache"
-
-
 build_linux_27:
   <<: *linux_build_job
   variables:
@@ -70,12 +57,6 @@ build_linux_27:
     expire_in: 1 week
     paths:
       - ${CONDA_ROOT}/conda-bld/linux-64/*.tar.bz2
-
-
-build_macosx_27:
-  <<: *macosx_build_job
-  variables:
-    PYTHON_VERSION: "2.7"
 
 
 # Test targets (not normally used)
@@ -105,15 +86,6 @@ build_macosx_27:
     key: "linux-cache"
 
 
-.test_macosx_template: &macosx_test_job
-  <<: *test_job
-  tags:
-    - macosx
-  cache:
-    <<: *test_caches
-    key: "macosx-cache"
-
-
 # Deploy targets
 .deploy_template: &deploy_job
   stage: deploy
@@ -126,7 +98,6 @@ build_macosx_27:
     - bdt ci clean -vv
   dependencies:
     - build_linux_27
-    - build_macosx_27
   tags:
     - docker
   cache: &build_caches

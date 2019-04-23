@@ -19,7 +19,7 @@ stages:
     - python3 bootstrap.py -vv channel base
     - source ${CONDA_ROOT}/etc/profile.d/conda.sh
     - conda activate base
-    - bdt build -vv --ci --stable --variant-config-files=conda/conda_build_config.yaml --python=${PYTHON_VERSION} conda
+    - bdt ci build -vv
     - bdt ci clean -vv
   cache: &build_caches
     paths:
@@ -51,7 +51,7 @@ build_linux_27:
     - python3 bootstrap.py -vv channel base
     - source ${CONDA_ROOT}/etc/profile.d/conda.sh
     - conda activate base
-    - bdt build -vv --ci --stable --variant-config-files=conda/conda_build_config.yaml --python=${PYTHON_VERSION} conda
+    - bdt ci build -vv
     - bdt ci clean -vv
   artifacts:
     expire_in: 1 week

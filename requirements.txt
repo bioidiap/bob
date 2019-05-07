@@ -92,3 +92,4 @@ bob.ip.tensorflow_extractor
 bob.ip.caffe_extractor
 bob.bio.caffe_face
 bob.fusion.base
+bob.db.fargo

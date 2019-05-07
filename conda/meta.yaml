@@ -119,6 +119,7 @@ requirements:
     - bob.ip.caffe_extractor  # [linux]
     - bob.bio.caffe_face  # [linux]
     - bob.fusion.base
+    - bob.db.fargo
   run:
     - python
     - setuptools

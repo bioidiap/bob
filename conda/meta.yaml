@@ -136,7 +136,7 @@ test:
     - export SDKROOT="{{ SDKROOT }}"  # [osx]
     - export CONDA_BUILD_SYSROOT="{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     - export MACOSX_DEPLOYMENT_TARGET="{{ MACOSX_DEPLOYMENT_TARGET }}"  # [osx]
-    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }}
+    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }} --exclude=bob.extension.test_extensions --exclude=bob.extension.test_cmake:test_library
     - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
     - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]

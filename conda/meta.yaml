@@ -132,13 +132,14 @@ test:
   imports:
     - {{ name }}
   commands:
+    # fix for the CONDA_BUILD_SYSROOT variable missing at test time
+    - export CONDA_BUILD_SYSROOT={{ CONDA_BUILD_SYSROOT }}  # [osx]
+    - export MACOSX_DEPLOYMENT_TARGET={{ MACOSX_DEPLOYMENT_TARGET }}  # [osx]
     - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }}
     - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
     - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
-    # fix for the CONDA_BUILD_SYSROOT variable missing at test time
-    - export CONDA_BUILD_SYSROOT={{ CONDA_BUILD_SYSROOT }}  # [osx]
   requires:
     - bob-devel {{ bob_devel }}.*
     - nose

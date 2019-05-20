@@ -1,3 +1,5 @@
+# The main copy of this list is in bob-devel. Keep them synced please.
+{% set nopin = ['ca-certificates', 'certifi', 'openssl', 'libstdcxx-ng', 'libgcc-ng', 'libcxx', 'libcxxabi'] %}
 {% set name = 'bob' %}
 {% set project_dir = environ.get('RECIPE_DIR') + '/..' %}
 
@@ -125,7 +127,9 @@ requirements:
     - setuptools
   run_constrained:
   {% for package in resolved_packages('host') %}
+  {% if package.split()[0] not in nopin %}
     - {{ package }}
+  {% endif %}
   {% endfor %}
 
 test:

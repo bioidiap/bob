@@ -33,6 +33,8 @@ bob.ip.flandmark
 gridtk
 bob.ip.qualitymeasure
 bob.ip.skincolorfilter
+bob.ip.facelandmarks
+bob.ip.dlib
 bob.ip.mtcnn
 bob.db.arface
 bob.db.asvspoof
@@ -42,6 +44,7 @@ bob.db.avspoof
 bob.db.banca
 bob.db.biosecure
 bob.db.biosecurid.face
+bob.db.casia_fasd
 bob.db.casme2
 bob.db.caspeal
 bob.db.cohface
@@ -68,12 +71,15 @@ bob.db.xm2vts
 bob.db.youtube
 bob.db.pericrosseye
 bob.db.maskattack
+bob.db.casiasurf
 bob.bio.base
 bob.bio.gmm
 bob.bio.face
 bob.bio.spear
 bob.bio.video
 bob.bio.vein
+bob.bio.face_ongoing
+bob.bio.htface
 bob.db.voxforge
 bob.db.ijba
 bob.rppg.base
@@ -81,6 +87,7 @@ bob.pad.base
 bob.pad.face
 bob.pad.voice
 bob.pad.vein
+bob.fusion.base
 bob.db.oulunpu
 bob.db.uvad
 bob.db.cuhk_cufs
@@ -88,8 +95,9 @@ bob.db.cbsr_nir_vis_2
 bob.db.nivl
 bob.db.pola_thermal
 bob.db.cuhk_cufsf
+bob.db.ldhf
 bob.ip.tensorflow_extractor
 bob.ip.caffe_extractor
 bob.bio.caffe_face
-bob.fusion.base
+bob.learn.tensorflow
 bob.db.fargo

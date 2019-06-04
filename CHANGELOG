@@ -1,8 +1,296 @@
-Compared with our last minor version (2.3.4) this one 2.4.0 has the following 
-minor updates:
-
- - Bumped bob.ap from 2.0.5 to 2.1.0
- - Bumped bob.db.base from 2.0.6 to 2.1.0
- - Bumped bob.extension from 2.3.1 to 2.2.1
- - Deprecated bob.db.verification.utils
- - Added bob.ip.flandmark 2.1.2 as bob core package
+* bob/bob.buildout
+  * minor
+     - bob/bob.buildout!32 New CI using bdt: This MR modifies the file `.gitlab-ci.yml` to use the new bob.devtools as base for the builds and package deployments. It also modifies the conda recipe to allow for package tests without the source.
+     - bob/bob.buildout!33 Try to use cp instead of install for doc-dir installation: This MR implements what @amohammadi has been suggesting instead of using the install command for copying the `doc` directory to `${PREFIX}` during package installation.
+     - bob/bob.buildout!35 Removing MACOSX_DEPLOYMENT_TARGET variable: Fixing https://gitlab.idiap.ch/bob/bob/commit/89a3ca143c58cb152aebfde71ae2bf97920711f9#note_42842
+* bob/bob.extension
+  * patch
+     - bob/bob.extension!89 Improve the error message of click tests by printing the traceback
+     - bob/bob.extension!91 Fix for CONDA_BUILD_SYSROOT variable missing on mac at test time
+     - bob/bob.extension!92 Enables bob auto-completion for bash (closes bob/bob.extension#63): That is it.
+     - bob/bob.extension!75 Fix a bug when commands where invoked multiple times
+     - bob/bob.extension!93 Deploy auto-completion scripts: MR bob/bob.extension!75 did not quite close bob/bob.extension#63 as the activation/deactivation scripts were not properly deployed.
+     - bob/bob.extension!94 Undoes auto-complete on request from @amohammadi: On a request from @amohammadi claiming slowness and problems with his bash/zsh setup, I removed this contributions in this MR.    To surmount slowness, we'd have to re-write some of our cmdline apps to take that into account, avoiding excessive imports.    To issues with zsh/bash setup could be circumvented with a more clever set of activation/deactivation scripts.    Fixes bob/bob.extension#70
+     - bob/bob.extension!95 Improve support for Extension building by acknowledging CXXFLAGS; Sets…: Improves support for Extension building by acknowledging CXXFLAGS; Sets -isysroot for macOS builds
+     - bob/bob.extension!90 Disable sphinx nitpick and Python 2: Fixes bob/bob.extension#67    related to https://gitlab.idiap.ch/bob/bob.nightlies/issues/41
+     - bob/bob.extension!96 [click] Account for cases when exception is None in click results
+     - bob/bob.extension!97 [ci] Update gitlab-ci file (depend on bdt): No description for this MR
+     - bob/bob.extension!98 Update for click 7 upgrade
+     - bob/bob.extension!99 Augments the extension for building C/C++ bindings with tests for SDKROOT and MACOSX_DEPLOYMENT_TARGET environment variables.    This partially addresses shortcomings in the setup of building C/C++ extensions (extensively discussed at bob/bob.devtools#24) by checking such environment variables before C/C++ modules and libraries can be build on macOS systems.  An standard `EnvironmentError` is raised in case these environment variables are not properly set.    Documentation was added explaining how to properly setup the environment on macOS.
+     - bob/bob.extension!100 Document setup of CONDA_BUILD_SYSROOT: This MR properly documents how to setup one's environment to compile on macOS machines.    It closes bob/bob.devtools#24
+* bob/bob.blitz
+  * patch
+* bob/bob.core
+  * patch
+* bob/bob.io.base
+  * patch
+* bob/bob.math
+  * patch
+* bob/bob.measure
+  * minor
+     - bob/bob.measure!89 Add a base class for subplot-based plots
+     - bob/bob.measure!90 Fixing histogram test
+     - bob/bob.measure!91 Fix decimal option in metrics command: Fixes bob/bob.measure#52
+     - bob/bob.measure!43 Resolve "FAR and FRR thresholds are computed even when there is no data support"
+     - bob/bob.measure!92 Fix minimizing threshold: Closes bob/bob.measure#59
+     - bob/bob.measure!93 Click scripts fixes: Improvements and bug fixes to click scripts
+* bob/bob.io.image
+  * patch
+     - bob/bob.io.image!24 Resolve "GIF loading seems to be completely broken": Closes bob/bob.io.image#26
+     - bob/bob.io.image!42 Fix c++ exception throw: Fix a missing `throw` reported by @mguenther on bob/bob.io.image!24.
+     - bob/bob.io.image!43 Fix readout of netpbm images containing empty lines (such as those produced by GIMP): This bug was detected by re-compiling Bob v1, which shipped PGM files containing empty lines (produced by an old version of GIMP).
+* bob/bob.db.base
+  * patch
+* bob/bob.io.video
+  * major
+     - bob/bob.io.video!10 Fixes to multiple issues: This MR closes bob/bob.io.video#6, closes bob/bob.io.video#8 and closes bob/bob.io.video#9.
+     - bob/bob.io.video!13 Frame free fix: The API to free the frames have changed in ffmpeg >= 3.0    Closes bob/bob.io.video#12.
+     - bob/bob.io.video!15 Adds a delete method to reader.iter types: The video reader was not closing the video files  when iteration did not finish all the way to the end.    Fixes bob/bob.io.video#14
+     - bob/bob.io.video!16 Increasing the threshold in the test_memory_leak: Closes bob/bob.io.video#15
+     - bob/bob.io.video!17 Port to ffmpeg 4, disable (libvpx|vp8 and mov) tests: libvpx and vp8 codecs are not working with .mov containers
+* bob/bob.io.matlab
+  * patch
+* bob/bob.io.audio
+  * patch
+* bob/bob.sp
+  * patch
+* bob/bob.ap
+  * patch
+* bob/bob.ip.base
+  * patch
+* bob/bob.ip.color
+  * patch
+* bob/bob.ip.draw
+  * patch
+* bob/bob.ip.gabor
+  * patch
+* bob/bob.learn.activation
+  * patch
+* bob/bob.learn.libsvm
+  * patch
+* bob/bob.learn.linear
+  * patch
+* bob/bob.learn.mlp
+  * patch
+* bob/bob.learn.boosting
+  * patch
+     - bob/bob.learn.boosting!10 Do not build a library to avoid C++ API incompatibilities (see bob/bob.learn.boosting#2): This is not a "fix" to bob/bob.learn.boosting#2, but makes the package work again by avoiding a CMake-library that may have an incompatible C++ ABI.
+* bob/bob.db.iris
+  * patch
+* bob/bob.learn.em
+  * patch
+     - bob/bob.learn.em!16 implemented EM with multiprocessing
+* bob/bob.db.wine
+  * patch
+* bob/bob.db.mnist
+  * patch
+* bob/bob.db.atnt
+  * patch
+* bob/bob.ip.facedetect
+  * patch
+* bob/bob.ip.optflow.hornschunck
+  * patch
+* bob/bob.ip.optflow.liu
+  * patch
+* bob/bob.ip.flandmark
+  * patch
+* bob/gridtk
+  * patch
+     - bob/gridtk!24 Fix submission to gpu queues removing memfree and hvmem settings (causing issues with virtual memory allocation)
+     - bob/gridtk!25 Do not delete the logs of the jobs that are not resubmitted: Fixes bob/gridtk#29
+     - bob/gridtk!26 Do not automatically remove G from the GPU memory requirements: Fixes bob/gridtk#30
+     - bob/gridtk!27 Automatic injection of bob.extension.rc to jinja variables: Fixes bob/gridtk#31
+* bob/bob.ip.qualitymeasure
+  * patch
+     - bob/bob.ip.qualitymeasure!13 added 2 lines for pkg_config: Updated meta.yaml to include pkg_config.
+* bob/bob.ip.skincolorfilter
+  * patch
+* bob/bob.ip.facelandmarks
+  * patch
+* bob/bob.ip.dlib
+  * patch
+     - bob/bob.ip.dlib!14 Fix left eye right eye landmarks: Fixes bob/bob.ip.dlib#7   Also fix plots lines disappearing
+* bob/bob.ip.mtcnn
+  * patch
+     - bob/bob.ip.mtcnn!7 Fixes conda recipe by setting caffe dependence to work on "linux" only: Closes bob/bob.ip.mtcnn#7.    This should solve macos builds.
+* bob/bob.db.arface
+  * patch
+* bob/bob.db.asvspoof
+  * patch
+* bob/bob.db.asvspoof2017
+  * patch
+* bob/bob.db.atvskeystroke
+  * patch
+* bob/bob.db.avspoof
+  * patch
+* bob/bob.db.banca
+  * patch
+* bob/bob.db.biosecure
+  * patch
+* bob/bob.db.biosecurid.face
+  * patch
+* bob/bob.db.casia_fasd
+  * patch
+* bob/bob.db.casme2
+  * patch
+* bob/bob.db.caspeal
+  * patch
+* bob/bob.db.cohface
+  * patch
+* bob/bob.db.frgc
+  * patch
+* bob/bob.db.gbu
+  * patch
+* bob/bob.db.hci_tagging
+  * patch
+* bob/bob.db.ijbc
+  * patch
+* bob/bob.db.kboc16
+  * patch
+* bob/bob.db.lfw
+  * patch
+* bob/bob.db.livdet2013
+  * patch
+* bob/bob.db.mobio
+  * patch
+* bob/bob.db.msu_mfsd_mod
+  * patch
+* bob/bob.db.multipie
+  * patch
+* bob/bob.db.nist_sre12
+  * patch
+* bob/bob.db.putvein
+  * patch
+* bob/bob.db.replay
+  * patch
+     - bob/bob.db.replay!6 Use the SQL class from bob.db.base to benefit from improvements
+* bob/bob.db.replaymobile
+  * patch
+* bob/bob.db.scface
+  * patch
+* bob/bob.db.utfvp
+  * patch
+* bob/bob.db.verafinger
+  * patch
+* bob/bob.db.fv3d
+  * patch
+* bob/bob.db.voicepa
+  * patch
+* bob/bob.db.xm2vts
+  * patch
+* bob/bob.db.youtube
+  * patch
+* bob/bob.db.pericrosseye
+  * patch
+* bob/bob.db.maskattack
+  * patch
+* bob/bob.db.casiasurf
+  * patch
+* bob/bob.bio.base
+  * patch
+     - bob/bob.bio.base!171 Implemented multiple subjects score generation, unknown probes and fixed issues:
+     - bob/bob.bio.base!172 Fix the tests after legend loc option change in bob.measure!89: Depends on bob.measure!89
+* bob/bob.bio.gmm
+  * patch
+* bob/bob.bio.face
+  * patch
+     - bob/bob.bio.face!53 Do not allow upside down faces in FaceCrop by default: Fixes bob/bob.bio.face#33
+     - bob/bob.bio.face!54 Remove bob.ip.dlib annotator: bob.ip.dlib is no longer maintained.
+     - bob/bob.bio.face!52 Add Fargo database: New face recognition database.    We'll merge this as soon as http://gitlab.idiap.ch/bob/bob.db.fargo is public
+     - bob/bob.bio.face!55 added FARGO stuff wherever it was needed: As mentioned here https://gitlab.idiap.ch/bob/bob.bio.face/merge_requests/52#note_42451
+* bob/bob.bio.spear
+  * patch
+     - bob/bob.bio.spear!45 Fix import
+* bob/bob.bio.video
+  * patch
+     - bob/bob.bio.video!37 Keep the order of FrameContainers when saving:
+* bob/bob.bio.vein
+  * patch
+* bob/bob.bio.face_ongoing
+  * patch
+* bob/bob.bio.htface
+  * patch
+* bob/bob.db.voxforge
+  * patch
+* bob/bob.db.ijba
+  * patch
+* bob/bob.rppg.base
+  * patch
+* bob/bob.pad.base
+  * patch
+     - bob/bob.pad.base!54 Use the GridSubplot base class for epsc: Depends on bob.measure!89
+     - bob/bob.pad.base!55 Use the version of scikit-learn that we use for testing: Fixes https://gitlab.idiap.ch/bob/bob.nightlies/-/jobs/149503
+     - bob/bob.pad.base!56 Use the builtin method for converting frame containers to arrays: Fixes bob/bob.pad.base#29, bob/bob.pad.base#18
+     - bob/bob.pad.base!57 Correcting bug when using split_training_data_by_client flag in extractor
+     - bob/bob.pad.base!53 Cross database testing evaluation: Adds a new command `bob pad cross` to evaluate PAD systems in cross database settings
+     - bob/bob.pad.base!58 Fixes bob/bob.pad.base#8 Algorithm.read_toscore_object should not exist
+     - bob/bob.pad.base!59 fix for wrong Axis label with -nG option: fix for wrong Axis label with -nG option, fixes bob/bob.pad.base#28
+     - bob/bob.pad.base!60 Correct apcer calculation: Fixes bob/bob.pad.base#31   Depends on bob.measure!93
+* bob/bob.pad.face
+  * minor
+     - bob/bob.pad.face!73 Fix the broken if logic in ImageQualityMeasure
+     - bob/bob.pad.face!74 Updated BATL HLDI: added rc, skin/non-skin annotations, multi-channel laoding functionalities
+     - bob/bob.pad.face!75 Alignment for LightCNN: Added an alignment method, suitable for LightCNN
+     - bob/bob.pad.face!76 remove missing bootstrap-buildout.py from MANIFEST.in
+     - bob/bob.pad.face!79 Batl hldi update: Updted batl HLDI, and skin, non-skin annotation files.
+     - bob/bob.pad.face!81 MC preprocessor: The pre-processor for multi-channel data, allowing to detect and crop faces, and extract patches from cropped images.
+     - bob/bob.pad.face!80 Patch extraction from images
+     - bob/bob.pad.face!83 Preprocessing and quality check
+     - bob/bob.pad.face!77 Added CASIA-SURF database
+     - bob/bob.pad.face!86 Batl loo protocols: Adds Leave one out protocols to the BATL HLDI.
+     - bob/bob.pad.face!87 Chalearn pad: 1. Fixed small mistake in CASIA-SURF High level PAD BD  2. Added some stuff to a preprocessor (sanity check and logging)
+     - bob/bob.pad.face!88 Added the doc on MLP training using AE embeddings
+     - bob/bob.pad.face!89 Fixed CASIA SURF
+     - bob/bob.pad.face!90 [database] added modification to high-level interface for CASIA-SURF
+     - bob/bob.pad.face!91 Resolve "fix CASIA-SURF tests": Closes bob/bob.pad.face#27
+     - bob/bob.pad.face!95 Move bob.ip.dlib and bob.ip.facelandmarks to test dependencies
+     - bob/bob.pad.face!96 Put bob.ip packages back as run requirements: Fixes bob/bob.pad.face#31
+     - bob/bob.pad.face!97 unit tests: Reverts the unit tests
+* bob/bob.pad.voice
+  * patch
+* bob/bob.pad.vein
+  * patch
+* bob/bob.fusion.base
+  * patch
+     - bob/bob.fusion.base!10 Add Tanh and ZNorm preprocessors: and clean-up code.
+* bob/bob.db.oulunpu
+  * patch
+* bob/bob.db.uvad
+  * patch
+* bob/bob.db.cuhk_cufs
+  * patch
+* bob/bob.db.cbsr_nir_vis_2
+  * patch
+* bob/bob.db.nivl
+  * patch
+* bob/bob.db.pola_thermal
+  * patch
+* bob/bob.db.cuhk_cufsf
+  * patch
+* bob/bob.db.ldhf
+  * patch
+* bob/bob.ip.tensorflow_extractor
+  * patch
+     - bob/bob.ip.tensorflow_extractor!9 Removed plot since this is not used
+     - bob/bob.ip.tensorflow_extractor!10 [facenet] Allow layer name
+     - bob/bob.ip.tensorflow_extractor!11 Created a VGGFace for tensorflow: Added download link
+     - bob/bob.ip.tensorflow_extractor!12 Add MTCNN (tensorflow) model: code and model from https://github.com/blaueck/tf-mtcnn
+* bob/bob.ip.caffe_extractor
+  * patch
+     - bob/bob.ip.caffe_extractor!11 Fix conda recipe by setting caffe dependence to work on "linux" only
+* bob/bob.bio.caffe_face
+  * patch
+* bob/bob.learn.tensorflow
+  * patch
+     - bob/bob.learn.tensorflow!72 [predict_bio] Some fixes and new features: * [predict_bio] fix the broken checkpoint path handling  * [predict_bio] Add an option to save data in FrameContainers  * [simplecnn] fix a bug with slim architecture  * [regressor] add a name scope for train parts  * [test] organize estimator scripts tests  * [eval] improvements to bob tf eval
+     - bob/bob.learn.tensorflow!73 Improvements to eval script
+     - bob/bob.learn.tensorflow!74 Click 7 compatibility
+     - bob/bob.learn.tensorflow!75 A lot of new features: * 905ffc9 small changes: nit, bug fix, small features  * 214fad7 Add scripts for training keras models using keras API  * 13ae391 Add two functions to allow dynamic weighting of samples per batch  * c77e386 Add several extractors which are usefull at inference time  * 0b0055b Add a generic Generator class alternative to BioGenerator  * 18e34e6 Add virtual adversarial training loss  * fcc1042 Fix the euclidean function so that its gradients don't become nan. Also moves the bytes_to_human function  * 5ad23cf Add a hook to add some tensors to the summary  * 9f3b752 Add bob tf predict command  * 09edcdf Fix the image augmentation function  * 9921e12 Add dataset_to_tfrecord and dataset_from_tfrecord  * c3c9e9a Make bob tf cache command useful  * 316eca7 Add a new MLP architecture  * 6809b36 Fixes in inception architectures  * 0ab7c21 setup.py required changes for multiple features
+     - bob/bob.learn.tensorflow!77 Fixed the reuse in some operations of the inception-v1
+     - bob/bob.learn.tensorflow!78 Fix issue with VGG16 from slim.
+     - bob/bob.learn.tensorflow!76 Estimators optimize loss: Fixes bob/bob.learn.tensorflow#78
+* bob/bob.db.fargo
+  * patch
+     - bob/bob.db.fargo!2 Disable Sphinx nitpicky and disable Python 2
+     - bob/bob.db.fargo!3 Resolve "Make it sqlite": Closes bob/bob.db.fargo#1
+     - bob/bob.db.fargo!4 Cleaning: Cleaning the package:  - remove unnecessary scripts (like detecting and cropping faces, extracting eyes center from annotations, etc ...)  - remove unnecessary dependencies

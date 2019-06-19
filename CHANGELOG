@@ -15,6 +15,7 @@
      - bob/bob.extension!98 Update for click 7 upgrade
      - bob/bob.extension!99 Augments the extension for building C/C++ bindings with tests for SDKROOT and MACOSX_DEPLOYMENT_TARGET environment variables.
      - bob/bob.extension!100 Document setup of CONDA_BUILD_SYSROOT: This MR properly documents how to setup one's environment to compile on macOS machines.
+* bob/bob.blitz
   * patch
 * bob/bob.core
   * patch
@@ -109,6 +110,7 @@
 * bob/bob.ip.dlib
   * patch
      - bob/bob.ip.dlib!14 Fix left eye right eye landmarks
+* bob/bob.ip.mtcnn
   * patch
      - bob/bob.ip.mtcnn!7 Fixes conda recipe by setting caffe dependence to work on "linux" only
 * bob/bob.db.arface
@@ -184,7 +186,7 @@
 * bob/bob.db.maskattack
   * patch
 * bob/bob.db.casiasurf
-  * patch
+  * major
 * bob/bob.bio.base
   * patch
      - bob/bob.bio.base!171 Implemented multiple subjects score generation, unknown probes and fixed issues:
@@ -321,7 +323,7 @@
      - bob/bob.learn.tensorflow!78 Fix issue with VGG16 from slim. The slim models adds the hot-encoded in the architecture function
      - bob/bob.learn.tensorflow!76 Estimators optimize loss:
 * bob/bob.db.fargo
-  * patch
+  * major
      - bob/bob.db.fargo!2 Disable Sphinx nitpicky and disable Python 2
      - bob/bob.db.fargo!3 Resolve "Make it sqlite":
      - bob/bob.db.fargo!4 Cleaning the package

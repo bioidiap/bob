@@ -79,7 +79,7 @@ bob.bio.spear == 3.2.3
 bob.bio.video == 3.4.3
 bob.bio.vein == 1.1.3
 bob.bio.face_ongoing == 1.0.3
-bob.bio.htface == 1.0.2
+bob.bio.htface == 1.0.3
 bob.db.voxforge == 2.3.3
 bob.db.ijba == 2.1.2
 bob.rppg.base == 2.0.3

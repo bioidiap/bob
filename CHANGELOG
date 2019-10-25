@@ -293,7 +293,7 @@
   * patch
      - Python 3.7 support
 * bob/bob.db.oulunpu
-  * patch
+  * minor
      - bob/bob.db.oulunpu!6 Add support for external annotations
      - Python 3.7 support
 * bob/bob.db.uvad

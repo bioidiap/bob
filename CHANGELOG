@@ -380,3 +380,10 @@
      - Fixed issue with LICENSE file
 * bob/bob
   * minor
+    - bob/bob.extension!103 Resolve "bob config fixes"
+    - bob/bob.extension!104 [config] added confirmation prompt before deleting anything from global config file
+    - bob.measure!95 Improve threshold calculation in ROC, DET, and Precision and Recall plots
+    - bob.measure!96 Add an alpha option to ROC,DET,EPC figures: Also, enables you to change the default value in `tablefmt` option.
+    - bob/gridtk!29 Automatically remove G from memory commands in GPU queues
+    - bob/bob.pad.base!63 Use plot.roc instead of plot.roc_for_far in vulnerability ROC plots
+    - bob/bob.db.oulunpu!6 Add support for external annotations

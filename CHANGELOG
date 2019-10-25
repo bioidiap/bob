@@ -4,7 +4,7 @@
 * bob/bob.extension
   * v3.1.2 (Sep 16, 2019 15:31)
      * Python 3.7 support
-  * patch
+  * minor
      - bob/bob.extension!103 Resolve "bob config fixes"
      - bob/bob.extension!104 [config] added confirmation prompt before deleting anything from global config file
      - bob/bob.extension!105 Break circular dependency on bob.blitz by moving the related tests to bob.blitz

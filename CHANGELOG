@@ -1,329 +1,389 @@
 * bob/bob.buildout
-  * minor
-     - bob/bob.buildout!32 New CI using bdt
-     - bob/bob.buildout!33 Try to use cp instead of install for doc-dir installation:
-     - bob/bob.buildout!35 Removing MACOSX_DEPLOYMENT_TARGET variable
+  * v2.2.1 (Sep 16, 2019 15:23)
+     * Python 3.7 support
 * bob/bob.extension
-  * patch
-     - bob/bob.extension!89 Improve the error message of click tests by printing the traceback
-     - bob/bob.extension!91 Fix for CONDA_BUILD_SYSROOT variable missing on mac at test time
-     - bob/bob.extension!75 Fix a bug when commands where invoked multiple times
-     - bob/bob.extension!95 Improve support for Extension building by acknowledging CXXFLAGS
-     - bob/bob.extension!90 Disable sphinx nitpick and Python 2
-     - bob/bob.extension!96 [click] Account for cases when exception is None in click results
-     - bob/bob.extension!97 [ci] Update gitlab-ci file (depend on bdt): No description for this MR
-     - bob/bob.extension!98 Update for click 7 upgrade
-     - bob/bob.extension!99 Augments the extension for building C/C++ bindings with tests for SDKROOT and MACOSX_DEPLOYMENT_TARGET environment variables.
-     - bob/bob.extension!100 Document setup of CONDA_BUILD_SYSROOT: This MR properly documents how to setup one's environment to compile on macOS machines.
-* bob/bob.blitz
-  * patch
-* bob/bob.core
-  * patch
-* bob/bob.io.base
-  * patch
-     - bob/bob.io.base!27 Add a function to load features in a memory efficient way
-* bob/bob.math
-  * patch
-* bob/bob.measure
+  * v3.1.2 (Sep 16, 2019 15:31)
+     * Python 3.7 support
   * minor
-     - bob/bob.measure!89 Add a base class for subplot-based plots
-     - bob/bob.measure!90 Fixing histogram test
-     - bob/bob.measure!91 Fix decimal option in metrics command: Fixes bob/bob.measure#52
-     - bob/bob.measure!43 Resolve "FAR and FRR thresholds are computed even when there is no data support"
-     - bob/bob.measure!92 Fix minimizing threshold: Closes bob/bob.measure#59
-     - bob/bob.measure!93 Click scripts fixes: Improvements and bug fixes to click scripts
-     - bob/bob.measure!94 Fix --figsize help message
+     - bob/bob.extension!103 Resolve "bob config fixes"
+     - bob/bob.extension!104 [config] added confirmation prompt before deleting anything from global config file
+     - bob/bob.extension!105 Break circular dependency on bob.blitz by moving the related tests to bob.blitz
+* bob/bob.blitz
+  * v2.0.18 (Sep 16, 2019 15:56)
+     * Python 3.7 support
+  * patch
+     - bob/bob.blitz!12 Move the tests for an example package from bob.extension to here: This breaks the circular dependency of bob.extension and bob.blitz.
+* bob/bob.core
+  * v2.2.3 (Sep 16, 2019 16:09)
+     * Python 3.7 support
+* bob/bob.io.base
+  * v3.0.6 (Sep 16, 2019 17:42)
+     * Python 3.7 support
+* bob/bob.math
+  * v3.1.4 (Sep 16, 2019 17:58)
+     * Python 3.7 support
+* bob/bob.measure
+  * v4.1.1 (Sep 16, 2019 18:19)
+     * bob/bob.measure!95 Improve threshold calculation in ROC, DET, and Precision and Recall plots
+     * bob/bob.measure!96 Add an alpha option to ROC,DET,EPC figures: Also, enables you to change the default value in `tablefmt` option.
+     * Python 3.7 support
 * bob/bob.io.image
-  * patch
-     - bob/bob.io.image!24 Resolve "GIF loading seems to be completely broken"
-     - bob/bob.io.image!42 Fix c++ exception throw
-     - bob/bob.io.image!43 Fix readout of netpbm images containing empty lines (such as those produced by GIMP)
+  * v2.4.4 (Sep 16, 2019 19:46)
+     * Python 3.7 support
 * bob/bob.db.base
-  * patch
+  * v3.0.3 (Sep 17, 2019 04:17)
+     * Python 3.7 support
 * bob/bob.io.video
-  * major
-     - bob/bob.io.video!10 Fixes to multiple issues: This MR closes bob/bob.io.video#6, closes bob/bob.io.video#8 and closes bob/bob.io.video#9.
-     - bob/bob.io.video!13 Frame free fix: The API to free the frames have changed in ffmpeg >= 3.0    Closes bob/bob.io.video#12.
-     - bob/bob.io.video!15 Adds a delete method to reader.iter types
-     - bob/bob.io.video!16 Increasing the threshold in the test_memory_leak
-     - bob/bob.io.video!17 Port to ffmpeg 4, disable (libvpx|vp8 and mov) tests: libvpx and vp8 codecs are not working with .mov containers
+  * patch
+     - Python 3.7 support
 * bob/bob.io.matlab
   * patch
+     - Python 3.7 support
 * bob/bob.io.audio
   * patch
+     - Python 3.7 support
 * bob/bob.sp
   * patch
+     - Python 3.7 support
 * bob/bob.ap
   * patch
+     - Python 3.7 support
 * bob/bob.ip.base
   * patch
+     - Python 3.7 support
 * bob/bob.ip.color
   * patch
+     - Python 3.7 support
 * bob/bob.ip.draw
   * patch
+     - Python 3.7 support
 * bob/bob.ip.gabor
   * patch
+     - Python 3.7 support
 * bob/bob.learn.activation
   * patch
+     - Python 3.7 support
 * bob/bob.learn.libsvm
   * patch
+     - Python 3.7 support
 * bob/bob.learn.linear
   * patch
+     - Python 3.7 support
 * bob/bob.learn.mlp
   * patch
+     - Python 3.7 support
 * bob/bob.learn.boosting
   * patch
-     - bob/bob.learn.boosting!10 Do not build a library to avoid C++ API incompatibilities (see bob/bob.learn.boosting#2)
+     - bob/bob.learn.boosting!10 Do not build a library to avoid C++ API incompatibilities (see bob/bob.learn.boosting#2): This is not a "fix" to bob/bob.learn.boosting#2, but makes the package work again by avoiding a CMake-library that may have an incompatible C++ ABI.
+     - Python 3.7 support
 * bob/bob.db.iris
   * patch
+     - Python 3.7 support
 * bob/bob.learn.em
   * patch
-     - bob/bob.learn.em!16 implemented EM with multiprocessing
+     - bob/bob.learn.em!37 Fixing possible issue with numpy.ndarray.resize: This fixes bob/bob.learn.em#31 for python 3.7
+     - Python 3.7 support
 * bob/bob.db.wine
   * patch
+     - Python 3.7 support
 * bob/bob.db.mnist
   * patch
+     - Python 3.7 support
 * bob/bob.db.atnt
   * patch
+     - bob/bob.db.atnt!11 Using bob.extension download script
+     - Python 3.7 support
 * bob/bob.ip.facedetect
   * patch
+     - Python 3.7 support
 * bob/bob.ip.optflow.hornschunck
   * patch
+     - Python 3.7 support
 * bob/bob.ip.optflow.liu
   * patch
+     - Python 3.7 support
 * bob/bob.ip.flandmark
   * patch
+     - Python 3.7 support
 * bob/gridtk
   * patch
-     - bob/gridtk!24 Fix submission to gpu queues removing memfree and hvmem settings (causing issues with virtual memory allocation)
-     - bob/gridtk!25 Do not delete the logs of the jobs that are not resubmitted: Fixes bob/gridtk#29
-     - bob/gridtk!26 Do not automatically remove G from the GPU memory requirements: Fixes bob/gridtk#30
-     - bob/gridtk!27 Automatic injection of bob.extension.rc to jinja variables: Fixes bob/gridtk#31
-     - bob/gridtk!28 Add a helper function to easily slice into a list in array jobs
+     - bob/gridtk!29 Automatically remove G from memory commands in GPU queues
+     - bob/gridtk!30 Refresh the status of jobs from SGE before listing them
+     - Python 3.7 support
 * bob/bob.ip.qualitymeasure
   * patch
-     - bob/bob.ip.qualitymeasure!13 added 2 lines for pkg_config: Updated meta.yaml to include pkg_config.
+     - Python 3.7 support
 * bob/bob.ip.skincolorfilter
   * patch
+     - Python 3.7 support
 * bob/bob.ip.facelandmarks
   * patch
+     - Python 3.7 support
 * bob/bob.ip.dlib
   * patch
-     - bob/bob.ip.dlib!14 Fix left eye right eye landmarks
+     - Python 3.7 support
 * bob/bob.ip.mtcnn
   * patch
-     - bob/bob.ip.mtcnn!7 Fixes conda recipe by setting caffe dependence to work on "linux" only
+     - Python 3.7 support
 * bob/bob.db.arface
   * patch
+     - Python 3.7 support
 * bob/bob.db.asvspoof
   * patch
+     - Python 3.7 support
 * bob/bob.db.asvspoof2017
   * patch
+     - Python 3.7 support
 * bob/bob.db.atvskeystroke
   * patch
+     - Python 3.7 support
 * bob/bob.db.avspoof
   * patch
+     - Python 3.7 support
 * bob/bob.db.banca
   * patch
+     - Python 3.7 support
 * bob/bob.db.biosecure
   * patch
+     - Python 3.7 support
 * bob/bob.db.biosecurid.face
   * patch
+     - Python 3.7 support
 * bob/bob.db.casia_fasd
   * patch
+     - Python 3.7 support
 * bob/bob.db.casme2
   * patch
+     - Python 3.7 support
 * bob/bob.db.caspeal
   * patch
+     - Python 3.7 support
 * bob/bob.db.cohface
   * patch
+     - Python 3.7 support
 * bob/bob.db.frgc
   * patch
+     - Python 3.7 support
 * bob/bob.db.gbu
   * patch
+     - Python 3.7 support
 * bob/bob.db.hci_tagging
   * patch
-* bob/bob.db.ijbc
-  * patch
-* bob/bob.db.kboc16
-  * patch
-* bob/bob.db.lfw
-  * patch
-* bob/bob.db.livdet2013
-  * patch
-* bob/bob.db.mobio
-  * patch
-* bob/bob.db.msu_mfsd_mod
-  * patch
-* bob/bob.db.multipie
-  * patch
-* bob/bob.db.nist_sre12
-  * patch
-* bob/bob.db.putvein
-  * patch
-* bob/bob.db.replay
-  * patch
-     - bob/bob.db.replay!6 Use the SQL class from bob.db.base to benefit from improvements
-* bob/bob.db.replaymobile
-  * patch
-     - bob/bob.db.replaymobile!11 Improve db interface
-* bob/bob.db.scface
-  * patch
-* bob/bob.db.utfvp
-  * patch
-* bob/bob.db.verafinger
-  * patch
-* bob/bob.db.fv3d
-  * patch
-* bob/bob.db.voicepa
-  * patch
-* bob/bob.db.xm2vts
-  * patch
-* bob/bob.db.youtube
-  * patch
-* bob/bob.db.pericrosseye
-  * patch
-* bob/bob.db.maskattack
-  * patch
-* bob/bob.db.casiasurf
-  * major
-* bob/bob.bio.base
-  * patch
-     - bob/bob.bio.base!171 Implemented multiple subjects score generation, unknown probes and fixed issues:
-     - bob/bob.bio.base!172 Fix the tests after legend loc option change in bob.measure!89
-     - bob/bob.bio.base!175 small fix in help message
-     - bob/bob.bio.base!174 Adds a sort command and small fixes
-* bob/bob.bio.gmm
-  * patch
-     - bob/bob.bio.gmm!22 Adds a threading option to the GMM algorithm
-* bob/bob.bio.face
-  * patch
-     - bob/bob.bio.face!53 Do not allow upside down faces in FaceCrop by default: Fixes bob/bob.bio.face#33
-     - bob/bob.bio.face!54 Remove bob.ip.dlib annotator: bob.ip.dlib is no longer maintained.
-     - bob/bob.bio.face!52 Add Fargo database: New face recognition database.
-     - bob/bob.bio.face!55 added FARGO stuff wherever it was needed:
-     - bob/bob.bio.face!44 Fix the header level of index.rst
-     - bob/bob.bio.face!57 Improve the warning message in FaceCrop
-     - bob/bob.bio.face!56 Improve Replay Mobile interface
-* bob/bob.bio.spear
-  * patch
-     - bob/bob.bio.spear!45 Fix import
-* bob/bob.bio.video
-  * patch
-     - bob/bob.bio.video!37 Keep the order of FrameContainers when saving:
-     - bob/bob.bio.video!39 Improve logging in case of failures in preprocessing
-     - bob/bob.bio.video!38 Add replay mobile interface     
-* bob/bob.bio.vein
-  * patch
-* bob/bob.bio.face_ongoing
-  * patch
-* bob/bob.bio.htface
-  * patch
-* bob/bob.db.voxforge
-  * patch
+     - Python 3.7 support
 * bob/bob.db.ijba
   * patch
+     - Python 3.7 support
+* bob/bob.db.ijbc
+  * patch
+     - Python 3.7 support
+* bob/bob.db.kboc16
+  * patch
+     - Python 3.7 support
+* bob/bob.db.lfw
+  * patch
+     - Python 3.7 support
+* bob/bob.db.livdet2013
+  * patch
+     - Python 3.7 support
+* bob/bob.db.mobio
+  * patch
+     - Python 3.7 support
+* bob/bob.db.msu_mfsd_mod
+  * patch
+     - Python 3.7 support
+* bob/bob.db.multipie
+  * patch
+     - Python 3.7 support
+* bob/bob.db.nist_sre12
+  * patch
+     - Python 3.7 support
+* bob/bob.db.putvein
+  * patch
+     - Python 3.7 support
+* bob/bob.db.replay
+  * patch
+     - Python 3.7 support
+* bob/bob.db.replaymobile
+  * patch
+     - Python 3.7 support
+* bob/bob.db.scface
+  * patch
+     - Python 3.7 support
+* bob/bob.db.utfvp
+  * patch
+     - Python 3.7 support
+* bob/bob.db.verafinger
+  * patch
+     - Python 3.7 support
+* bob/bob.db.fv3d
+  * patch
+     - Python 3.7 support
+* bob/bob.db.hkpu
+  * patch
+     - Python 3.7 support
+* bob/bob.db.thufvdt
+  * patch
+     - Python 3.7 support
+* bob/bob.db.mmcbnu6k
+  * patch
+     - Python 3.7 support
+* bob/bob.db.hmtvein
+  * patch
+     - Python 3.7 support
+* bob/bob.db.voicepa
+  * patch
+     - Python 3.7 support
+* bob/bob.db.xm2vts
+  * patch
+     - Python 3.7 support
+* bob/bob.db.youtube
+  * patch
+     - Python 3.7 support
+* bob/bob.db.pericrosseye
+  * patch
+     - Python 3.7 support
+* bob/bob.db.maskattack
+  * patch
+     - Python 3.7 support
+* bob/bob.db.casiasurf
+  * patch
+     - Python 3.7 support
+* bob/bob.db.fargo
+  * patch
+     - Python 3.7 support
+* bob/bob.bio.base
+  * patch
+     - bob/bob.bio.base!178 Fixed issue with numpy.ndarray.resize py37
+     - Python 3.7 support
+* bob/bob.bio.gmm
+  * patch
+     - Python 3.7 support
+* bob/bob.bio.face
+  * patch
+     - Python 3.7 support
+* bob/bob.bio.spear
+  * patch
+     - Python 3.7 support
+* bob/bob.bio.video
+  * patch
+     - Python 3.7 support
+* bob/bob.bio.vein
+  * patch
+     - Python 3.7 support
+* bob/bob.db.voxforge
+  * patch
+     - Python 3.7 support
 * bob/bob.rppg.base
   * patch
+     - Python 3.7 support
 * bob/bob.pad.base
-  * minor
-     - bob/bob.pad.base!54 Use the GridSubplot base class for epsc: Depends on bob.measure!89
-     - bob/bob.pad.base!55 Use the version of scikit-learn that we use for testing:
-     - bob/bob.pad.base!56 Use the builtin method for converting frame containers to arrays: 
-     - bob/bob.pad.base!57 Correcting bug when using split_training_data_by_client flag in extractor
-     - bob/bob.pad.base!53 Cross database testing evaluation: Adds a new command `bob pad cross` to evaluate PAD systems in cross database settings
-     - bob/bob.pad.base!58 Fixes bob/bob.pad.base#8 Algorithm.read_toscore_object should not exist
-     - bob/bob.pad.base!59 fix for wrong Axis label with -nG option: fix for wrong Axis label with -nG option, fixes bob/bob.pad.base#28
-     - bob/bob.pad.base!60 Correct apcer calculation
-     - bob/bob.pad.base!61 Bpcer threshold criteria: Added criteria for threshold selection based on desired BPCER criteria
-     - bob/bob.pad.base!62 Add a new one class GMM based on bob's GMMs
+  * patch
+     - bob/bob.pad.base!63 Use plot.roc instead of plot.roc_for_far in vulnerability ROC plots
+     - Python 3.7 support
 * bob/bob.pad.face
-  * minor
-     - bob/bob.pad.face!73 Fix the broken if logic in ImageQualityMeasure
-     - bob/bob.pad.face!74 Updated BATL HLDI: added rc, skin/non-skin annotations, multi-channel laoding functionalities
-     - bob/bob.pad.face!75 Alignment for LightCNN: Added an alignment method, suitable for LightCNN
-     - bob/bob.pad.face!76 remove missing bootstrap-buildout.py from MANIFEST.in
-     - bob/bob.pad.face!79 Batl hldi update: Updted batl HLDI, and skin, non-skin annotation files.
-     - bob/bob.pad.face!81 MC preprocessor: The pre-processor for multi-channel data, allowing to detect and crop faces, and extract patches from cropped images.
-     - bob/bob.pad.face!80 Patch extraction from images
-     - bob/bob.pad.face!83 Preprocessing and quality check
-     - bob/bob.pad.face!77 Added CASIA-SURF database
-     - bob/bob.pad.face!86 Batl loo protocols: Adds Leave one out protocols to the BATL HLDI.
-     - bob/bob.pad.face!87 Chalearn pad: 1. Fixed small mistake in CASIA-SURF High level PAD BD  2. Added some stuff to a preprocessor (sanity check and logging)
-     - bob/bob.pad.face!88 Added the doc on MLP training using AE embeddings
-     - bob/bob.pad.face!89 Fixed CASIA SURF
-     - bob/bob.pad.face!90 [database] added modification to high-level interface for CASIA-SURF
-     - bob/bob.pad.face!91 Resolve "fix CASIA-SURF tests"
-     - bob/bob.pad.face!95 Move bob.ip.dlib and bob.ip.facelandmarks to test dependencies
-     - bob/bob.pad.face!96 Put bob.ip packages back as run requirements
-     - bob/bob.pad.face!97 unit tests: Reverts the unit tests
-     - bob/bob.pad.face!98 Add casia fasd and an optical flow extractor
+  * patch
+     - Python 3.7 support
 * bob/bob.pad.voice
   * patch
-     - bob/bob.pad.voice!17 Stop the TensorflowEval algorithm to load on imports
+     - Python 3.7 support
 * bob/bob.pad.vein
   * patch
+     - Python 3.7 support
 * bob/bob.fusion.base
   * patch
-     - bob/bob.fusion.base!10 Add Tanh and ZNorm preprocessors: and clean-up code.
+     - Python 3.7 support
 * bob/bob.db.oulunpu
-  * patch
-      - bob/bob.db.oulunpu!5 Fix left and right annotations being swapped
+  * minor
+     - bob/bob.db.oulunpu!6 Add support for external annotations
+     - Python 3.7 support
 * bob/bob.db.uvad
   * patch
+     - Python 3.7 support
+* bob/bob.db.swan
+  * patch
+     - Python 3.7 support
 * bob/bob.db.cuhk_cufs
   * patch
+     - Python 3.7 support
 * bob/bob.db.cbsr_nir_vis_2
   * patch
+     - Python 3.7 support
 * bob/bob.db.nivl
   * patch
+     - Python 3.7 support
 * bob/bob.db.pola_thermal
   * patch
+     - Python 3.7 support
 * bob/bob.db.cuhk_cufsf
   * patch
+     - Python 3.7 support
 * bob/bob.db.ldhf
   * patch
+     - Python 3.7 support
 * bob/bob.ip.tensorflow_extractor
   * patch
-     - bob/bob.ip.tensorflow_extractor!9 Removed plot since this is not used
-     - bob/bob.ip.tensorflow_extractor!10 [facenet] Allow layer name
-     - bob/bob.ip.tensorflow_extractor!11 Created a VGGFace for tensorflow: Added download link
-     - bob/bob.ip.tensorflow_extractor!12 Add MTCNN (tensorflow) model: code and model from https://github.com/blaueck/tf-mtcnn
-     - bob/bob.ip.tensorflow_extractor!13 Improve graph and session handling in facenet class
+     - bob/bob.ip.tensorflow_extractor!14 Corrected the external link to FaceNet model: If someone from outside Idiap is trying to use FaceNet model, it would not download it, since downloading from google drive requires cookies now. So, the link is replaced to the one on Dropbox.
+     - Python 3.7 support
 * bob/bob.ip.caffe_extractor
   * patch
-     - bob/bob.ip.caffe_extractor!11 Fix conda recipe by setting caffe dependence to work on "linux" only
+     - Python 3.7 support
 * bob/bob.bio.caffe_face
   * patch
+     - Python 3.7 support
 * bob/bob.learn.tensorflow
+  * patch
+     - Python 3.7 support
+* bob/bob.learn.pytorch
+  * patch
+     - bob/bob.learn.pytorch!37 Use matplotlib to save images: The old one breaks for the new scipy version; replaces image saving with matplotlib.
+     - bob/bob.learn.pytorch!39 change async to non_blocking: The `async` keyword is a reserved keyword in Python 3.7
+     - Python 3.7 support
+* bob/bob.bio.face_ongoing
+  * v1.0.4 (Jul 17, 2019 08:04)
+     * Shipped some missing .py
+  * patch
+     - Python 3.7 support
+* bob/bob.bio.htface
+  * patch
+     - Python 3.7 support
+* bob/bob.db.drive
+  * v1.0.0 (Sep 17, 2019 05:23)
+     * Initial public release
+* bob/bob.db.stare
+  * v1.0.0 (Sep 17, 2019 05:07)
+     * Initial public release
+* bob/bob.db.chasedb1
+  * v1.0.0 (Sep 17, 2019 05:38)
+     * Initial public release
+* bob/bob.db.iostar
+  * v1.0.0 (Sep 17, 2019 07:00)
+     * Initial public release
+* bob/bob.db.hrf
+  * v1.0.0 (Sep 17, 2019 05:51)
+     * Initial public release
+* bob/bob.db.rimoner3
+  * v1.0.0 (Sep 17, 2019 06:23)
+     * Initial public release
+* bob/bob.db.drionsdb
+  * v1.0.0 (Sep 17, 2019 06:03)
+     * Initial public release
+* bob/bob.db.refuge
+  * v1.0.0 (Sep 17, 2019 06:46)
+     * Initial public release
+* bob/bob.db.drishtigs1
+  * v1.0.0 (Sep 17, 2019 06:34)
+     * Initial public release
+* bob/bob.ip.binseg
+  * v1.0.0 (Sep 17, 2019 11:17)
+     * Initial public release
+  * patch
+     - Fixed issue with LICENSE file
+* bob/bob
   * minor
-     - bob/bob.learn.tensorflow!72 [predict_bio] Some fixes and new features:
-     - [predict_bio] fix the broken checkpoint path handling 
-     - [predict_bio] Add an option to save data in FrameContainers 
-     - [simplecnn] fix a bug with slim architecture
-     - [regressor] add a name scope for train parts
-     - [test] organize estimator scripts tests
-     - [eval] improvements to bob tf eval
-     - bob/bob.learn.tensorflow!73 Improvements to eval script: 
-     - bob/bob.learn.tensorflow!74 Click 7 compatibility
-     - bob/bob.learn.tensorflow!75 Add scripts for training keras models using keras API
-     - Add two functions to allow dynamic weighting of samples per batch
-     - Add several extractors which are usefull at inference time 
-     - Add a generic Generator class alternative to BioGenerator
-     - Add virtual adversarial training loss
-     - Fix the euclidean function so that its gradients don't become nan. Also moves the bytes_to_human function
-     - Add a hook to add some tensors to the summary
-     - Add bob tf predict command  
-     - Fix the image augmentation function 
-     - Add dataset_to_tfrecord and dataset_from_tfrecord 
-     - Make bob tf cache command useful 
-     - Add a new MLP architecture  
-     - Fixes in inception architectures
-     - bob/bob.learn.tensorflow!77 Fixed the reuse in some operations of the inception-v1: 
-     - bob/bob.learn.tensorflow!78 Fix issue with VGG16 from slim. The slim models adds the hot-encoded in the architecture function
-     - bob/bob.learn.tensorflow!76 Estimators optimize loss:
-* bob/bob.db.fargo
-  * major
-     - bob/bob.db.fargo!2 Disable Sphinx nitpicky and disable Python 2
-     - bob/bob.db.fargo!3 Resolve "Make it sqlite":
-     - bob/bob.db.fargo!4 Cleaning the package
+    - bob/bob.extension!103 Resolve "bob config fixes"
+    - bob/bob.extension!104 [config] added confirmation prompt before deleting anything from global config file
+    - bob.measure!95 Improve threshold calculation in ROC, DET, and Precision and Recall plots
+    - bob.measure!96 Add an alpha option to ROC,DET,EPC figures: Also, enables you to change the default value in `tablefmt` option.
+    - bob/gridtk!29 Automatically remove G from memory commands in GPU queues
+    - bob/bob.pad.base!63 Use plot.roc instead of plot.roc_for_far in vulnerability ROC plots
+    - bob/bob.db.oulunpu!6 Add support for external annotations

@@ -156,7 +156,11 @@ test:
   commands:
     - export SDKROOT="{{ SDKROOT }}"  # [osx]
     - export MACOSX_DEPLOYMENT_TARGET="{{ MACOSX_DEPLOYMENT_TARGET }}"  # [osx]
+    {% if environ.get('BOB_NOSE_FAST') %}
+    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }} -a '!slow'
+    {% else %}
     - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }}
+    {% endif %}
     - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
     - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]

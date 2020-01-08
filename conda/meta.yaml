@@ -64,7 +64,6 @@ requirements:
     - bob.ip.skincolorfilter
     - bob.ip.facelandmarks
     - bob.ip.dlib
-    - bob.ip.mtcnn  # [linux]
     - bob.db.arface
     - bob.db.asvspoof
     - bob.db.asvspoof2017
@@ -126,8 +125,6 @@ requirements:
     - bob.db.cuhk_cufsf
     - bob.db.ldhf
     - bob.ip.tensorflow_extractor  # [linux]
-    - bob.ip.caffe_extractor  # [linux]
-    - bob.bio.caffe_face  # [linux]
     - bob.learn.tensorflow
     - bob.db.fargo
     - bob.db.drive

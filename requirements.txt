@@ -35,7 +35,6 @@ bob.ip.qualitymeasure
 bob.ip.skincolorfilter
 bob.ip.facelandmarks
 bob.ip.dlib
-bob.ip.mtcnn
 bob.db.arface
 bob.db.asvspoof
 bob.db.asvspoof2017
@@ -97,8 +96,6 @@ bob.db.pola_thermal
 bob.db.cuhk_cufsf
 bob.db.ldhf
 bob.ip.tensorflow_extractor
-bob.ip.caffe_extractor
-bob.bio.caffe_face
 bob.learn.tensorflow
 bob.db.fargo
 bob.db.drive

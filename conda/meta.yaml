@@ -130,7 +130,7 @@ requirements:
     - bob.db.ldhf
     - bob.ip.tensorflow_extractor
     - bob.learn.tensorflow
-    - bob.learn.pytorch
+    - bob.learn.pytorch  # [linux]
     - bob.bio.face_ongoing
     - bob.bio.htface
     - bob.db.drive
@@ -142,7 +142,7 @@ requirements:
     - bob.db.drionsdb
     - bob.db.refuge
     - bob.db.drishtigs1
-    - bob.ip.binseg
+    - bob.ip.binseg  # [linux]
     # LIST OF BOB PACKAGES - END
   run:
     - python
@@ -160,11 +160,7 @@ test:
   commands:
     - export SDKROOT="{{ SDKROOT }}"  # [osx]
     - export MACOSX_DEPLOYMENT_TARGET="{{ MACOSX_DEPLOYMENT_TARGET }}"  # [osx]
-    {% if environ.get('BOB_NOSE_FAST') %}
-    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }} -a '!slow'
-    {% else %}
     - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }}
-    {% endif %}
     - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
     - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]

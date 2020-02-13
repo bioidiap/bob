@@ -50,6 +50,7 @@ bob.db.cohface
 bob.db.frgc
 bob.db.gbu
 bob.db.hci_tagging
+bob.db.ijba
 bob.db.ijbc
 bob.db.kboc16
 bob.db.lfw
@@ -71,16 +72,14 @@ bob.db.youtube
 bob.db.pericrosseye
 bob.db.maskattack
 bob.db.casiasurf
+bob.db.fargo
 bob.bio.base
 bob.bio.gmm
 bob.bio.face
 bob.bio.spear
 bob.bio.video
 bob.bio.vein
-bob.bio.face_ongoing
-bob.bio.htface
 bob.db.voxforge
-bob.db.ijba
 bob.rppg.base
 bob.pad.base
 bob.pad.face
@@ -89,6 +88,8 @@ bob.pad.vein
 bob.fusion.base
 bob.db.oulunpu
 bob.db.uvad
+bob.db.swan
+bob.db.siw
 bob.db.cuhk_cufs
 bob.db.cbsr_nir_vis_2
 bob.db.nivl
@@ -97,7 +98,9 @@ bob.db.cuhk_cufsf
 bob.db.ldhf
 bob.ip.tensorflow_extractor
 bob.learn.tensorflow
-bob.db.fargo
+bob.learn.pytorch
+bob.bio.face_ongoing
+bob.bio.htface
 bob.db.drive
 bob.db.stare
 bob.db.chasedb1

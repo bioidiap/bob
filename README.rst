@@ -39,15 +39,15 @@ Below are some instructions for the maintainers of the package.
 Adding/Removing a dependency package
 ------------------------------------
 
-To remove or add a package from bob, search for its name (or the name of a
-similar package in case you are adding a new package) in this repository and
-add/remove its name in appropriate places.
+The list of bob packages here should be in sync with bob.nightlies.
+You may use the `bdt gitlab update-bob` command for automatic update of the list of
+packages.
 
 
 Releasing a new version of Bob
 ------------------------------
 
-Use the release script from bob.admin to do this.
+See bob.devtools documentation.
 
 .. External References
 

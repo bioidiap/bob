@@ -27,6 +27,9 @@ requirements:
     - bob-devel {{ bob_devel }}
     # the list below contains all public packages. This is/should be the same
     # list as order.txt (save for private packages) in bob.nightlies.
+
+    # Do not remove the tag below which is used for automatic parsing of this recipe
+    # LIST OF BOB PACKAGES - START
     - bob.buildout
     - bob.extension
     - bob.blitz
@@ -79,6 +82,7 @@ requirements:
     - bob.db.frgc
     - bob.db.gbu
     - bob.db.hci_tagging
+    - bob.db.ijba
     - bob.db.ijbc
     - bob.db.kboc16
     - bob.db.lfw
@@ -100,16 +104,14 @@ requirements:
     - bob.db.pericrosseye
     - bob.db.maskattack
     - bob.db.casiasurf
+    - bob.db.fargo
     - bob.bio.base
     - bob.bio.gmm
     - bob.bio.face
     - bob.bio.spear
     - bob.bio.video
     - bob.bio.vein
-    - bob.bio.face_ongoing  # [linux]
-    - bob.bio.htface  # [linux]
     - bob.db.voxforge
-    - bob.db.ijba
     - bob.rppg.base
     - bob.pad.base
     - bob.pad.face
@@ -118,15 +120,19 @@ requirements:
     - bob.fusion.base
     - bob.db.oulunpu
     - bob.db.uvad
+    - bob.db.swan
+    - bob.db.siw
     - bob.db.cuhk_cufs
     - bob.db.cbsr_nir_vis_2
     - bob.db.nivl
     - bob.db.pola_thermal
     - bob.db.cuhk_cufsf
     - bob.db.ldhf
-    - bob.ip.tensorflow_extractor  # [linux]
+    - bob.ip.tensorflow_extractor
     - bob.learn.tensorflow
-    - bob.db.fargo
+    - bob.learn.pytorch
+    - bob.bio.face_ongoing
+    - bob.bio.htface
     - bob.db.drive
     - bob.db.stare
     - bob.db.chasedb1
@@ -136,7 +142,8 @@ requirements:
     - bob.db.drionsdb
     - bob.db.refuge
     - bob.db.drishtigs1
-    - bob.ip.binseg  # [linux]
+    - bob.ip.binseg
+    # LIST OF BOB PACKAGES - END
   run:
     - python
     - setuptools

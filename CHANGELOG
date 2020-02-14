@@ -6,7 +6,7 @@
   * patch
      - bob/bob.buildout!36 [docs] removing the Local package development for bob and replacing it with a link to bobdevtools: This merge request attempt to remove all the information about developing bob packages locally and move them to `bob.devtools` documentation.
 * bob/bob.extension
-  * patch
+  * major
      - bob/bob.extension!106 Removed Dependency graph script: moved this to bob.devtools    Closes bob/bob.extension#62
      - bob/bob.extension!109 [click] lookup in the config files before env var: This changes the behavior of loading options in ResourceOptions  Since the config files are given explicitly, similar to command line options,  it's better to look there first before looking into env variables.
      - bob/bob.extension!108 [click] Change the ConfigCommand and ResourceOption logic: Fixes bob/bob.extension#66     Changed the logic behind `ConfigCommand` and `ResourceOption`.
@@ -23,7 +23,7 @@
 * bob/bob.math
   * patch
 * bob/bob.measure
-  * patch
+  * minor
      - bob/bob.measure!97 Add Area Under ROC Curve (AUC): Add the function called bob.measure.roc_auc_score.  Add the AUC computation to ``bob measure metrics`` command.  Fixes bob/bob.measure#2
      - bob/bob.measure!98 Separate semilogx and TPR options in ROC plots: Also, ran black on some code files.
 * bob/bob.io.image
@@ -175,10 +175,12 @@
      - bob/bob.db.casiasurf!2 Add test labels
 * bob/bob.db.fargo
   * v1.0.2 (Dec 13, 2019 10:30)
-     * Extract frontal image in .mov files instead of .264  * v1.0.3 (Dec 13, 2019 10:31)
-     * Extract frontal image in .mov files instead of .264  * patch
-* bob/bob.bio.base
+     * Extract frontal image in .mov files instead of .264
+  * v1.0.3 (Dec 13, 2019 10:31)
+     * Extract frontal image in .mov files instead of .264
   * patch
+* bob/bob.bio.base
+  * minor
      - bob/bob.bio.base!178 Fixed issue with numpy.ndarray.resize py37
      - bob/bob.bio.base!179 Separate semilogx and TPR options in ROC plots: Depends on https://gitlab.idiap.ch/bob/bob.measure/merge_requests/98
      - bob/bob.bio.base!176 Add bob bio annotate-samples command: This command works very similar to bob bio annotate  except that works without a db interface. Instead,  it requires a list of samples and two functions to  do the job.
@@ -191,7 +193,7 @@
   * patch
 * bob/bob.bio.video
   * patch
-     - bob/bob.bio.video!40 Improve FrameContainer and FrameSelector to be more memory efficient: * FrameContainers can now load a subset of themselves from an HDF5 file  * FrameSelectors now can handle `bob.io.video.reader` instances to avoid loading the whole video into memory.    For example, you can do:  ```python  path = '.../fc.hdf5'  with bob.io.base.HDF5File(path) as f:      bob/bob.bio.video# load only a subset of the FrameContainer      fc = bob.bio.video.FrameContainer().load(f, selection_style="spread", max_number_of_frames=20)  ```  and  ```python  path = '.../video.mp4'  fs = bob.bio.video.FrameSelector(selection_style="spread", max_number_of_frames=20)  fc = fs(bob.io.video.reader(path))  bob/bob.bio.video# only loads 20 frames into memory  ```
+     - bob/bob.bio.video!40 Improve FrameContainer and FrameSelector to be more memory efficient: * FrameContainers can now load a subset of themselves from an HDF5 file  * FrameSelectors now can handle `bob.io.video.reader` instances to avoid loading the whole video into memory.
 * bob/bob.bio.vein
   * patch
 * bob/bob.db.voxforge
@@ -199,17 +201,15 @@
 * bob/bob.rppg.base
   * patch
 * bob/bob.pad.base
-  * patch
+  * minor
      - bob/bob.pad.base!65 Separate semilogx and TPR options in ROC plots: Depends on https://gitlab.idiap.ch/bob/bob.measure/merge_requests/98
      - bob/bob.pad.base!66 Fix the wrong total number reported in metrics: Fixes bob.measure#61
-     - bob/bob.pad.base!64 Scikit wrapper: This is the scikit wrapper I was using. It can be improved further I guess.
-     - bob/bob.pad.base!67 Revert "Merge branch 'scikit_wrapper' into 'master'": This reverts merge request bob/bob.pad.base!64
      - bob/bob.pad.base!69 Small fixes
      - bob/bob.pad.base!68 Add a GMM Algorithm (moved from bob.pad.voice)
      - bob/bob.pad.base!70 Improve the metrics command with AUC and relaxed threshold criteria
 * bob/bob.pad.face
   * patch
-     - bob/bob.pad.face!99 Add BRSU: Hi @ageorge and @amohammadi,    I just modified some stuff to add the BRSU database here (note that ``bob.db.brsu`` is not public yet, but will be soon).  Also, I took advantage of this to correct the tests for the aggregated_db used by Olegs (i.e. just adding the db_available decorator).    Could you please have a look ?    Thanks  Guillaume
+     - bob/bob.pad.face!99 Add the BRSU database (note that ``bob.db.brsu`` is not public yet, but will be soon).
      - bob/bob.pad.face!100 Resolve "Remove dependencies with caffe": Closes bob/bob.pad.face#33
      - bob/bob.pad.face!102 [database] added test labels for CASIA-SURF (and corresponding tests)
      - bob/bob.pad.face!103 Improve bbox_cropper in load_utils.py
@@ -247,13 +247,13 @@
 * bob/bob.ip.tensorflow_extractor
   * patch
 * bob/bob.learn.tensorflow
-  * patch
+  * minor
      - bob/bob.learn.tensorflow!81 Added @attr(slow) for slow tests: https://gitlab.idiap.ch/bob/bob.nightlies/issues/55
      - bob/bob.learn.tensorflow!82 [sphinx] Fixed doc test
-     - bob/bob.learn.tensorflow!83 Revert BOB_NOSE_FAST hack in favour of using environment variables supported by nosetests: @tiago.pereira: I changed the nightlies to use the new mechanism.    This is the last patch to close bob/bob.nightlies#55    I'll let you do the honours as soon as the build passes.
+     - bob/bob.learn.tensorflow!83 Revert BOB_NOSE_FAST hack in favour of using environment variables supported by nosetests.
      - bob/bob.learn.tensorflow!79 Add keras-based models, add pixel-wise loss, other improvements: * d47eae91 Add dataset_to_hdf5 command  * cc8a142a EPSC estimators and losses  * 8e274774 improve block extraction  * b9583f15 Add a parallel read option to dataset_from_tfrecords  * a8bc6541 Add an extra feed option to the extractors  * 1c3fdb10 improve logging for vat loss  * 9058f1a8 Add more logging to bob tf cache-dataset  * e7445a23 Save one best evaluation checkpoint by default  * c82154ef Allow architectures to provide the logits layer  * 281e1c26 Add more logging to the predict commands  * ac7d3eda Add a pixel wise loss  * 2f7fec82 Add keras-based models  * c9311f9c Move utils to the utils folder  * 70e0b85 Allow shuffle on epoch end in generator  * 54a8032 add a function to load png images  * 036a308 improve logging  * e155ed5 improve logging in losses  * fa76538 add center loss, mmd loss, and pairwise confusion loss  * d957c74 make sure densenet layer names are consistent  * 63993d4 nitpick  * cda150d add starting point options to the style transfer script  * 7fabc04 Add more utils  * cb9744b new keras models  * 38de7bd Add GAN tools  * f6e1bb5 implement random rotate  * aece6e1 improve the generator and biogenerator classes  * 6e6adde nitpick  * b9cc5a9 handle nans in network predictions  * 27e73ae cast labels to required format  * 8082804 fix imports  * b9fd76b Add model_summary to keras utils  * 4a714e0 add more option to reproducible  * 3241c38 Add keras version of models  * f481311 remove six dependency  * 36c3f4b Add a Gaussian blur filter
 * bob/bob.learn.pytorch
-  * patch
+  * minor
      - bob/bob.learn.pytorch!40 Deeppixbis extractor: Added the extractor for DeepPixBiS, since it was not present here, but only in the following paper package: ``bob.paper.deep_pix_bis_pad.icb2019``    I guess it's better to have it here as well bob/bob.learn.pytorch!
      - bob/bob.learn.pytorch!41 Stop Downloading Densenet in nosetests: Extractor need not download the pretrained model now
 * bob/bob.bio.face_ongoing
@@ -292,7 +292,32 @@
   * patch
      - bob/bob.db.drishtigs1!3 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
 * bob/bob.ip.binseg
-  * patch
+  * minor
      - bob/bob.ip.binseg!9 Minor fixes: This MR includes the following features:    1. Makes it explicit the conversion to RGB images in image pre-processing pipelines  2. Adds a transform for converting between 16-bit and 8-bit PNG images  3. Allows the inferencer to work with globs instead of fixed paths (+ adaptations to this where needed)  4. Adds documentation for `imagefolderinference`  5. Adds explicit dependence to bob.core, required by the 16/8 bit PNG converters  6. Fixes an issue related to the conda recipe (see bob/bob.devtools#44 and bob/bob.devtools!127)
 * bob/bob
-  * patch
+  * major
+     - **Breaking Changes**:
+     - bob/bob.extension!106 Removed Dependency graph script: moved this to bob.devtools    Closes bob/bob.extension#62
+     - **Other Important Changes**:
+     - bob/bob.extension!109 [click] lookup in the config files before env var: This changes the behavior of loading options in ResourceOptions  Since the config files are given explicitly, similar to command line options,  it's better to look there first before looking into env variables.
+     - bob/bob.extension!110 [click] ResourceOption can be used without ConfigCommand: related to bob.fusion.base#8
+     - bob/bob.measure!97 Add Area Under ROC Curve (AUC): Add the function called bob.measure.roc_auc_score.  Add the AUC computation to ``bob measure metrics`` command.  Fixes bob/bob.measure#2
+     - bob/bob.measure!98 Separate semilogx and TPR options in ROC plots: Also, ran black on some code files.
+     - bob/bob.bio.base!179 Separate semilogx and TPR options in ROC plots: Depends on https://gitlab.idiap.ch/bob/bob.measure/merge_requests/98
+     - bob/bob.bio.base!176 Add bob bio annotate-samples command: This command works very similar to bob bio annotate  except that works without a db interface. Instead,  it requires a list of samples and two functions to  do the job.
+     - bob/bob.bio.face!59 [mtcnn-annotator] replace it bob.ip.mtcnn with bob.ip.tensorflow_extractor
+     - bob/bob.bio.video!40 Improve FrameContainer and FrameSelector to be more memory efficient: * FrameContainers can now load a subset of themselves from an HDF5 file  * FrameSelectors now can handle `bob.io.video.reader` instances to avoid loading the whole video into memory.
+     - bob/bob.pad.base!65 Separate semilogx and TPR options in ROC plots: Depends on https://gitlab.idiap.ch/bob/bob.measure/merge_requests/98
+     - bob/bob.pad.base!66 Fix the wrong total number reported in metrics: Fixes bob.measure#61
+     - bob/bob.pad.base!68 Add a GMM Algorithm (moved from bob.pad.voice)
+     - bob/bob.pad.base!70 Improve the metrics command with AUC and relaxed threshold criteria
+     - bob/bob.pad.face!99 Add the BRSU database (note that ``bob.db.brsu`` is not public yet, but will be soon).
+     - bob/bob.pad.face!100 Resolve "Remove dependencies with caffe": Closes bob/bob.pad.face#33
+     - bob/bob.pad.face!102 [database] added test labels for CASIA-SURF (and corresponding tests)
+     - bob/bob.pad.face!103 Improve bbox_cropper in load_utils.py
+     - bob/bob.pad.face!104 Improve high level database interfaces
+     - bob/bob.pad.voice!18 Deprecate the GMM algorithm
+     - bob/bob.fusion.base!11 [click] ResourceOption usage is changed.: Depends on https://gitlab.idiap.ch/bob/bob.extension/merge_requests/110    Fixes bob/bob.fusion.base#8
+     - bob/bob.learn.tensorflow!79 Add keras-based models, add pixel-wise loss, other improvements: * d47eae91 Add dataset_to_hdf5 command  * cc8a142a EPSC estimators and losses  * 8e274774 improve block extraction  * b9583f15 Add a parallel read option to dataset_from_tfrecords  * a8bc6541 Add an extra feed option to the extractors  * 1c3fdb10 improve logging for vat loss  * 9058f1a8 Add more logging to bob tf cache-dataset  * e7445a23 Save one best evaluation checkpoint by default  * c82154ef Allow architectures to provide the logits layer  * 281e1c26 Add more logging to the predict commands  * ac7d3eda Add a pixel wise loss  * 2f7fec82 Add keras-based models  * c9311f9c Move utils to the utils folder  * 70e0b85 Allow shuffle on epoch end in generator  * 54a8032 add a function to load png images  * 036a308 improve logging  * e155ed5 improve logging in losses  * fa76538 add center loss, mmd loss, and pairwise confusion loss  * d957c74 make sure densenet layer names are consistent  * 63993d4 nitpick  * cda150d add starting point options to the style transfer script  * 7fabc04 Add more utils  * cb9744b new keras models  * 38de7bd Add GAN tools  * f6e1bb5 implement random rotate  * aece6e1 improve the generator and biogenerator classes  * 6e6adde nitpick  * b9cc5a9 handle nans in network predictions  * 27e73ae cast labels to required format  * 8082804 fix imports  * b9fd76b Add model_summary to keras utils  * 4a714e0 add more option to reproducible  * 3241c38 Add keras version of models  * f481311 remove six dependency  * 36c3f4b Add a Gaussian blur filter
+     - bob/bob.learn.pytorch!40 Deeppixbis extractor: Added the extractor for DeepPixBiS, since it was not present here, but only in the following paper package: ``bob.paper.deep_pix_bis_pad.icb2019``    I guess it's better to have it here as well bob/bob.learn.pytorch!
+     - bob/bob.ip.binseg!9 Minor fixes: This MR includes the following features:    1. Makes it explicit the conversion to RGB images in image pre-processing pipelines  2. Adds a transform for converting between 16-bit and 8-bit PNG images  3. Allows the inferencer to work with globs instead of fixed paths (+ adaptations to this where needed)  4. Adds documentation for `imagefolderinference`  5. Adds explicit dependence to bob.core, required by the 16/8 bit PNG converters  6. Fixes an issue related to the conda recipe (see bob/bob.devtools#44 and bob/bob.devtools!127)

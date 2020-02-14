@@ -1,389 +1,298 @@
 * bob/bob.buildout
-  * v2.2.1 (Sep 16, 2019 15:23)
-     * Python 3.7 support
-* bob/bob.extension
-  * v3.1.2 (Sep 16, 2019 15:31)
-     * Python 3.7 support
-  * minor
-     - bob/bob.extension!103 Resolve "bob config fixes"
-     - bob/bob.extension!104 [config] added confirmation prompt before deleting anything from global config file
-     - bob/bob.extension!105 Break circular dependency on bob.blitz by moving the related tests to bob.blitz
-* bob/bob.blitz
-  * v2.0.18 (Sep 16, 2019 15:56)
-     * Python 3.7 support
+  * v2.2.2 (Jan 10, 2020 08:37)
+     * bob/bob.buildout!37 Reset license file location and remove hack (affects bob/bob.devtoolsbob/bob.buildout#44): This MR resets the location of the license file for this package in the conda recipe.    Affects bob/bob.devtoolsbob/bob.buildout#44 and bob/bob.devtoolsbob/bob.buildout!127.     * bob/bob.buildout!38 [conda] Completely remove "license_file" entry on conda recipes     * bob/bob.buildout!39 Add missing requirements.txt to MANIFEST.in: Without it the file is missing from the source archive and therefore  cannot be installed using pip.     - bob/bob.buildout!37 Reset license file location and remove hack (affects bob/bob.devtools#44): This MR resets the location of the license file for this package in the conda recipe.    Affects bob/bob.devtools#44 and bob/bob.devtools!127.
+     - bob/bob.buildout!38 [conda] Completely remove "license_file" entry on conda recipes
+     - bob/bob.buildout!39 Add missing requirements.txt to MANIFEST.in: Without it the file is missing from the source archive and therefore  cannot be installed using pip.
   * patch
-     - bob/bob.blitz!12 Move the tests for an example package from bob.extension to here: This breaks the circular dependency of bob.extension and bob.blitz.
+     - bob/bob.buildout!36 [docs] removing the Local package development for bob and replacing it with a link to bobdevtools: This merge request attempt to remove all the information about developing bob packages locally and move them to `bob.devtools` documentation.
+* bob/bob.extension
+  * patch
+     - bob/bob.extension!106 Removed Dependency graph script: moved this to bob.devtools    Closes bob/bob.extension#62
+     - bob/bob.extension!109 [click] lookup in the config files before env var: This changes the behavior of loading options in ResourceOptions  Since the config files are given explicitly, similar to command line options,  it's better to look there first before looking into env variables.
+     - bob/bob.extension!108 [click] Change the ConfigCommand and ResourceOption logic: Fixes bob/bob.extension#66     Changed the logic behind `ConfigCommand` and `ResourceOption`.
+     - bob/bob.extension!110 [click] ResourceOption can be used without ConfigCommand: related to bob.fusion.base#8
+     - bob/bob.extension!107 Fix buildout code-block guesses: Fixes issues with the doc lexer guessing.
+     - bob/bob.extension!111 Fix lookup of click manual: This MR fixes an issue with the nightly builds in which bob.extension sphinx building does not find the click catalogue online.
+     - bob/bob.extension!102 [docs] removed information about building python packages locally: [docs] removed information about building packages locally and referred to bob.devtools when necessary.
+* bob/bob.blitz
+  * patch
 * bob/bob.core
-  * v2.2.3 (Sep 16, 2019 16:09)
-     * Python 3.7 support
+  * patch
 * bob/bob.io.base
-  * v3.0.6 (Sep 16, 2019 17:42)
-     * Python 3.7 support
+  * patch
 * bob/bob.math
-  * v3.1.4 (Sep 16, 2019 17:58)
-     * Python 3.7 support
+  * patch
 * bob/bob.measure
-  * v4.1.1 (Sep 16, 2019 18:19)
-     * bob/bob.measure!95 Improve threshold calculation in ROC, DET, and Precision and Recall plots
-     * bob/bob.measure!96 Add an alpha option to ROC,DET,EPC figures: Also, enables you to change the default value in `tablefmt` option.
-     * Python 3.7 support
+  * patch
+     - bob/bob.measure!97 Add Area Under ROC Curve (AUC): Add the function called bob.measure.roc_auc_score.  Add the AUC computation to ``bob measure metrics`` command.  Fixes bob/bob.measure#2
+     - bob/bob.measure!98 Separate semilogx and TPR options in ROC plots: Also, ran black on some code files.
 * bob/bob.io.image
-  * v2.4.4 (Sep 16, 2019 19:46)
-     * Python 3.7 support
+  * patch
 * bob/bob.db.base
-  * v3.0.3 (Sep 17, 2019 04:17)
-     * Python 3.7 support
+  * patch
 * bob/bob.io.video
   * patch
-     - Python 3.7 support
+     - bob/bob.io.video!18 Adjusting again memory leak test: closes bob/bob.io.video#15
 * bob/bob.io.matlab
   * patch
-     - Python 3.7 support
 * bob/bob.io.audio
   * patch
-     - Python 3.7 support
 * bob/bob.sp
   * patch
-     - Python 3.7 support
 * bob/bob.ap
   * patch
-     - Python 3.7 support
 * bob/bob.ip.base
   * patch
-     - Python 3.7 support
 * bob/bob.ip.color
   * patch
-     - Python 3.7 support
 * bob/bob.ip.draw
   * patch
-     - Python 3.7 support
 * bob/bob.ip.gabor
   * patch
-     - Python 3.7 support
 * bob/bob.learn.activation
   * patch
-     - Python 3.7 support
 * bob/bob.learn.libsvm
   * patch
-     - Python 3.7 support
+     - bob/bob.learn.libsvm!10 Fix precision test to be a bit softer on floating-point comparisons: Fix a precision test to use `numpy.isclose` instead of comparing for equality.
 * bob/bob.learn.linear
   * patch
-     - Python 3.7 support
 * bob/bob.learn.mlp
   * patch
-     - Python 3.7 support
 * bob/bob.learn.boosting
   * patch
-     - bob/bob.learn.boosting!10 Do not build a library to avoid C++ API incompatibilities (see bob/bob.learn.boosting#2): This is not a "fix" to bob/bob.learn.boosting#2, but makes the package work again by avoiding a CMake-library that may have an incompatible C++ ABI.
-     - Python 3.7 support
 * bob/bob.db.iris
   * patch
-     - Python 3.7 support
+     - bob/bob.db.iris!8 remove unused links.rst file
 * bob/bob.learn.em
   * patch
-     - bob/bob.learn.em!37 Fixing possible issue with numpy.ndarray.resize: This fixes bob/bob.learn.em#31 for python 3.7
-     - Python 3.7 support
 * bob/bob.db.wine
   * patch
-     - Python 3.7 support
 * bob/bob.db.mnist
   * patch
-     - Python 3.7 support
 * bob/bob.db.atnt
   * patch
-     - bob/bob.db.atnt!11 Using bob.extension download script
-     - Python 3.7 support
 * bob/bob.ip.facedetect
   * patch
-     - Python 3.7 support
 * bob/bob.ip.optflow.hornschunck
   * patch
-     - Python 3.7 support
 * bob/bob.ip.optflow.liu
   * patch
-     - Python 3.7 support
 * bob/bob.ip.flandmark
   * patch
-     - Python 3.7 support
 * bob/gridtk
   * patch
-     - bob/gridtk!29 Automatically remove G from memory commands in GPU queues
-     - bob/gridtk!30 Refresh the status of jobs from SGE before listing them
-     - Python 3.7 support
 * bob/bob.ip.qualitymeasure
   * patch
-     - Python 3.7 support
 * bob/bob.ip.skincolorfilter
   * patch
-     - Python 3.7 support
 * bob/bob.ip.facelandmarks
   * patch
-     - Python 3.7 support
 * bob/bob.ip.dlib
   * patch
-     - Python 3.7 support
-* bob/bob.ip.mtcnn
-  * patch
-     - Python 3.7 support
 * bob/bob.db.arface
   * patch
-     - Python 3.7 support
 * bob/bob.db.asvspoof
   * patch
-     - Python 3.7 support
 * bob/bob.db.asvspoof2017
   * patch
-     - Python 3.7 support
 * bob/bob.db.atvskeystroke
   * patch
-     - Python 3.7 support
 * bob/bob.db.avspoof
   * patch
-     - Python 3.7 support
 * bob/bob.db.banca
   * patch
-     - Python 3.7 support
 * bob/bob.db.biosecure
   * patch
-     - Python 3.7 support
 * bob/bob.db.biosecurid.face
   * patch
-     - Python 3.7 support
 * bob/bob.db.casia_fasd
   * patch
-     - Python 3.7 support
 * bob/bob.db.casme2
   * patch
-     - Python 3.7 support
 * bob/bob.db.caspeal
   * patch
-     - Python 3.7 support
 * bob/bob.db.cohface
   * patch
-     - Python 3.7 support
 * bob/bob.db.frgc
   * patch
-     - Python 3.7 support
 * bob/bob.db.gbu
   * patch
-     - Python 3.7 support
 * bob/bob.db.hci_tagging
   * patch
-     - Python 3.7 support
 * bob/bob.db.ijba
   * patch
-     - Python 3.7 support
 * bob/bob.db.ijbc
   * patch
-     - Python 3.7 support
 * bob/bob.db.kboc16
   * patch
-     - Python 3.7 support
 * bob/bob.db.lfw
   * patch
-     - Python 3.7 support
 * bob/bob.db.livdet2013
   * patch
-     - Python 3.7 support
 * bob/bob.db.mobio
   * patch
-     - Python 3.7 support
 * bob/bob.db.msu_mfsd_mod
   * patch
-     - Python 3.7 support
 * bob/bob.db.multipie
   * patch
-     - Python 3.7 support
 * bob/bob.db.nist_sre12
   * patch
-     - Python 3.7 support
 * bob/bob.db.putvein
   * patch
-     - Python 3.7 support
 * bob/bob.db.replay
   * patch
-     - Python 3.7 support
 * bob/bob.db.replaymobile
   * patch
-     - Python 3.7 support
 * bob/bob.db.scface
   * patch
-     - Python 3.7 support
 * bob/bob.db.utfvp
   * patch
-     - Python 3.7 support
 * bob/bob.db.verafinger
   * patch
-     - Python 3.7 support
 * bob/bob.db.fv3d
   * patch
-     - Python 3.7 support
 * bob/bob.db.hkpu
   * patch
-     - Python 3.7 support
 * bob/bob.db.thufvdt
   * patch
-     - Python 3.7 support
 * bob/bob.db.mmcbnu6k
   * patch
-     - Python 3.7 support
 * bob/bob.db.hmtvein
   * patch
-     - Python 3.7 support
 * bob/bob.db.voicepa
   * patch
-     - Python 3.7 support
 * bob/bob.db.xm2vts
   * patch
-     - Python 3.7 support
 * bob/bob.db.youtube
   * patch
-     - Python 3.7 support
 * bob/bob.db.pericrosseye
   * patch
-     - Python 3.7 support
 * bob/bob.db.maskattack
   * patch
-     - Python 3.7 support
 * bob/bob.db.casiasurf
   * patch
-     - Python 3.7 support
+     - bob/bob.db.casiasurf!1 Resolve "Database not available anymore ?": Closes bob/bob.db.casiasurf#4
+     - bob/bob.db.casiasurf!2 Add test labels
 * bob/bob.db.fargo
-  * patch
-     - Python 3.7 support
+  * v1.0.2 (Dec 13, 2019 10:30)
+     * Extract frontal image in .mov files instead of .264  * v1.0.3 (Dec 13, 2019 10:31)
+     * Extract frontal image in .mov files instead of .264  * patch
 * bob/bob.bio.base
   * patch
      - bob/bob.bio.base!178 Fixed issue with numpy.ndarray.resize py37
-     - Python 3.7 support
+     - bob/bob.bio.base!179 Separate semilogx and TPR options in ROC plots: Depends on https://gitlab.idiap.ch/bob/bob.measure/merge_requests/98
+     - bob/bob.bio.base!176 Add bob bio annotate-samples command: This command works very similar to bob bio annotate  except that works without a db interface. Instead,  it requires a list of samples and two functions to  do the job.
 * bob/bob.bio.gmm
   * patch
-     - Python 3.7 support
 * bob/bob.bio.face
   * patch
-     - Python 3.7 support
+     - bob/bob.bio.face!59 [mtcnn-annotator] replace it bob.ip.mtcnn with bob.ip.tensorflow_extractor
 * bob/bob.bio.spear
   * patch
-     - Python 3.7 support
 * bob/bob.bio.video
   * patch
-     - Python 3.7 support
+     - bob/bob.bio.video!40 Improve FrameContainer and FrameSelector to be more memory efficient: * FrameContainers can now load a subset of themselves from an HDF5 file  * FrameSelectors now can handle `bob.io.video.reader` instances to avoid loading the whole video into memory.    For example, you can do:  ```python  path = '.../fc.hdf5'  with bob.io.base.HDF5File(path) as f:      bob/bob.bio.video# load only a subset of the FrameContainer      fc = bob.bio.video.FrameContainer().load(f, selection_style="spread", max_number_of_frames=20)  ```  and  ```python  path = '.../video.mp4'  fs = bob.bio.video.FrameSelector(selection_style="spread", max_number_of_frames=20)  fc = fs(bob.io.video.reader(path))  bob/bob.bio.video# only loads 20 frames into memory  ```
 * bob/bob.bio.vein
   * patch
-     - Python 3.7 support
 * bob/bob.db.voxforge
   * patch
-     - Python 3.7 support
 * bob/bob.rppg.base
   * patch
-     - Python 3.7 support
 * bob/bob.pad.base
   * patch
-     - bob/bob.pad.base!63 Use plot.roc instead of plot.roc_for_far in vulnerability ROC plots
-     - Python 3.7 support
+     - bob/bob.pad.base!65 Separate semilogx and TPR options in ROC plots: Depends on https://gitlab.idiap.ch/bob/bob.measure/merge_requests/98
+     - bob/bob.pad.base!66 Fix the wrong total number reported in metrics: Fixes bob.measure#61
+     - bob/bob.pad.base!64 Scikit wrapper: This is the scikit wrapper I was using. It can be improved further I guess.
+     - bob/bob.pad.base!67 Revert "Merge branch 'scikit_wrapper' into 'master'": This reverts merge request bob/bob.pad.base!64
+     - bob/bob.pad.base!69 Small fixes
+     - bob/bob.pad.base!68 Add a GMM Algorithm (moved from bob.pad.voice)
+     - bob/bob.pad.base!70 Improve the metrics command with AUC and relaxed threshold criteria
 * bob/bob.pad.face
   * patch
-     - Python 3.7 support
+     - bob/bob.pad.face!99 Add BRSU: Hi @ageorge and @amohammadi,    I just modified some stuff to add the BRSU database here (note that ``bob.db.brsu`` is not public yet, but will be soon).  Also, I took advantage of this to correct the tests for the aggregated_db used by Olegs (i.e. just adding the db_available decorator).    Could you please have a look ?    Thanks  Guillaume
+     - bob/bob.pad.face!100 Resolve "Remove dependencies with caffe": Closes bob/bob.pad.face#33
+     - bob/bob.pad.face!102 [database] added test labels for CASIA-SURF (and corresponding tests)
+     - bob/bob.pad.face!103 Improve bbox_cropper in load_utils.py
+     - bob/bob.pad.face!104 Improve high level database interfaces
 * bob/bob.pad.voice
   * patch
-     - Python 3.7 support
+     - bob/bob.pad.voice!18 Deprecate the GMM algorithm
 * bob/bob.pad.vein
   * patch
-     - Python 3.7 support
 * bob/bob.fusion.base
   * patch
-     - Python 3.7 support
+     - bob/bob.fusion.base!11 [click] ResourceOption usage is changed.: Depends on https://gitlab.idiap.ch/bob/bob.extension/merge_requests/110    Fixes bob/bob.fusion.base#8
 * bob/bob.db.oulunpu
-  * minor
-     - bob/bob.db.oulunpu!6 Add support for external annotations
-     - Python 3.7 support
+  * patch
+     - bob/bob.db.oulunpu!7 [docs] reference bob.extension.rc in the docs
 * bob/bob.db.uvad
   * patch
-     - Python 3.7 support
 * bob/bob.db.swan
   * patch
-     - Python 3.7 support
+     - bob/bob.db.swan!4 Add new SWAN protocols
+* bob/bob.db.siw
+  * patch
 * bob/bob.db.cuhk_cufs
   * patch
-     - Python 3.7 support
 * bob/bob.db.cbsr_nir_vis_2
   * patch
-     - Python 3.7 support
 * bob/bob.db.nivl
   * patch
-     - Python 3.7 support
 * bob/bob.db.pola_thermal
   * patch
-     - Python 3.7 support
 * bob/bob.db.cuhk_cufsf
   * patch
-     - Python 3.7 support
 * bob/bob.db.ldhf
   * patch
-     - Python 3.7 support
 * bob/bob.ip.tensorflow_extractor
   * patch
-     - bob/bob.ip.tensorflow_extractor!14 Corrected the external link to FaceNet model: If someone from outside Idiap is trying to use FaceNet model, it would not download it, since downloading from google drive requires cookies now. So, the link is replaced to the one on Dropbox.
-     - Python 3.7 support
-* bob/bob.ip.caffe_extractor
-  * patch
-     - Python 3.7 support
-* bob/bob.bio.caffe_face
-  * patch
-     - Python 3.7 support
 * bob/bob.learn.tensorflow
   * patch
-     - Python 3.7 support
+     - bob/bob.learn.tensorflow!81 Added @attr(slow) for slow tests: https://gitlab.idiap.ch/bob/bob.nightlies/issues/55
+     - bob/bob.learn.tensorflow!82 [sphinx] Fixed doc test
+     - bob/bob.learn.tensorflow!83 Revert BOB_NOSE_FAST hack in favour of using environment variables supported by nosetests: @tiago.pereira: I changed the nightlies to use the new mechanism.    This is the last patch to close bob/bob.nightlies#55    I'll let you do the honours as soon as the build passes.
+     - bob/bob.learn.tensorflow!79 Add keras-based models, add pixel-wise loss, other improvements: * d47eae91 Add dataset_to_hdf5 command  * cc8a142a EPSC estimators and losses  * 8e274774 improve block extraction  * b9583f15 Add a parallel read option to dataset_from_tfrecords  * a8bc6541 Add an extra feed option to the extractors  * 1c3fdb10 improve logging for vat loss  * 9058f1a8 Add more logging to bob tf cache-dataset  * e7445a23 Save one best evaluation checkpoint by default  * c82154ef Allow architectures to provide the logits layer  * 281e1c26 Add more logging to the predict commands  * ac7d3eda Add a pixel wise loss  * 2f7fec82 Add keras-based models  * c9311f9c Move utils to the utils folder  * 70e0b85 Allow shuffle on epoch end in generator  * 54a8032 add a function to load png images  * 036a308 improve logging  * e155ed5 improve logging in losses  * fa76538 add center loss, mmd loss, and pairwise confusion loss  * d957c74 make sure densenet layer names are consistent  * 63993d4 nitpick  * cda150d add starting point options to the style transfer script  * 7fabc04 Add more utils  * cb9744b new keras models  * 38de7bd Add GAN tools  * f6e1bb5 implement random rotate  * aece6e1 improve the generator and biogenerator classes  * 6e6adde nitpick  * b9cc5a9 handle nans in network predictions  * 27e73ae cast labels to required format  * 8082804 fix imports  * b9fd76b Add model_summary to keras utils  * 4a714e0 add more option to reproducible  * 3241c38 Add keras version of models  * f481311 remove six dependency  * 36c3f4b Add a Gaussian blur filter
 * bob/bob.learn.pytorch
   * patch
-     - bob/bob.learn.pytorch!37 Use matplotlib to save images: The old one breaks for the new scipy version; replaces image saving with matplotlib.
-     - bob/bob.learn.pytorch!39 change async to non_blocking: The `async` keyword is a reserved keyword in Python 3.7
-     - Python 3.7 support
+     - bob/bob.learn.pytorch!40 Deeppixbis extractor: Added the extractor for DeepPixBiS, since it was not present here, but only in the following paper package: ``bob.paper.deep_pix_bis_pad.icb2019``    I guess it's better to have it here as well bob/bob.learn.pytorch!
+     - bob/bob.learn.pytorch!41 Stop Downloading Densenet in nosetests: Extractor need not download the pretrained model now
 * bob/bob.bio.face_ongoing
-  * v1.0.4 (Jul 17, 2019 08:04)
-     * Shipped some missing .py
   * patch
-     - Python 3.7 support
+     - bob/bob.bio.face_ongoing!3 Fix the documentation index: closes bob/bob.bio.face_ongoing#8
+     - bob/bob.bio.face_ongoing!4 [doc] Fix values in idiap_resnet_msceleb.rst: Corrected the training parameters values of inception ResNet v2 on  MS-Celeb, as well as the link to the training script.
+     - bob/bob.bio.face_ongoing!5 Enable osx-64 builds
 * bob/bob.bio.htface
   * patch
-     - Python 3.7 support
+     - bob/bob.bio.htface!3 Fix the documentation index
 * bob/bob.db.drive
-  * v1.0.0 (Sep 17, 2019 05:23)
-     * Initial public release
-* bob/bob.db.stare
-  * v1.0.0 (Sep 17, 2019 05:07)
-     * Initial public release
-* bob/bob.db.chasedb1
-  * v1.0.0 (Sep 17, 2019 05:38)
-     * Initial public release
-* bob/bob.db.iostar
-  * v1.0.0 (Sep 17, 2019 07:00)
-     * Initial public release
-* bob/bob.db.hrf
-  * v1.0.0 (Sep 17, 2019 05:51)
-     * Initial public release
-* bob/bob.db.rimoner3
-  * v1.0.0 (Sep 17, 2019 06:23)
-     * Initial public release
-* bob/bob.db.drionsdb
-  * v1.0.0 (Sep 17, 2019 06:03)
-     * Initial public release
-* bob/bob.db.refuge
-  * v1.0.0 (Sep 17, 2019 06:46)
-     * Initial public release
-* bob/bob.db.drishtigs1
-  * v1.0.0 (Sep 17, 2019 06:34)
-     * Initial public release
-* bob/bob.ip.binseg
-  * v1.0.0 (Sep 17, 2019 11:17)
-     * Initial public release
   * patch
-     - Fixed issue with LICENSE file
+     - bob/bob.db.drive!4 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.stare
+  * patch
+     - bob/bob.db.stare!2 [conda] Completely remove "license_file" entry on conda recipes (see...: [conda] Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.chasedb1
+  * patch
+     - bob/bob.db.chasedb1!2 Completely remove "license_file" entry on conda recipes (see...: [conda] Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.iostar
+  * patch
+     - bob/bob.db.iostar!2 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.hrf
+  * patch
+     - bob/bob.db.hrf!2 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.rimoner3
+  * patch
+     - bob/bob.db.rimoner3!2 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.drionsdb
+  * patch
+     - bob/bob.db.drionsdb!2 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.refuge
+  * patch
+     - bob/bob.db.refuge!2 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.db.drishtigs1
+  * patch
+     - bob/bob.db.drishtigs1!3 [conda] Completely remove "license_file" entry on conda recipes (see...: Completely remove "license_file" entry on conda recipes (see bob/bob.devtools#44 and bob/bob.devtools!127)
+* bob/bob.ip.binseg
+  * patch
+     - bob/bob.ip.binseg!9 Minor fixes: This MR includes the following features:    1. Makes it explicit the conversion to RGB images in image pre-processing pipelines  2. Adds a transform for converting between 16-bit and 8-bit PNG images  3. Allows the inferencer to work with globs instead of fixed paths (+ adaptations to this where needed)  4. Adds documentation for `imagefolderinference`  5. Adds explicit dependence to bob.core, required by the 16/8 bit PNG converters  6. Fixes an issue related to the conda recipe (see bob/bob.devtools#44 and bob/bob.devtools!127)
 * bob/bob
-  * minor
-    - bob/bob.extension!103 Resolve "bob config fixes"
-    - bob/bob.extension!104 [config] added confirmation prompt before deleting anything from global config file
-    - bob.measure!95 Improve threshold calculation in ROC, DET, and Precision and Recall plots
-    - bob.measure!96 Add an alpha option to ROC,DET,EPC figures: Also, enables you to change the default value in `tablefmt` option.
-    - bob/gridtk!29 Automatically remove G from memory commands in GPU queues
-    - bob/bob.pad.base!63 Use plot.roc instead of plot.roc_for_far in vulnerability ROC plots
-    - bob/bob.db.oulunpu!6 Add support for external annotations
+  * patch

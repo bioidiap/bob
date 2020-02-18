@@ -1,7 +1,0 @@
-bob.bio.base
-bob.bio.face
-bob.bio.video
-bob.bio.spear
-bob.bio.gmm
-matplotlib
-scipy

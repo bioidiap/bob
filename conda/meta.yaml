@@ -30,119 +30,119 @@ requirements:
 
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
-    - bob.buildout ==2.2.4
-    - bob.extension ==4.0.0
-    - bob.blitz ==2.0.20
-    - bob.core ==2.2.4
-    - bob.io.base ==3.0.7
-    - bob.math ==3.1.5
-    - bob.measure ==4.2.0
-    - bob.io.image ==2.4.5
-    - bob.db.base ==3.0.4
-    - bob.io.video ==3.0.2
-    - bob.io.matlab ==2.0.15
-    - bob.io.audio ==2.0.11
-    - bob.sp ==2.0.15
-    - bob.ap ==2.1.10
-    - bob.ip.base ==2.2.5
-    - bob.ip.color ==2.0.15
-    - bob.ip.draw ==2.0.14
-    - bob.ip.gabor ==2.0.16
-    - bob.learn.activation ==2.0.15
-    - bob.learn.libsvm ==2.1.4
-    - bob.learn.linear ==2.1.7
-    - bob.learn.mlp ==2.1.11
-    - bob.learn.boosting ==2.0.18
-    - bob.db.iris ==2.1.6
-    - bob.learn.em ==2.1.5
-    - bob.db.wine ==2.0.14
-    - bob.db.mnist ==2.2.5
-    - bob.db.atnt ==2.0.15
-    - bob.ip.facedetect ==2.1.10
-    - bob.ip.optflow.hornschunck ==2.0.18
-    - bob.ip.optflow.liu ==2.0.17
-    - bob.ip.flandmark ==2.1.11
-    - gridtk ==1.6.5
-    - bob.ip.qualitymeasure ==1.1.4
-    - bob.ip.skincolorfilter ==0.0.8
-    - bob.ip.facelandmarks ==1.0.9
-    - bob.ip.dlib ==1.0.8
-    - bob.db.arface ==2.1.9
-    - bob.db.asvspoof ==1.2.4
-    - bob.db.asvspoof2017 ==1.1.4
-    - bob.db.atvskeystroke ==2.1.10
-    - bob.db.avspoof ==2.3.4
-    - bob.db.banca ==2.1.10
-    - bob.db.biosecure ==2.1.10
-    - bob.db.biosecurid.face ==2.1.13
-    - bob.db.casia_fasd ==2.0.9
-    - bob.db.casme2 ==2.1.11
-    - bob.db.caspeal ==2.1.10
-    - bob.db.cohface ==1.1.5
-    - bob.db.frgc ==2.1.8
-    - bob.db.gbu ==2.1.9
-    - bob.db.hci_tagging ==1.1.5
-    - bob.db.ijba ==2.1.5
-    - bob.db.ijbc ==1.0.3
-    - bob.db.kboc16 ==2.1.4
-    - bob.db.lfw ==2.1.10
-    - bob.db.livdet2013 ==2.1.4
-    - bob.db.mobio ==2.2.4
-    - bob.db.msu_mfsd_mod ==2.2.8
-    - bob.db.multipie ==2.1.9
-    - bob.db.nist_sre12 ==3.0.8
-    - bob.db.putvein ==1.3.5
-    - bob.db.replay ==3.0.8
-    - bob.db.replaymobile ==1.1.8
-    - bob.db.scface ==2.1.10
-    - bob.db.utfvp ==3.0.4
-    - bob.db.verafinger ==2.0.5
-    - bob.db.fv3d ==1.1.5
-    - bob.db.voicepa ==1.1.4
-    - bob.db.xm2vts ==2.1.9
-    - bob.db.youtube ==2.1.9
-    - bob.db.pericrosseye ==1.0.6
-    - bob.db.maskattack ==0.0.4
-    - bob.db.casiasurf ==1.0.2
-    - bob.db.fargo ==1.0.4
-    - bob.bio.base ==4.1.0
-    - bob.bio.gmm ==3.2.5
-    - bob.bio.face ==4.0.3
-    - bob.bio.spear ==3.2.5
-    - bob.bio.video ==3.4.5
-    - bob.bio.vein ==1.1.5
-    - bob.db.voxforge ==2.3.5
-    - bob.rppg.base ==2.0.5
-    - bob.pad.base ==2.3.0
-    - bob.pad.face ==2.2.2
-    - bob.pad.voice ==1.0.9
-    - bob.pad.vein ==1.0.4
-    - bob.fusion.base ==0.0.4
-    - bob.db.oulunpu ==0.1.1
-    - bob.db.uvad ==0.0.5
-    - bob.db.swan ==0.0.3
-    - bob.db.siw ==0.0.1
-    - bob.db.cuhk_cufs ==2.2.6
-    - bob.db.cbsr_nir_vis_2 ==2.0.6
-    - bob.db.nivl ==1.0.4
-    - bob.db.pola_thermal ==1.0.4
-    - bob.db.cuhk_cufsf ==1.0.5
-    - bob.db.ldhf ==1.0.3
-    - bob.ip.tensorflow_extractor ==0.0.6
-    - bob.learn.tensorflow ==1.2.0
-    - bob.learn.pytorch ==0.1.0  # [linux]
-    - bob.bio.face_ongoing ==1.0.6
-    - bob.bio.htface ==1.0.5
-    - bob.db.drive ==1.0.1
-    - bob.db.stare ==1.0.1
-    - bob.db.chasedb1 ==1.0.1
-    - bob.db.iostar ==1.0.1
-    - bob.db.hrf ==1.0.1
-    - bob.db.rimoner3 ==1.0.1
-    - bob.db.drionsdb ==1.0.1
-    - bob.db.refuge ==1.0.1
-    - bob.db.drishtigs1 ==1.0.1
-    - bob.ip.binseg ==1.1.0  # [linux]
+    - bob.buildout
+    - bob.extension
+    - bob.blitz
+    - bob.core
+    - bob.io.base
+    - bob.math
+    - bob.measure
+    - bob.io.image
+    - bob.db.base
+    - bob.io.video
+    - bob.io.matlab
+    - bob.io.audio
+    - bob.sp
+    - bob.ap
+    - bob.ip.base
+    - bob.ip.color
+    - bob.ip.draw
+    - bob.ip.gabor
+    - bob.learn.activation
+    - bob.learn.libsvm
+    - bob.learn.linear
+    - bob.learn.mlp
+    - bob.learn.boosting
+    - bob.db.iris
+    - bob.learn.em
+    - bob.db.wine
+    - bob.db.mnist
+    - bob.db.atnt
+    - bob.ip.facedetect
+    - bob.ip.optflow.hornschunck
+    - bob.ip.optflow.liu
+    - bob.ip.flandmark
+    - gridtk
+    - bob.ip.qualitymeasure
+    - bob.ip.skincolorfilter
+    - bob.ip.facelandmarks
+    - bob.ip.dlib
+    - bob.db.arface
+    - bob.db.asvspoof
+    - bob.db.asvspoof2017
+    - bob.db.atvskeystroke
+    - bob.db.avspoof
+    - bob.db.banca
+    - bob.db.biosecure
+    - bob.db.biosecurid.face
+    - bob.db.casia_fasd
+    - bob.db.casme2
+    - bob.db.caspeal
+    - bob.db.cohface
+    - bob.db.frgc
+    - bob.db.gbu
+    - bob.db.hci_tagging
+    - bob.db.ijba
+    - bob.db.ijbc
+    - bob.db.kboc16
+    - bob.db.lfw
+    - bob.db.livdet2013
+    - bob.db.mobio
+    - bob.db.msu_mfsd_mod
+    - bob.db.multipie
+    - bob.db.nist_sre12
+    - bob.db.putvein
+    - bob.db.replay
+    - bob.db.replaymobile
+    - bob.db.scface
+    - bob.db.utfvp
+    - bob.db.verafinger
+    - bob.db.fv3d
+    - bob.db.voicepa
+    - bob.db.xm2vts
+    - bob.db.youtube
+    - bob.db.pericrosseye
+    - bob.db.maskattack
+    - bob.db.casiasurf
+    - bob.db.fargo
+    - bob.bio.base
+    - bob.bio.gmm
+    - bob.bio.face
+    - bob.bio.spear
+    - bob.bio.video
+    - bob.bio.vein
+    - bob.db.voxforge
+    - bob.rppg.base
+    - bob.pad.base
+    - bob.pad.face
+    - bob.pad.voice
+    - bob.pad.vein
+    - bob.fusion.base
+    - bob.db.oulunpu
+    - bob.db.uvad
+    - bob.db.swan
+    - bob.db.siw
+    - bob.db.cuhk_cufs
+    - bob.db.cbsr_nir_vis_2
+    - bob.db.nivl
+    - bob.db.pola_thermal
+    - bob.db.cuhk_cufsf
+    - bob.db.ldhf
+    - bob.ip.tensorflow_extractor
+    - bob.learn.tensorflow
+    - bob.learn.pytorch  # [linux]
+    - bob.bio.face_ongoing
+    - bob.bio.htface
+    - bob.db.drive
+    - bob.db.stare
+    - bob.db.chasedb1
+    - bob.db.iostar
+    - bob.db.hrf
+    - bob.db.rimoner3
+    - bob.db.drionsdb
+    - bob.db.refuge
+    - bob.db.drishtigs1
+    - bob.ip.binseg  # [linux]
     # LIST OF BOB PACKAGES - END
   run:
     - python

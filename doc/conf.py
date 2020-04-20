@@ -19,14 +19,11 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.ifconfig',
     'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
-    'sphinx.ext.graphviz',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     'sphinx.ext.mathjax',
-    'matplotlib.sphinxext.plot_directive'
     ]
 
 
@@ -51,16 +48,6 @@ if os.path.exists('nitpick-exceptions.txt'):
 
 # Always includes todos
 todo_include_todos = False
-
-# Generates auto-summary automatically
-autosummary_generate = False
-
-# Create numbers on figures with captions
-numfig = True
-
-# If we are on OSX, the 'dvipng' path maybe different
-dvipng_osx = '/opt/local/libexec/texlive/binaries/dvipng'
-if os.path.exists(dvipng_osx): pngmath_dvipng = dvipng_osx
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -103,7 +90,7 @@ release = distribution.version
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['**/links.rst', '**/README.rst', '**/bob.db.atnt/doc/py_api', '**/plot.detection_identification_curve']
+exclude_patterns = ['**/links.rst', '**/README.rst']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None

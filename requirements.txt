@@ -101,13 +101,4 @@ bob.learn.tensorflow
 bob.learn.pytorch ; sys_platform == 'linux'
 bob.bio.face_ongoing
 bob.bio.htface
-bob.db.drive
-bob.db.stare
-bob.db.chasedb1
-bob.db.iostar
-bob.db.hrf
-bob.db.rimoner3
-bob.db.drionsdb
-bob.db.refuge
-bob.db.drishtigs1
 bob.ip.binseg ; sys_platform == 'linux'

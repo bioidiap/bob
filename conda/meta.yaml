@@ -133,15 +133,6 @@ requirements:
     - bob.learn.pytorch  # [linux]
     - bob.bio.face_ongoing
     - bob.bio.htface
-    - bob.db.drive
-    - bob.db.stare
-    - bob.db.chasedb1
-    - bob.db.iostar
-    - bob.db.hrf
-    - bob.db.rimoner3
-    - bob.db.drionsdb
-    - bob.db.refuge
-    - bob.db.drishtigs1
     - bob.ip.binseg  # [linux]
     # LIST OF BOB PACKAGES - END
   run:

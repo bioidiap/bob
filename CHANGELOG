@@ -1,5 +1,5 @@
 * bob/bob
-  * patch
+  * major
      - bob/bob.buildout!40 [script] Revert fixes done to tackle issue bob/bob.buildout#15: Revert fixes done to tackle issue bob/bob.buildout#15. https://bugs.python.org/issue30167 is fixed since a couple of years (I cannot reproduce the error anymore on all supported Python versions)
      - bob/bob.io.video!19 Make reader and writer classes picklable: Fixes bob/bob.io.video#16
      - bob/bob.ip.draw!5 Deprecating package

@@ -121,7 +121,7 @@ requirements:
     - bob.db.oulunpu ==0.1.2
     - bob.db.uvad ==0.0.6
     - bob.db.swan ==0.0.4
-    - bob.db.siw ==0.0.1
+    - bob.db.siw ==0.0.2
     - bob.db.cuhk_cufs ==2.2.7
     - bob.db.cbsr_nir_vis_2 ==2.0.7
     - bob.db.nivl ==1.0.5

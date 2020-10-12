@@ -84,7 +84,6 @@ bob.rppg.base
 bob.pad.base
 bob.pad.face
 bob.pad.voice
-bob.pad.vein
 bob.fusion.base
 bob.db.oulunpu
 bob.db.uvad

@@ -97,7 +97,7 @@ requirements:
     - bob.db.pola_thermal
     - bob.db.cuhk_cufsf
     - bob.db.ldhf
-    - bob.learn.tensorflow
+    - bob.learn.tensorflow  # [linux]
     - bob.learn.pytorch  # [linux]
     - bob.ip.binseg  # [linux]
     # LIST OF BOB PACKAGES - END

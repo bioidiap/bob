@@ -129,6 +129,7 @@ test:
     - sphinx
     - sphinx_rtd_theme
     - cmake
+    - pytest
     - pkg-config
     - freetype
     - psutil  # for bob.io.video

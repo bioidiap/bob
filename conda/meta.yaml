@@ -117,8 +117,7 @@ test:
   commands:
     - export SDKROOT="{{ SDKROOT }}"  # [osx]
     - export MACOSX_DEPLOYMENT_TARGET="{{ MACOSX_DEPLOYMENT_TARGET }}"  # [osx]
-    - nosetests --with-coverage --cover-package={{ name }} -sv {{ name }} --exclude bob.buildout
-    - pytest --verbose --cov bob.buildout --cov-report term-missing --pyargs bob.buildout
+    - pytest --verbose --cov {{ name }} --cov-report term-missing --cov-report html:{{ project_dir }}/sphinx/coverage --cov-report xml:{{ project_dir }}/coverage.xml --pyargs {{ name }}
     - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
     - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]

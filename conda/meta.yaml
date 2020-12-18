@@ -117,7 +117,7 @@ test:
   commands:
     - export SDKROOT="{{ SDKROOT }}"  # [osx]
     - export MACOSX_DEPLOYMENT_TARGET="{{ MACOSX_DEPLOYMENT_TARGET }}"  # [osx]
-    - pytest --verbose --cov {{ name }} --cov-report term-missing --cov-report html:{{ project_dir }}/sphinx/coverage --cov-report xml:{{ project_dir }}/coverage.xml --pyargs {{ name }} -k="not test_cmake and not test_extensions"
+    - pytest --verbose --cov {{ name }} --cov-report term-missing --cov-report html:{{ project_dir }}/sphinx/coverage --cov-report xml:{{ project_dir }}/coverage.xml --pyargs {{ name }}
     - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
     - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
@@ -134,6 +134,7 @@ test:
     - freetype
     - psutil  # for bob.io.video
     - dask-ml
+    - make
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}

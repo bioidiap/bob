@@ -67,8 +67,6 @@ requirements:
     - bob.db.ijbc
     - bob.db.lfw
     - bob.db.livdet2013
-    - bob.db.mobio
-    - bob.db.multipie
     - bob.db.replay
     - bob.db.replaymobile
     - bob.db.voicepa

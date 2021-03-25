@@ -47,8 +47,8 @@ requirements:
     - bob.ip.color
     - bob.ip.gabor
     - bob.learn.activation
-    - bob.learn.libsvm
     - bob.learn.linear
+    - bob.learn.libsvm
     - bob.learn.mlp
     - bob.db.iris
     - bob.learn.em
@@ -57,29 +57,8 @@ requirements:
     - bob.ip.facedetect
     - gridtk
     - bob.ip.qualitymeasure
-    - bob.ip.skincolorfilter
-    - bob.db.arface
-    - bob.db.asvspoof
-    - bob.db.asvspoof2017
-    - bob.db.atvskeystroke
-    - bob.db.casia_fasd
-    - bob.db.gbu
-    - bob.db.ijbc
-    - bob.db.lfw
-    - bob.db.livdet2013
-    - bob.db.replay
-    - bob.db.replaymobile
-    - bob.db.voicepa
-    - bob.db.xm2vts
-    - bob.db.youtube
-    - bob.db.maskattack
-    - bob.db.casiasurf
-    - bob.db.fargo
-    - bob.db.verafinger
-    - bob.db.utfvp
-    - bob.db.fv3d
-    - bob.db.putvein
     - bob.pipelines
+    - bob.learn.tensorflow  # [linux]
     - bob.bio.base
     - bob.bio.gmm
     - bob.bio.face
@@ -88,14 +67,6 @@ requirements:
     - bob.pad.base
     - bob.pad.face
     - bob.fusion.base
-    - bob.db.uvad
-    - bob.db.cuhk_cufs
-    - bob.db.cbsr_nir_vis_2
-    - bob.db.nivl
-    - bob.db.pola_thermal
-    - bob.db.cuhk_cufsf
-    - bob.db.ldhf
-    - bob.learn.tensorflow  # [linux]
     - bob.learn.pytorch  # [linux]
     - bob.ip.binseg  # [linux]
     # LIST OF BOB PACKAGES - END

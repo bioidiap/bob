@@ -30,45 +30,45 @@ requirements:
 
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
-    - bob.buildout
-    - bob.extension
-    - bob.blitz
-    - bob.core
-    - bob.io.base
-    - bob.math
-    - bob.measure
-    - bob.io.image
-    - bob.db.base
-    - bob.io.video
-    - bob.io.audio
-    - bob.sp
-    - bob.ap
-    - bob.ip.base
-    - bob.ip.color
-    - bob.ip.gabor
-    - bob.learn.activation
-    - bob.learn.linear
-    - bob.learn.libsvm
-    - bob.learn.mlp
-    - bob.db.iris
-    - bob.learn.em
-    - bob.db.mnist
-    - bob.db.atnt
-    - bob.ip.facedetect
-    - gridtk
-    - bob.ip.qualitymeasure
-    - bob.pipelines
-    - bob.learn.tensorflow  # [linux]
-    - bob.bio.base
-    - bob.bio.gmm
-    - bob.bio.face
-    - bob.bio.video
-    - bob.bio.vein
-    - bob.pad.base
-    - bob.pad.face
-    - bob.fusion.base
-    - bob.learn.pytorch  # [linux]
-    - bob.ip.binseg  # [linux]
+    - bob.buildout ==2.3.0
+    - bob.extension ==6.0.0
+    - bob.blitz ==2.0.23
+    - bob.core ==2.2.7
+    - bob.io.base ==3.0.10
+    - bob.math ==3.1.8
+    - bob.measure ==4.2.3
+    - bob.io.image ==2.5.0
+    - bob.db.base ==3.1.0
+    - bob.io.video ==3.0.4
+    - bob.io.audio ==2.0.14
+    - bob.sp ==2.0.17
+    - bob.ap ==2.1.12
+    - bob.ip.base ==2.2.7
+    - bob.ip.color ==2.0.17
+    - bob.ip.gabor ==2.0.18
+    - bob.learn.activation ==2.0.17
+    - bob.learn.linear ==2.1.9
+    - bob.learn.libsvm ==2.1.6
+    - bob.learn.mlp ==2.1.13
+    - bob.db.iris ==2.1.8
+    - bob.learn.em ==2.1.7
+    - bob.db.mnist ==2.2.7
+    - bob.db.atnt ==2.0.17
+    - bob.ip.facedetect ==4.0.0
+    - gridtk ==1.8.2
+    - bob.ip.qualitymeasure ==1.1.7
+    - bob.pipelines ==1.0.0
+    - bob.learn.tensorflow ==2.0.0  # [linux]
+    - bob.bio.base ==5.0.0
+    - bob.bio.gmm ==4.0.0
+    - bob.bio.face ==5.0.0
+    - bob.bio.video ==4.0.0
+    - bob.bio.vein ==2.0.0
+    - bob.pad.base ==3.0.0
+    - bob.pad.face ==3.0.0
+    - bob.fusion.base ==0.0.6
+    - bob.learn.pytorch ==0.2.0  # [linux]
+    - bob.ip.binseg ==1.2.0  # [linux]
     # LIST OF BOB PACKAGES - END
   run:
     - python

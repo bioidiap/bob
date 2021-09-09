@@ -1,5 +1,5 @@
 # The main copy of this list is in bob-devel. Keep them synced please.
-{% set nopin = ['ca-certificates', 'certifi', 'openssl', 'libstdcxx-ng', 'libgcc-ng', 'libcxx', 'libcxxabi'] %}
+{% set nopin = ['ca-certificates', 'certifi', 'openssl', 'libstdcxx-ng', 'libgcc-ng', 'libgfortran-ng', 'libcxx', 'libcxxabi', 'libgfortran'] %}
 {% set name = 'bob' %}
 {% set project_dir = environ.get('RECIPE_DIR') + '/..' %}
 
@@ -24,7 +24,6 @@ requirements:
   host:
     - python {{ python }}
     - setuptools {{ setuptools }}
-    - bob-devel {{ bob_devel }}
     # the list below contains all public packages. This is/should be the same
     # list as order.txt (save for private packages) in bob.nightlies.
 
@@ -91,18 +90,17 @@ test:
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
   requires:
-    - bob-devel {{ bob_devel }}.*
-    - nose
-    - coverage
-    - sphinx
-    - sphinx_rtd_theme
-    - cmake
-    - pytest
-    - pkg-config
-    - freetype
-    - psutil  # for bob.io.video
-    - dask-ml
-    - make
+    - nose {{ nose }}
+    - coverage {{ coverage }}
+    - sphinx {{ sphinx }}
+    - sphinx_rtd_theme {{ sphinx_rtd_theme }}
+    - cmake {{ cmake }}
+    - pytest {{ pytest }}
+    - pkg-config {{ pkg_config }}
+    - freetype {{ freetype }}
+    - psutil {{ psutil }}
+    - dask-ml {{ dask_ml }}
+    - make {{ make }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}

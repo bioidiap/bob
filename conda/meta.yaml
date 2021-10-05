@@ -16,14 +16,15 @@ build:
   script:
     - cd {{ project_dir }}
     {% if environ.get('BUILD_EGG') %}
-    - python setup.py sdist --formats=zip
+    - "{{ PYTHON }} setup.py sdist --formats=zip"
     {% endif %}
-    - python setup.py install --single-version-externally-managed --record record.txt
+    - "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - python {{ python }}
     - setuptools {{ setuptools }}
+    - pip {{ pip }}
     # the list below contains all public packages. This is/should be the same
     # list as order.txt (save for private packages) in bob.nightlies.
 

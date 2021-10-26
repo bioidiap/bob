@@ -30,7 +30,6 @@ requirements:
 
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
-    - bob.buildout
     - bob.extension
     - bob.blitz
     - bob.core
@@ -54,7 +53,6 @@ requirements:
     - bob.db.atnt
     - bob.ip.facedetect
     - gridtk
-    - bob.ip.qualitymeasure
     - bob.pipelines
     - bob.learn.tensorflow  # [linux]
     - bob.bio.base
@@ -62,11 +60,13 @@ requirements:
     - bob.bio.face
     - bob.bio.video
     - bob.bio.vein
+    - bob.ip.qualitymeasure
     - bob.pad.base
     - bob.pad.face
     - bob.fusion.base
-    - bob.learn.pytorch  # [linux]
-    - bob.ip.binseg  # [linux]
+    - bob.ip.binseg
+    - bob.io.stream
+    - bob.ip.stereo
     # LIST OF BOB PACKAGES - END
   run:
     - python

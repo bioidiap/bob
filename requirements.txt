@@ -1,4 +1,3 @@
-bob.buildout
 bob.extension
 bob.blitz
 bob.core
@@ -22,7 +21,6 @@ bob.db.mnist
 bob.db.atnt
 bob.ip.facedetect
 gridtk
-bob.ip.qualitymeasure
 bob.pipelines
 bob.learn.tensorflow
 bob.bio.base
@@ -30,8 +28,10 @@ bob.bio.gmm
 bob.bio.face
 bob.bio.video
 bob.bio.vein
+bob.ip.qualitymeasure
 bob.pad.base
 bob.pad.face
 bob.fusion.base
-bob.learn.pytorch
 bob.ip.binseg
+bob.io.stream
+bob.ip.stereo

@@ -95,8 +95,12 @@ test:
     - coverage {{ coverage }}
     - sphinx {{ sphinx }}
     - sphinx_rtd_theme {{ sphinx_rtd_theme }}
+    - sphinxcontrib-programoutput {{ sphinxcontrib_programoutput }}
+    - graphviz {{ graphviz }}
+    - font-ttf-dejavu-sans-mono {{ font_ttf_dejavu_sans_mono }}
     - cmake {{ cmake }}
     - pytest {{ pytest }}
+    - pytest-cov {{ pytest_cov }}
     - pkg-config {{ pkg_config }}
     - freetype {{ freetype }}
     - psutil {{ psutil }}

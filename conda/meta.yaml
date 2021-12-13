@@ -30,43 +30,43 @@ requirements:
 
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
-    - bob.extension ==6.1.1
-    - bob.blitz ==2.0.24
-    - bob.core ==2.2.8
-    - bob.io.base ==4.0.0
-    - bob.math ==3.1.9
-    - bob.measure ==5.0.0
-    - bob.io.image ==2.5.1
-    - bob.db.base ==3.2.0
-    - bob.io.video ==3.0.5
-    - bob.io.audio ==2.0.15
-    - bob.sp ==2.0.18
-    - bob.ap ==2.1.13
-    - bob.ip.base ==3.0.0
-    - bob.ip.color ==2.0.18
-    - bob.ip.gabor ==2.0.19
-    - bob.learn.activation ==2.0.18
-    - bob.learn.linear ==2.1.10
-    - bob.db.iris ==2.1.9
-    - bob.learn.em ==2.1.8
-    - bob.db.mnist ==2.2.8
-    - bob.db.atnt ==2.0.18
-    - bob.ip.facedetect ==4.1.0
-    - gridtk ==1.8.3
-    - bob.pipelines ==2.0.0
-    - bob.learn.tensorflow ==3.0.0  # [linux]
-    - bob.bio.base ==6.0.0
-    - bob.bio.gmm ==4.0.1
-    - bob.bio.face ==6.0.0
-    - bob.bio.video ==5.0.0
-    - bob.bio.vein ==3.0.0
-    - bob.ip.qualitymeasure ==1.1.8
-    - bob.pad.base ==4.0.0
-    - bob.pad.face ==3.1.0
-    - bob.fusion.base ==0.0.7
-    - bob.ip.binseg ==1.4.0
-    - bob.io.stream ==1.0.1
-    - bob.ip.stereo ==1.0.1
+    - bob.extension
+    - bob.blitz
+    - bob.core
+    - bob.io.base
+    - bob.math
+    - bob.measure
+    - bob.io.image
+    - bob.db.base
+    - bob.io.video
+    - bob.io.audio
+    - bob.sp
+    - bob.ap
+    - bob.ip.base
+    - bob.ip.color
+    - bob.ip.gabor
+    - bob.learn.activation
+    - bob.learn.linear
+    - bob.db.iris
+    - bob.learn.em
+    - bob.db.mnist
+    - bob.db.atnt
+    - bob.ip.facedetect
+    - gridtk
+    - bob.pipelines
+    - bob.learn.tensorflow  # [linux]
+    - bob.bio.base
+    - bob.bio.gmm
+    - bob.bio.face
+    - bob.bio.video
+    - bob.bio.vein
+    - bob.ip.qualitymeasure
+    - bob.pad.base
+    - bob.pad.face
+    - bob.fusion.base
+    - bob.ip.binseg
+    - bob.io.stream
+    - bob.ip.stereo
     # LIST OF BOB PACKAGES - END
   run:
     - python

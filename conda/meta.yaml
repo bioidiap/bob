@@ -103,7 +103,6 @@ test:
     - pytest-cov {{ pytest_cov }}
     - pkg-config {{ pkg_config }}
     - freetype {{ freetype }}
-    - psutil {{ psutil }}
     - dask-ml {{ dask_ml }}
     - make {{ make }}
     - {{ compiler('c') }}

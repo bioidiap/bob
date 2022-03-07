@@ -25,6 +25,24 @@ requirements:
     - python {{ python }}
     - setuptools {{ setuptools }}
     - pip {{ pip }}
+    # test requirement MUST be listed and pinned here:
+    - nose {{ nose }}
+    - coverage {{ coverage }}
+    - sphinx {{ sphinx }}
+    - sphinx_rtd_theme {{ sphinx_rtd_theme }}
+    - sphinxcontrib-programoutput {{ sphinxcontrib_programoutput }}
+    - graphviz {{ graphviz }}
+    - font-ttf-dejavu-sans-mono {{ font_ttf_dejavu_sans_mono }}
+    - cmake {{ cmake }}
+    - pytest {{ pytest }}
+    - pytest-cov {{ pytest_cov }}
+    - pkg-config {{ pkg_config }}
+    - freetype {{ freetype }}
+    - dask-ml {{ dask_ml }}
+    - make {{ make }}
+    - tensorflow-base {{ tensorflow }}  # for mtcnn tests
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     # the list below contains all public packages. This is/should be the same
     # list as order.txt (save for private packages) in bob.nightlies.
 
@@ -83,21 +101,23 @@ test:
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
   requires:
-    - nose {{ nose }}
-    - coverage {{ coverage }}
-    - sphinx {{ sphinx }}
-    - sphinx_rtd_theme {{ sphinx_rtd_theme }}
-    - sphinxcontrib-programoutput {{ sphinxcontrib_programoutput }}
-    - graphviz {{ graphviz }}
-    - font-ttf-dejavu-sans-mono {{ font_ttf_dejavu_sans_mono }}
-    - cmake {{ cmake }}
-    - pytest {{ pytest }}
-    - pytest-cov {{ pytest_cov }}
-    - pkg-config {{ pkg_config }}
-    - freetype {{ freetype }}
-    - dask-ml {{ dask_ml }}
-    - make {{ make }}
-    - tensorflow {{ tensorflow }}  # for mtcnn tests
+    # All test requirements MUST also be listed and pinned in the host section.
+    # Do not pin test requirements here because they are already pinned in the host section.
+    - nose
+    - coverage
+    - sphinx
+    - sphinx_rtd_theme
+    - sphinxcontrib-programoutput
+    - graphviz
+    - font-ttf-dejavu-sans-mono
+    - cmake
+    - pytest
+    - pytest-cov
+    - pkg-config
+    - freetype
+    - dask-ml
+    - make
+    - tensorflow-base
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}

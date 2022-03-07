@@ -97,6 +97,7 @@ test:
     - freetype {{ freetype }}
     - dask-ml {{ dask_ml }}
     - make {{ make }}
+    - tensorflow {{ tensorflow }}  # for mtcnn tests
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}

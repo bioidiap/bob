@@ -60,19 +60,18 @@ requirements:
     - bob.ap
     - bob.ip.base
     - bob.ip.color
-    - bob.ip.gabor
     - bob.learn.em
     - bob.db.atnt
     - gridtk
     - bob.pipelines
     - bob.bio.base
     - bob.bio.gmm
-    - bob.bio.face
-    - bob.bio.video
+    - bob.bio.face # [not arm64] 
+    - bob.bio.video # [not arm64] 
     - bob.bio.vein
     - bob.ip.qualitymeasure
     - bob.pad.base
-    - bob.pad.face
+    - bob.pad.face # [not arm64]
     - bob.fusion.base
     - bob.ip.binseg
     - bob.io.stream

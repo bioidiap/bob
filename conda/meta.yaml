@@ -54,12 +54,9 @@ requirements:
     - bob.io.base
     - bob.math
     - bob.measure
-    - bob.io.image
-    - bob.db.base
     - bob.sp
     - bob.ap
     - bob.ip.base
-    - bob.ip.color
     - bob.learn.em
     - bob.db.atnt
     - gridtk
@@ -73,7 +70,6 @@ requirements:
     - bob.pad.base
     - bob.pad.face # [not arm64]
     - bob.fusion.base
-    - bob.ip.binseg
     - bob.io.stream
     - bob.ip.stereo
     # LIST OF BOB PACKAGES - END

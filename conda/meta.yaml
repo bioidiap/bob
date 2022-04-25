@@ -63,8 +63,8 @@ requirements:
     - bob.pipelines
     - bob.bio.base
     - bob.bio.gmm
-    - bob.bio.face # [not arm64] 
-    - bob.bio.video # [not arm64] 
+    - bob.bio.face # [not arm64]
+    - bob.bio.video # [not arm64]
     - bob.bio.vein
     - bob.ip.qualitymeasure
     - bob.pad.base

@@ -4,13 +4,9 @@ bob.core
 bob.io.base
 bob.math
 bob.measure
-bob.io.image
-bob.db.base
 bob.sp
 bob.ap
 bob.ip.base
-bob.ip.color
-bob.ip.gabor
 bob.learn.em
 bob.db.atnt
 gridtk
@@ -24,6 +20,5 @@ bob.ip.qualitymeasure
 bob.pad.base
 bob.pad.face
 bob.fusion.base
-bob.ip.binseg
 bob.io.stream
 bob.ip.stereo

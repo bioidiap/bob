@@ -7,7 +7,6 @@ bob.measure
 bob.sp
 bob.ap
 bob.learn.em
-bob.db.atnt
 gridtk
 bob.pipelines
 bob.bio.base

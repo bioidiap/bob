@@ -56,7 +56,6 @@ requirements:
     - bob.measure
     - bob.sp
     - bob.ap
-    - bob.ip.base
     - bob.learn.em
     - bob.db.atnt
     - gridtk

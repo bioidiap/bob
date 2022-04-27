@@ -49,27 +49,18 @@ requirements:
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
     - bob.extension
-    - bob.blitz
-    - bob.core
     - bob.io.base
-    - bob.math
     - bob.measure
-    - bob.sp
-    - bob.ap
     - bob.learn.em
-    - gridtk
     - bob.pipelines
     - bob.bio.base
-    - bob.bio.gmm
-    - bob.bio.face # [not arm64]
-    - bob.bio.video # [not arm64]
+    - bob.bio.face  # [not arm64]
+    - bob.bio.video  # [not arm64]
     - bob.bio.vein
-    - bob.ip.qualitymeasure
+    - bob.bio.spear  # [not arm64]
     - bob.pad.base
-    - bob.pad.face # [not arm64]
+    - bob.pad.face  # [not arm64]
     - bob.fusion.base
-    - bob.io.stream
-    - bob.ip.stereo
     # LIST OF BOB PACKAGES - END
   run:
     - python

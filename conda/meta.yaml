@@ -8,6 +8,7 @@ package:
   version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
 
 build:
+  skip: True  # [arm64]
   number: {{ environ.get('BOB_BUILD_NUMBER', 0) }}
   ignore_run_exports:
   {% for package in resolved_packages('host') %}

@@ -49,19 +49,19 @@ requirements:
 
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
-    - bob.extension
-    - bob.io.base
-    - bob.measure
-    - bob.learn.em
-    - bob.pipelines
-    - bob.bio.base
-    - bob.bio.face  # [not arm64]
-    - bob.bio.video  # [not arm64]
-    - bob.bio.vein
-    - bob.bio.spear  # [not arm64]
-    - bob.pad.base
-    - bob.pad.face  # [not arm64]
-    - bob.fusion.base
+    - bob.extension ==7.0.2
+    - bob.io.base ==5.0.1
+    - bob.measure ==6.0.1
+    - bob.learn.em ==3.0.3
+    - bob.pipelines ==3.0.2
+    - bob.bio.base ==7.0.3
+    - bob.bio.face ==7.0.3  # [not arm64]
+    - bob.bio.video ==6.0.7  # [not arm64]
+    - bob.bio.vein ==4.0.2
+    - bob.bio.spear ==4.0.2  # [not arm64]
+    - bob.pad.base ==5.0.2
+    - bob.pad.face ==4.0.2  # [not arm64]
+    - bob.fusion.base ==0.1.2
     # LIST OF BOB PACKAGES - END
   run:
     - python

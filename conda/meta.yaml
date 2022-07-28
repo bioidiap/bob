@@ -8,7 +8,6 @@ package:
   version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
 
 build:
-  skip: True  # [arm64]
   number: {{ environ.get('BOB_BUILD_NUMBER', 0) }}
   ignore_run_exports:
   {% for package in resolved_packages('host') %}
@@ -55,12 +54,12 @@ requirements:
     - bob.learn.em
     - bob.pipelines
     - bob.bio.base
-    - bob.bio.face  # [not arm64]
-    - bob.bio.video  # [not arm64]
+    - bob.bio.face
+    - bob.bio.video
     - bob.bio.vein
-    - bob.bio.spear  # [not arm64]
+    - bob.bio.spear
     - bob.pad.base
-    - bob.pad.face  # [not arm64]
+    - bob.pad.face
     - bob.fusion.base
     # LIST OF BOB PACKAGES - END
   run:

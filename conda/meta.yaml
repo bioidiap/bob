@@ -27,7 +27,6 @@ requirements:
     - setuptools {{ setuptools }}
     - pip {{ pip }}
     # test requirement MUST be listed and pinned here:
-    - nose {{ nose }}
     - coverage {{ coverage }}
     - sphinx {{ sphinx }}
     - sphinx_rtd_theme {{ sphinx_rtd_theme }}
@@ -88,7 +87,6 @@ test:
   requires:
     # All test requirements MUST also be listed and pinned in the host section.
     # Do not pin test requirements here because they are already pinned in the host section.
-    - nose
     - coverage
     - sphinx
     - sphinx_rtd_theme

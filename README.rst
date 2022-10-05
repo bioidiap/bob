@@ -1,11 +1,11 @@
 .. vim: set fileencoding=utf-8 :
 
-.. image:: https://img.shields.io/badge/docs-v11.2.1-orange.svg
-   :target: https://www.idiap.ch/software/bob/docs/bob/bob/v11.2.1/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob/badges/v11.2.1/pipeline.svg
-   :target: https://gitlab.idiap.ch/bob/bob/commits/v11.2.1
-.. image:: https://gitlab.idiap.ch/bob/bob/badges/v11.2.1/coverage.svg
-   :target: https://gitlab.idiap.ch/bob/bob/commits/v11.2.1
+.. image:: https://img.shields.io/badge/docs-latest-orange.svg
+   :target: https://www.idiap.ch/software/bob/docs/bob/bob/master/index.html
+.. image:: https://gitlab.idiap.ch/bob/bob/badges/master/pipeline.svg
+   :target: https://gitlab.idiap.ch/bob/bob/commits/master
+.. image:: https://gitlab.idiap.ch/bob/bob/badges/master/coverage.svg
+   :target: https://gitlab.idiap.ch/bob/bob/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob
 

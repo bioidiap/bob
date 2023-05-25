@@ -48,19 +48,6 @@ requirements:
 
     # Do not remove the tag below which is used for automatic parsing of this recipe
     # LIST OF BOB PACKAGES - START
-    - bob.extension
-    - bob.io.base
-    - bob.measure
-    - bob.learn.em
-    - bob.pipelines
-    - bob.bio.base
-    - bob.bio.face
-    - bob.bio.video
-    - bob.bio.vein
-    - bob.bio.spear
-    - bob.pad.base
-    - bob.pad.face
-    - bob.fusion.base
     # LIST OF BOB PACKAGES - END
   run:
     - python

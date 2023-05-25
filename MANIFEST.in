@@ -1,2 +1,2 @@
-include README.rst CHANGELOG LICENSE buildout.cfg requirements.txt version.txt
+include README.md LICENSE
 recursive-include doc *.rst *.png conf.py *.py *.ico

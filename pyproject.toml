@@ -1,3 +1,94 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+    requires = ["setuptools>=61.0.0", "wheel"]
+    build-backend = "setuptools.build_meta"
+
+[project]
+    name = "bob"
+    version = "11.3.1b0"
+    requires-python = ">=3.9"
+    description = "Bob is a free signal-processing and machine learning toolbox originally developed by the Biometrics group at Idiap Research Institute, in Switzerland."
+    dynamic = ["readme"]
+    license = {text = "BSD 3-Clause License"}
+    authors = [
+        {name = "IDIAP Biometrics Group", email = "biometric@idiap.ch"},
+        {name = "Yannick Dayer", email = "yannick.dayer@idiap.ch"},
+    ]
+    keywords = ["bob", "biometric recognition", "evaluation"]
+
+    classifiers=[
+        "Framework :: Bob",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Education",
+        'Intended Audience :: Science/Research',
+        "License :: OSI Approved :: BSD License",
+        "Natural Language :: English",
+        "Programming Language :: Python",
+        'Programming Language :: Python :: 3',
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    ]
+    dependencies = [
+        "click",
+        "click-plugins",
+    ]
+
+[project.urls]
+    documentation = "https://www.idiap.ch/software/bob/docs/bob/bob/master/"
+    homepage = "https://pypi.org/project/bob/"
+    repository = "https://gitlab.idiap.ch/bob/bob"
+    changelog = "https://gitlab.idiap.ch/bob/bob/-/releases"
+
+[project.entry-points."console_scripts"]
+    bob = "bob.extension.scripts:main_cli"
+
+[project.entry-points."bob.cli"]
+    config = "bob.extension.scripts.config:config"
+
+[project.optional-dependencies]
+    qa = ["pre-commit"]
+    doc = [
+        "sphinx",
+        "sphinx_rtd_theme",
+        "sphinx-autodoc-typehints",
+        "auto-intersphinx",
+        "sphinxcontrib-programoutput",
+        "bob.bio.face",
+        "bob.bio.vein",
+        "bob.bio.spear",
+        "bob.bio.video",
+        ]
+    test = [
+        "pytest",
+        "pytest-cov",
+        "coverage",
+        ]
+
+[tool.setuptools]
+    zip-safe = false
+    package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+    readme = {file = "README.md", content-type = "text/markdown"}
+
+[tool.distutils.bdist_wheel]
+    universal = true
+
+[tool.isort]
+    profile = "black"
+    line_length = 80
+    order_by_type = true
+    lines_between_types = 1
+
+[tool.black]
+    line-length = 80
+
+[tool.pytest.ini_options]
+    markers = [
+        "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    ]
+    addopts = [
+        "--import-mode=append",
+        "--cov-report=term-missing",
+        "--cov=bob.bio.base",
+    ]
+    junit_logging = "all"
+    junit_log_passing_tests = false

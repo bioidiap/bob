@@ -1,1 +1,4 @@
-include: 'https://gitlab.idiap.ch/bob/bob.devtools/raw/master/bob/devtools/data/gitlab-ci/single-package.yaml'
+include:
+  - project: bob/dev-profile
+    ref: main
+    file: gitlab/python.yml

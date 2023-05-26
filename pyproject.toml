@@ -37,11 +37,8 @@
     repository = "https://gitlab.idiap.ch/bob/bob"
     changelog = "https://gitlab.idiap.ch/bob/bob/-/releases"
 
-[project.entry-points."console_scripts"]
-    bob = "bob.extension.scripts:main_cli"
-
-[project.entry-points."bob.cli"]
-    config = "bob.extension.scripts.config:config"
+[project.scripts]
+    bob = "bob.cli:bob_main_cli"
 
 [project.optional-dependencies]
     qa = ["pre-commit"]

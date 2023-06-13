@@ -26,6 +26,9 @@ requirements:
     - python {{ python }}
     - setuptools {{ setuptools }}
     - pip {{ pip }}
+    - clapper {{ clapper }}
+    - click {{ click }}
+    - click-plugins {{ click_plugins }}
     # test requirement MUST be listed and pinned here:
     - coverage {{ coverage }}
     - sphinx {{ sphinx }}
@@ -33,38 +36,17 @@ requirements:
     - sphinxcontrib-programoutput {{ sphinxcontrib_programoutput }}
     - graphviz {{ graphviz }}
     - font-ttf-dejavu-sans-mono {{ font_ttf_dejavu_sans_mono }}
-    - cmake {{ cmake }}
     - pytest {{ pytest }}
     - pytest-cov {{ pytest_cov }}
     - pkg-config {{ pkg_config }}
     - freetype {{ freetype }}
-    - dask-ml {{ dask_ml }}
-    - make {{ make }}
-    - tensorflow-base {{ tensorflow }}  # for mtcnn tests
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    # the list below contains all public packages. This is/should be the same
-    # list as order.txt (save for private packages) in bob.nightlies.
 
-    # Do not remove the tag below which is used for automatic parsing of this recipe
-    # LIST OF BOB PACKAGES - START
-    - bob.extension
-    - bob.io.base
-    - bob.measure
-    - bob.learn.em
-    - bob.pipelines
-    - bob.bio.base
-    - bob.bio.face
-    - bob.bio.video
-    - bob.bio.vein
-    - bob.bio.spear
-    - bob.pad.base
-    - bob.pad.face
-    - bob.fusion.base
-    # LIST OF BOB PACKAGES - END
   run:
     - python
     - setuptools
+    - {{ pin_compatible('clapper') }}
+    - {{ pin_compatible('click') }}
+    - {{ pin_compatible('click-plugins') }}
   run_constrained:
   {% for package in resolved_packages('host') %}
   {% if package.split()[0] not in nopin %}
@@ -76,33 +58,12 @@ test:
   imports:
     - {{ name }}
   commands:
-    - export SDKROOT="{{ SDKROOT }}"  # [osx]
-    - export MACOSX_DEPLOYMENT_TARGET="{{ MACOSX_DEPLOYMENT_TARGET }}"  # [osx]
-    # skip the boundary_grouping test from bob.fusion.base because somehow this test fails here due to matplotlib's backend.
-    - pytest --verbose --cov {{ name }} --cov-report term-missing --cov-report html:{{ project_dir }}/sphinx/coverage --cov-report xml:{{ project_dir }}/coverage.xml --pyargs {{ name }} -k "not boundary_grouping" -m "not slow"
-    - sphinx-build -aEW {{ project_dir }}/doc {{ project_dir }}/sphinx
-    - sphinx-build -aEb doctest {{ project_dir }}/doc sphinx
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
   requires:
     # All test requirements MUST also be listed and pinned in the host section.
     # Do not pin test requirements here because they are already pinned in the host section.
-    - coverage
-    - sphinx
-    - sphinx_rtd_theme
-    - sphinxcontrib-programoutput
-    - graphviz
-    - font-ttf-dejavu-sans-mono
-    - cmake
-    - pytest
-    - pytest-cov
     - pkg-config
-    - freetype
-    - dask-ml
-    - make
-    - tensorflow-base
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}
     - {{ package }}
   {% endfor %}

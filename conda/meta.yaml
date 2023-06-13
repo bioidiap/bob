@@ -33,22 +33,11 @@ requirements:
     - sphinxcontrib-programoutput {{ sphinxcontrib_programoutput }}
     - graphviz {{ graphviz }}
     - font-ttf-dejavu-sans-mono {{ font_ttf_dejavu_sans_mono }}
-    - cmake {{ cmake }}
     - pytest {{ pytest }}
     - pytest-cov {{ pytest_cov }}
     - pkg-config {{ pkg_config }}
     - freetype {{ freetype }}
-    - dask-ml {{ dask_ml }}
-    - make {{ make }}
-    - tensorflow-base {{ tensorflow }}  # for mtcnn tests
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    # the list below contains all public packages. This is/should be the same
-    # list as order.txt (save for private packages) in bob.nightlies.
 
-    # Do not remove the tag below which is used for automatic parsing of this recipe
-    # LIST OF BOB PACKAGES - START
-    # LIST OF BOB PACKAGES - END
   run:
     - python
     - setuptools
@@ -80,16 +69,10 @@ test:
     - sphinxcontrib-programoutput
     - graphviz
     - font-ttf-dejavu-sans-mono
-    - cmake
     - pytest
     - pytest-cov
     - pkg-config
     - freetype
-    - dask-ml
-    - make
-    - tensorflow-base
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   {% for package in resolved_packages('host') %}
     - {{ package }}
   {% endfor %}

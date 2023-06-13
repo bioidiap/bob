@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8 :
 
 import os
-import pkg_resources
-import sphinx_rtd_theme
 import time
 
+import pkg_resources
+import sphinx_rtd_theme
 
 # -- General configuration -----------------------------------------------------
 

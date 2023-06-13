@@ -13,7 +13,9 @@ logger = clapper.logging.setup("bob")
 
 
 # Create the main CLI group: bob
-@with_plugins(entry_points(group="bob.cli"))
+# HACK: entry_points in python <3.10 takes no parameter but returns a dictionary
+#     Replace with entry_points(group="bob.cli") when dropping py3.9 support.
+@with_plugins(entry_points().get("bob.cli"))
 @click.group(
     cls=AliasedGroup,
     context_settings={"help_option_names": ("-h", "--help")},

@@ -27,6 +27,7 @@
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ]
     dependencies = [
+        "clapper",
         "click",
         "click-plugins",
     ]

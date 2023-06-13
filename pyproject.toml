@@ -86,7 +86,7 @@
     addopts = [
         "--import-mode=append",
         "--cov-report=term-missing",
-        "--cov=bob.bio.base",
+        "--cov=bob.cli",
     ]
     junit_logging = "all"
     junit_log_passing_tests = false

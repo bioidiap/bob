@@ -17,7 +17,6 @@ dist
 .gdb_history
 build
 *.egg
-src/
 *.png
 *.pdf
 record.txt

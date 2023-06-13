@@ -16,7 +16,7 @@ logger = clapper.logging.setup("bob")
 @with_plugins(entry_points(group="bob.cli"))
 @click.group(
     cls=AliasedGroup,
-    context_settings={"help_option_names": ("-?", "-h", "--help")},
+    context_settings={"help_option_names": ("-h", "--help")},
 )
 def bob_main_cli():
     """The main command line interface for bob."""

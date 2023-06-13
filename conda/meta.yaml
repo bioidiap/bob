@@ -26,6 +26,7 @@ requirements:
     - python {{ python }}
     - setuptools {{ setuptools }}
     - pip {{ pip }}
+    - clapper {{ clapper }}
     # test requirement MUST be listed and pinned here:
     - coverage {{ coverage }}
     - sphinx {{ sphinx }}
@@ -41,6 +42,7 @@ requirements:
   run:
     - python
     - setuptools
+    - {{ pin_compatible('clapper') }}
   run_constrained:
   {% for package in resolved_packages('host') %}
   {% if package.split()[0] not in nopin %}

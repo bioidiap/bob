@@ -1,25 +1,20 @@
-# The main copy of this list is in bob-devel. Keep them synced please.
-{% set nopin = ['ca-certificates', 'certifi', 'openssl', 'libstdcxx-ng', 'libgcc-ng', 'libgfortran-ng', 'libcxx', 'libcxxabi', 'libgfortran'] %}
-{% set name = 'bob' %}
-{% set project_dir = environ.get('RECIPE_DIR') + '/..' %}
+{% set data = load_file_data(RECIPE_DIR + '/../pyproject.toml') %}
+{% set name = data['project']['name'] %}
 
 package:
   name: {{ name }}
-  version: {{ environ.get('BOB_PACKAGE_VERSION', '0.0.1') }}
+  version: {{ data['project']['version'] }}
+
+source:
+  path: ..
 
 build:
-  skip: True  # [arm64]
+  noarch: python
   number: {{ environ.get('BOB_BUILD_NUMBER', 0) }}
-  ignore_run_exports:
-  {% for package in resolved_packages('host') %}
-    - {{ package.split()[0] }}
-  {% endfor %}
+  run_exports:
+    - {{ pin_subpackage(name) }}
   script:
-    - cd {{ project_dir }}
-    {% if environ.get('BUILD_EGG') %}
-    - "{{ PYTHON }} setup.py sdist --formats=zip"
-    {% endif %}
-    - "{{ PYTHON }} -m pip install . -vv"
+    - "{{ PYTHON }} -m pip install {{ SRC_DIR }} -vv"
 
 requirements:
   host:
@@ -29,49 +24,24 @@ requirements:
     - clapper {{ clapper }}
     - click {{ click }}
     - click-plugins {{ click_plugins }}
-    # test requirement MUST be listed and pinned here:
-    - coverage {{ coverage }}
-    - sphinx {{ sphinx }}
-    - sphinx_rtd_theme {{ sphinx_rtd_theme }}
-    - sphinxcontrib-programoutput {{ sphinxcontrib_programoutput }}
-    - graphviz {{ graphviz }}
-    - font-ttf-dejavu-sans-mono {{ font_ttf_dejavu_sans_mono }}
-    - pytest {{ pytest }}
-    - pytest-cov {{ pytest_cov }}
-    - pkg-config {{ pkg_config }}
-    - freetype {{ freetype }}
-
   run:
     - python
     - setuptools
     - {{ pin_compatible('clapper') }}
     - {{ pin_compatible('click') }}
     - {{ pin_compatible('click-plugins') }}
-  run_constrained:
-  {% for package in resolved_packages('host') %}
-  {% if package.split()[0] not in nopin %}
-    - {{ package }}
-  {% endif %}
-  {% endfor %}
 
 test:
   imports:
-    - {{ name }}
+    - {{ name.replace('-','_') }}
   commands:
     - conda inspect linkages -p $PREFIX {{ name }}  # [not win]
     - conda inspect objects -p $PREFIX {{ name }}  # [osx]
-  requires:
-    # All test requirements MUST also be listed and pinned in the host section.
-    # Do not pin test requirements here because they are already pinned in the host section.
-    - pkg-config
-  {% for package in resolved_packages('host') %}
-    - {{ package }}
-  {% endfor %}
 
 about:
-  home: https://www.idiap.ch/software/bob/
-  license: BSD 3-Clause
-  summary: Bob is a free signal-processing and machine learning toolbox originally developed by the Biometrics group at Idiap Research Institute, in Switzerland.
-  license_family: BSD
+  home: {{ data['project']['urls']['homepage'] }}
+  summary: {{ data['project']['description'] }}
+  license: {{ data['project']['license']['text'] }}
   doc_url: https://www.idiap.ch/software/bob/documentation
   dev_url: https://gitlab.idiap.ch/bob/bob
+  license_family: BSD

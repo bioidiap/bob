@@ -1,6 +1,7 @@
 """Sets up the click plugin group for packages to plug into."""
 
 from importlib.metadata import entry_points
+from pathlib import Path
 
 import clapper.logging
 import click
@@ -12,7 +13,26 @@ from click_plugins import with_plugins
 logger = clapper.logging.setup("bob")
 
 
-# Create the main CLI group: bob
+def legacy_rc_checker(func):
+    if (Path.home() / ".bobrc").is_file():
+        click.echo(
+            "You have a legacy .bobrc file. The current configuration file "
+            "needs to be located in ~/.config/bobrc.toml. Will now attempt to"
+            "move it to the correct location..."
+        )
+        if not (Path.home() / ".config/bobrc.toml").is_file():
+            (Path.home() / ".bobrc").rename(Path.home() / ".config/bobrc.toml")
+        else:
+            click.echo(
+                "WARNING: You have a legacy ~/.bobrc file but also a new "
+                "~/.config/bobrc.toml. The configurations files were not "
+                "altered. Consider removing ~/.bobrc if you don't need it."
+            )
+    return func
+
+
+# Back-compatibility: ~/.bobrc needs to be moved to ~/.config/bobrc.toml
+@legacy_rc_checker
 # HACK: entry_points in python <3.10 takes no parameter but returns a dictionary
 #     Replace with entry_points(group="bob.cli") when dropping py3.9 support.
 @with_plugins(entry_points().get("bob.cli"))
@@ -35,7 +55,6 @@ def bob_main_cli():
     pass
 
 
-# Create the only default sub-command: config
 @user_defaults_group(
     logger=logger, config=UserDefaults("bobrc.toml", logger=logger)
 )

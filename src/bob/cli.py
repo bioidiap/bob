@@ -5,6 +5,7 @@ from pathlib import Path
 
 import clapper.logging
 import click
+import xdg
 
 from clapper.click import AliasedGroup, user_defaults_group
 from clapper.rc import UserDefaults
@@ -14,14 +15,15 @@ logger = clapper.logging.setup("bob")
 
 
 def legacy_rc_checker(func):
-    if (Path.home() / ".bobrc").is_file():
+    home = xdg.xdg_config_home()
+    if (Path(home) / "../.bobrc").is_file():
         click.echo(
             "You have a legacy .bobrc file. The current configuration file "
             "needs to be located in ~/.config/bobrc.toml. Will now attempt to"
             "move it to the correct location..."
         )
-        if not (Path.home() / ".config/bobrc.toml").is_file():
-            (Path.home() / ".bobrc").rename(Path.home() / ".config/bobrc.toml")
+        if not (Path(home) / "bobrc.toml").is_file():
+            (Path(home) / "../.bobrc").rename(Path(home) / "bobrc.toml")
         else:
             click.echo(
                 "WARNING: You have a legacy ~/.bobrc file but also a new "

@@ -3,11 +3,12 @@
 NOTE: The command names displayed here are not the same as the entry-point names
 """
 
+from pathlib import Path
 from textwrap import dedent
 
 from click.testing import CliRunner
 
-from bob.cli import bob_config, bob_main_cli
+from bob.cli import bob_config, bob_main_cli, legacy_rc_checker
 
 
 def test_cli_main():
@@ -29,6 +30,65 @@ def test_cli_main():
             """
         )
     )
+
+
+def test_cli_legacy_rc(monkeypatch):
+    """Test the relocation of a legacy bobrc."""
+    runner = CliRunner()
+    with runner.isolated_filesystem() as tmp_dir:
+        temp_dir = Path(tmp_dir)
+        config_home = temp_dir / ".config"
+        config_home.mkdir()
+        assert not (config_home / "bobrc.toml").is_file()
+        with open(temp_dir / ".bobrc", "w") as legacy_f:
+            legacy_f.write(
+                """{"test.section": "value", "test.part": "value"}"""
+            )
+
+        monkeypatch.setenv("XDG_CONFIG_HOME", config_home.as_posix())
+
+        @legacy_rc_checker
+        def dummy():
+            pass
+
+        dummy()
+
+        assert not (temp_dir / ".bobrc").is_file()
+        assert (config_home / "bobrc.toml").is_file()
+
+
+def test_cli_legacy_both_rc(monkeypatch):
+    """Test when both a legacy and a new bobrc are present."""
+    runner = CliRunner()
+    dummy_toml_content = dedent(
+        """\
+        [section]
+        key = "value"
+        """
+    )
+    with runner.isolated_filesystem() as tmp_dir:
+        temp_dir = Path(tmp_dir)
+        config_home = temp_dir / ".config"
+        config_home.mkdir()
+        with open(temp_dir / ".bobrc", "w") as legacy_f:
+            legacy_f.write(
+                """{"test.section": "value", "test.part": "value"}"""
+            )
+        with open(config_home / "bobrc.toml", "w") as new_f:
+            new_f.write(dummy_toml_content)
+
+        monkeypatch.setenv("XDG_CONFIG_HOME", config_home.as_posix())
+
+        @legacy_rc_checker
+        def dummy():
+            pass
+
+        dummy()
+
+        assert (temp_dir / ".bobrc").is_file()
+        assert (config_home / "bobrc.toml").is_file()
+        with open(config_home / "bobrc.toml", "r") as new_f:
+            assert new_f.read() == dummy_toml_content
 
 
 def test_cli_config_group():

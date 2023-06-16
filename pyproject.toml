@@ -4,7 +4,7 @@
 
 [project]
     name = "bob"
-    version = "12.0.0"
+    version = "12.0.1b0"
     requires-python = ">=3.9"
     description = "Bob is a free signal-processing and machine learning toolbox originally developed by the Biometrics group at Idiap Research Institute, in Switzerland."
     dynamic = ["readme"]
@@ -27,13 +27,13 @@
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ]
     dependencies = [
-        "clapper==1.0.1",
-        "click==8.1.3",
-        "click-plugins==1.1.1",
+        "clapper",
+        "click",
+        "click-plugins",
     ]
 
 [project.urls]
-    documentation = "https://www.idiap.ch/software/bob/docs/bob/bob/v12.0.0/"
+    documentation = "https://www.idiap.ch/software/bob/docs/bob/bob/master/"
     homepage = "https://pypi.org/project/bob/"
     repository = "https://gitlab.idiap.ch/bob/bob"
     changelog = "https://gitlab.idiap.ch/bob/bob/-/releases"
@@ -44,16 +44,16 @@
 [project.optional-dependencies]
     qa = ["pre-commit"]
     doc = [
-        "sphinx==5.3.0",
-        "sphinx-rtd-theme==1.1.1",
-        "sphinx-autodoc-typehints==1.21.8",
-        "auto-intersphinx==1.0.2",
-        "sphinxcontrib-programoutput==0.17",
+        "sphinx",
+        "sphinx_rtd_theme",
+        "sphinx-autodoc-typehints",
+        "auto-intersphinx",
+        "sphinxcontrib-programoutput",
         ]
     test = [
-        "pytest==7.2.1",
-        "pytest-cov==4.0.0",
-        "coverage==7.0.5",
+        "pytest",
+        "pytest-cov",
+        "coverage",
         ]
 
 [tool.setuptools]
@@ -86,7 +86,3 @@
     ]
     junit_logging = "all"
     junit_log_passing_tests = false
-
-[profile]
-    repository_url = "git@gitlab.idiap.ch:bob/dev-profile.git"
-    commit_hash = "ade723be1f11feddb7bece235de32cc98953dc07"

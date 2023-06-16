@@ -49,10 +49,6 @@
         "sphinx-autodoc-typehints",
         "auto-intersphinx",
         "sphinxcontrib-programoutput",
-        "bob.bio.face",
-        "bob.bio.vein",
-        "bob.bio.spear",
-        "bob.bio.video",
         ]
     test = [
         "pytest",

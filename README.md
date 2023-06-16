@@ -1,6 +1,6 @@
-[![badge doc](https://img.shields.io/badge/docs-v12.0.0-orange.svg)](https://www.idiap.ch/software/bob/docs/bob/bob/v12.0.0/index.html)
-[![badge pipeline](https://gitlab.idiap.ch/bob/bob/badges/v12.0.0/pipeline.svg)](https://gitlab.idiap.ch/bob/bob/commits/v12.0.0)
-[![badge coverage](https://gitlab.idiap.ch/bob/bob/badges/v12.0.0/coverage.svg)](https://gitlab.idiap.ch/bob/bob/commits/v12.0.0)
+[![badge doc](https://img.shields.io/badge/docs-latest-orange.svg)](https://www.idiap.ch/software/bob/docs/bob/bob/master/index.html)
+[![badge pipeline](https://gitlab.idiap.ch/bob/bob/badges/master/pipeline.svg)](https://gitlab.idiap.ch/bob/bob/commits/master)
+[![badge coverage](https://gitlab.idiap.ch/bob/bob/badges/master/coverage.svg)](https://gitlab.idiap.ch/bob/bob/commits/master)
 [![badge gitlab](https://img.shields.io/badge/gitlab-project-0000c0.svg)](https://gitlab.idiap.ch/bob/bob)
 
 # Bob

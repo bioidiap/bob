@@ -53,7 +53,7 @@ def test_cli_legacy_rc(monkeypatch):
 
         dummy()
 
-        assert not (temp_dir / ".bobrc").is_file()
+        assert (temp_dir / ".bobrc").is_file()
         assert (config_home / "bobrc.toml").is_file()
 
 

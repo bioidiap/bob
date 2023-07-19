@@ -16,14 +16,21 @@ logger = clapper.logging.setup("bob")
 
 def legacy_rc_checker(func):
     home = xdg.xdg_config_home()
-    if (Path(home) / "../.bobrc").is_file():
+    old_rc = Path(home) / "../.bobrc"
+    new_rc = Path(home) / "bobrc.toml"
+    if old_rc.is_file():
         click.echo(
             "You have a legacy .bobrc file. The current configuration file "
             "needs to be located in ~/.config/bobrc.toml. Will now attempt to"
-            "move it to the correct location..."
+            "copy it to the correct location..."
         )
-        if not (Path(home) / "bobrc.toml").is_file():
-            (Path(home) / "../.bobrc").rename(Path(home) / "bobrc.toml")
+        if not new_rc.is_file():
+            new_rc.write_text(old_rc.read_text())  # Copy old -> new
+            click.echo(
+                "Your config file was copied to its new location. You can "
+                "remove the old file ('~/.bobrc') if you don't use older "
+                "(<12.0.0) versions of bob at the same time as this."
+            )
         else:
             click.echo(
                 "WARNING: You have a legacy ~/.bobrc file but also a new "

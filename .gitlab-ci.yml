@@ -1,4 +1,4 @@
 include:
   - project: bob/dev-profile
-    ref: main
+    ref: job-token
     file: gitlab/python.yml
